@@ -72,6 +72,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .header-icons {
@@ -165,5 +166,17 @@ nav a:hover {
   }
 }
 
+
+@media (max-device-width: 440px) {
+  nav {
+    flex-direction: column;
+    position: absolute;
+    background: red;
+    z-index: 100;
+    right: -3em; /* Negative the size of body's padding */
+    padding: 1.5em;
+    top: 100%;
+  }
+}
 
 </style>
