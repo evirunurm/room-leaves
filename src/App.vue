@@ -21,8 +21,28 @@
   </header>
   <router-view />
   <footer>
-    <a href="https://www.flaticon.com/free-icons/cart" title="cart icons">Cart icons created by Catalin Fertu - Flaticon</a>
-    <a href="https://www.flaticon.com/free-icons/search" title="search icons">Search icons created by Catalin Fertu - Flaticon</a>
+    <section class="newsletter">
+      <p>Be the first one to receive all the exclusive discounts</p>
+      <div class="newsletter-title">
+        <p>Subscribe to our</p>
+        <label for="email" class="big serif">Newsletter</label>
+      </div>
+      <input id="email" type="email" name="email">
+      <button class="white">Sign in</button>
+    </section>
+    <section class="legal">
+      <ul>
+        <li>Careers</li>
+        <li>Terms of Use</li>
+        <li>Privacy</li>
+        <li>Site Map</li>
+        <li>Contact Us</li>
+      </ul>
+    </section>
+    <section class="credits">
+      <a href="https://www.flaticon.com/free-icons/cart" title="cart icons">Cart icons created by Catalin Fertu - Flaticon</a>
+      <a href="https://www.flaticon.com/free-icons/search" title="search icons">Search icons created by Catalin Fertu - Flaticon</a>
+    </section>
   </footer>
 </template>
 
@@ -53,6 +73,7 @@ export default {
 
 <style>
 
+/* NORMALIZATION */
 body {
   font-family: 'Montserrat', sans-serif;
   font-family: 'Poppins', sans-serif;
@@ -64,15 +85,18 @@ body {
   padding: 0;
 }
 
-body {
-  padding: 1rem 3rem;
-}
+/* General */
 
+
+/********************/
+/****** Header ******/
+/********************/
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
+  padding: 1rem 3rem;
 }
 
 .header-icons {
@@ -88,6 +112,7 @@ header {
   position: relative;
 }
 
+/* The green dot pointing to the hovered icon */
 .header-icons button:hover::after {
  content: "";
   position: absolute;
@@ -147,6 +172,36 @@ nav a:hover {
 #searchbar input:focus {
   outline: 2px solid rgba(16, 69, 71, 0.5);
 }
+
+/********************/
+/****** Footer ******/
+/********************/
+footer {
+  background: green;
+  width: 100%;
+  padding: 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+footer > section {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+footer > section.newsletter {
+
+}
+
+
+
+
+
+
+
+
 
 @keyframes showSearchbar {
   0% {
