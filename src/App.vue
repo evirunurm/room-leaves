@@ -27,16 +27,16 @@
         <p>Subscribe to our</p>
         <label for="email" class="big serif">Newsletter</label>
       </div>
-      <input id="email" type="email" name="email">
+      <input id="email" type="email" name="email" placeholder="example@mail.com">
       <button class="white">Sign in</button>
     </section>
     <section class="legal">
       <ul>
-        <li>Careers</li>
-        <li>Terms of Use</li>
-        <li>Privacy</li>
-        <li>Site Map</li>
-        <li>Contact Us</li>
+        <li><a href="">Careers</a></li>
+        <li><a href="">Terms of Use</a></li>
+        <li><a href="">Privacy</a></li>
+        <li><a href="">Site Map</a></li>
+        <li><a href="">Contact Us</a></li>
       </ul>
     </section>
     <section class="credits">
@@ -69,9 +69,14 @@ export default {
 
 </script>
 
-
-
 <style>
+
+/* VARIABLES */
+:root {
+  --darkgreen: #104547;
+  --lightgreen: #60894A;
+  --pink: #AF929D;
+}
 
 /* NORMALIZATION */
 body {
@@ -87,6 +92,24 @@ body {
 
 /* General */
 
+button.white {
+  font-size: 1rem;
+  background: white;
+  border: 1px solid white;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  border-radius: 2rem;
+  font-weight: bold;
+  color: var(--darkgreen);
+  cursor: pointer;
+  transition: 0.1s ease-in;
+}
+
+button.white:hover {
+  background: var(--darkgreen);
+  border: 1px solid white;
+  color: white;
+}
 
 /********************/
 /****** Header ******/
@@ -177,15 +200,14 @@ nav a:hover {
 /****** Footer ******/
 /********************/
 footer {
-  background: green;
+  background: var(--darkgreen);
   width: 100%;
-  padding: 1rem 3rem;
+  padding: 3rem 3rem;
   display: flex;
   flex-direction: column;
-  gap: 2em;
+  gap: 2.5em;
   align-items: center;
   color: white;
-
 }
 
 footer > section {
@@ -193,26 +215,57 @@ footer > section {
   flex-direction: column;
   text-align: center;
   gap: 1rem;
+  width: 100%;
+  max-width: 500px;
 }
 
-
 /* NEWSLETTER */
+footer > section.newsletter {
+  font-size: 1.1rem;
+}
+
 footer > section.newsletter label {
   font-size: 2rem;
+  text-transform: uppercase;
+  position: relative;
+  bottom: 8px;
 }
 
 footer > section.newsletter input {
   font-size: 1rem;
-  padding: 0.25em 0 0.25em 0.75em;
+  padding: 0.5em 0 0.5em 1em;
   background: none;
   border: none;
-  border-bottom: 1px solid white;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: white;
+  text-align: center;
+  margin-bottom: 1em;
 }
 
 /* LEGAL */
 
+footer > section.legal {
+  border-top: 1px solid white;
+  width: 100%;
+  padding-top: 2em;
+}
+
+
 footer > section.legal > ul {
   list-style: none;
+}
+
+footer > section.legal > ul a {
+  color: white;
+  text-decoration: none;
+}
+
+footer > section.legal > ul a:hover {
+  text-decoration: underline;
+}
+
+footer > section.newsletter input:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
 }
 
 
@@ -248,7 +301,6 @@ footer > section.legal > ul {
     position: absolute;
     background: red;
     z-index: 100;
-    right: -3em; /* Negative the size of body's padding */
     padding: 1.5em;
     top: 100%;
   }
