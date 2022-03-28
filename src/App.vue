@@ -4,7 +4,11 @@
       <img src="./assets/logo.png" alt="Room Leaves logotype" height="48" >
     </div>
     <div class="right" id="right">
-      <nav>
+      <nav class="desktop">
+        <router-link to="/">Home</router-link>
+        <router-link to="/about">About</router-link>
+      </nav>
+       <nav class="mobile" v-show="isMenuOpen">
         <router-link to="/">Home</router-link>
         <router-link to="/about">About</router-link>
       </nav>
@@ -15,7 +19,8 @@
             <input name="search" type="text" placeholder="Search...">
           </div>
         </Transition>
-        <button><img height="20" src="./assets/shopping-cart-icon.png" alt="Search Icon"></button>
+        <button><img height="20" src="./assets/shopping-cart-icon.png" alt="Cart Icon"></button>
+        <button id="burgerMenuButton" @click="isMenuOpen = !isMenuOpen" ><img height="20" src="./assets/menu-icon.png" alt="Menu Icon"></button>
       </div>
     </div>
   </header>
@@ -41,6 +46,7 @@
     </section>
     <section class="credits">
       <a href="https://www.flaticon.com/free-icons/cart" title="cart icons">Cart icons created by Catalin Fertu - Flaticon</a>
+      <a href="https://www.flaticon.com/free-icons/open-menu" title="open menu icons">Open menu icons created by Pixel perfect - Flaticon</a>
       <a href="https://www.flaticon.com/free-icons/search" title="search icons">Search icons created by Catalin Fertu - Flaticon</a>
     </section>
   </footer>
@@ -50,7 +56,8 @@
 export default {
   data() {
     return {
-      isSearchbarOpen: false
+      isSearchbarOpen: false,
+      isMenuOpen: false
     }
   },
   methods: {
@@ -79,15 +86,12 @@ export default {
 }
 
 /* NORMALIZATION */
-body {
-  font-family: 'Montserrat', sans-serif;
-  font-family: 'Poppins', sans-serif;
-}
 
 *, *:before, *:after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* General */
@@ -109,6 +113,10 @@ button.white:hover {
   background: var(--darkgreen);
   border: 1px solid white;
   color: white;
+}
+
+.serif {
+  font-family: 'Abril Fatface', cursive;
 }
 
 /********************/
@@ -153,9 +161,17 @@ header {
   align-items: baseline;
 }
 
+#burgerMenuButton {
+  display: none;
+}
+
 nav {
   display: flex;
   gap: 1em;
+}
+
+nav.mobile {
+  display: none;
 }
 
 nav a {
@@ -228,7 +244,7 @@ footer > section.newsletter label {
   font-size: 2rem;
   text-transform: uppercase;
   position: relative;
-  bottom: 8px;
+  bottom: 6px;
 }
 
 footer > section.newsletter input {
@@ -272,10 +288,6 @@ footer > section.newsletter input:focus {
 
 
 
-
-
-
-
 @keyframes showSearchbar {
   0% {
     width: 0px;
@@ -294,15 +306,24 @@ footer > section.newsletter input:focus {
   }
 }
 
-
-@media (max-device-width: 440px) {
-  nav {
+@media (max-width: 440px) {
+  nav.mobile {
+    display: flex;
     flex-direction: column;
     position: absolute;
     background: red;
     z-index: 100;
     padding: 1.5em;
     top: 100%;
+    right: 0;
+  }
+
+  nav.desktop {
+    display: none;
+  }
+
+  #burgerMenuButton {
+    display: block;
   }
 }
 
