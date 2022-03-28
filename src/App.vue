@@ -183,16 +183,36 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 2em;
+  align-items: center;
+  color: white;
+
 }
 
 footer > section {
   display: flex;
   flex-direction: column;
   text-align: center;
+  gap: 1rem;
 }
 
-footer > section.newsletter {
 
+/* NEWSLETTER */
+footer > section.newsletter label {
+  font-size: 2rem;
+}
+
+footer > section.newsletter input {
+  font-size: 1rem;
+  padding: 0.25em 0 0.25em 0.75em;
+  background: none;
+  border: none;
+  border-bottom: 1px solid white;
+}
+
+/* LEGAL */
+
+footer > section.legal > ul {
+  list-style: none;
 }
 
 
