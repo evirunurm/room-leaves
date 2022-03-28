@@ -83,6 +83,7 @@ export default {
   --darkgreen: #104547;
   --lightgreen: #60894A;
   --pink: #AF929D;
+  --general-margin: 3rem;
 }
 
 /* NORMALIZATION */
@@ -127,7 +128,7 @@ header {
   justify-content: space-between;
   align-items: center;
   position: relative;
-  padding: 1rem 3rem;
+  padding: 1rem var(--general-margin);
 }
 
 .header-icons {
@@ -218,7 +219,7 @@ nav a:hover {
 footer {
   background: var(--darkgreen);
   width: 100%;
-  padding: 3rem 3rem;
+  padding: var(--general-margin) var(--general-margin);
   display: flex;
   flex-direction: column;
   gap: 2.5em;

@@ -1,18 +1,23 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ImageCarousel class="hello"></ImageCarousel>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import ImageCarousel from '@/components/ImageCarousel.vue'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    ImageCarousel
   }
 }
 </script>
+
+<style scoped>
+.hello {
+  margin: 0 var(--general-margin);
+}
+</style>
