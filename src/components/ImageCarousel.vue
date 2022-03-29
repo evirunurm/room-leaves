@@ -5,7 +5,17 @@
       <div v-for="ad in ads" class="img"></div>
     </div>
     <div class="controller">
-      <button @click="clearSlideTimer(); openSlide(ad.img); setSlideTimer(); " v-for="ad in ads">{{ ad.img }}</button>
+      <div v-for="ad in ads">
+        <button class="controller-button" @click="clearSlideTimer(); openSlide(ad.img); setSlideTimer(); "
+                 v-show="this.selected != ad.img" >
+          {{ ad.img }}
+        </button>
+        <button class="controller-button --marked" @click="clearSlideTimer(); openSlide(ad.img); setSlideTimer();"
+                v-show="this.selected == ad.img">
+          {{ ad.img }}
+        </button>
+      </div>
+
     </div>
   </div>
 </template>
@@ -113,7 +123,7 @@ export default {
   gap: 1em;
 }
 
-.controller > button {
+.controller-button {
   border-radius: 50%;
   border: 2px solid white;
   background: none;
@@ -121,6 +131,10 @@ export default {
   height: 20px;
   cursor: pointer;
   box-shadow: 0 5px 8px 0px rgba(0,0,0, 0.5);
+}
+
+.controller-button.--marked {
+  background: white;
 }
 
 </style>
