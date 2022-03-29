@@ -1,19 +1,13 @@
 # room-leaves
 
-## Project setup
-```
-npm install
-```
+## Pending
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+<ul style="list-style: none">
+    <li><input type="checkbox"> Notification appearing when you spend too much time in the same page.</li>
+    <li><input type="checkbox"> </li>
+    <li><input type="checkbox"> </li>
+    <li><input type="checkbox"> </li>
+    <li><input type="checkbox"> </li>
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+</ul>
