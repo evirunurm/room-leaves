@@ -24,17 +24,20 @@
       </div>
     </div>
   </header>
+
   <router-view />
+
   <footer>
-    <section class="newsletter">
+    <form class="newsletter" action="/" method="POST">
       <p>Be the first one to receive all the exclusive discounts</p>
       <div class="newsletter-title">
         <p>Subscribe to our</p>
         <label for="email" class="big serif">Newsletter</label>
       </div>
-      <input id="email" type="email" name="email" placeholder="example@mail.com">
-      <button class="white">Sign in</button>
-    </section>
+
+      <input id="email" type="email" name="email" placeholder="example@mail.com" required>
+      <button class="white" type="submit" >Sign in</button>
+    </form>
     <section class="legal">
       <ul>
         <li><a href="">Careers</a></li>
@@ -100,7 +103,7 @@ export default {
 button.white {
   font-size: 1rem;
   background: white;
-  border: 1px solid white;
+  border: 2px solid white;
   padding-top: 0.75em;
   padding-bottom: 0.75em;
   border-radius: 2rem;
@@ -112,12 +115,20 @@ button.white {
 
 button.white:hover {
   background: var(--darkgreen);
-  border: 1px solid white;
+  border: 2px solid white;
   color: white;
 }
 
 .serif {
   font-family: 'Abril Fatface', cursive;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.lightgreen-font {
+  color: var(--lightgreen);
 }
 
 /********************/
@@ -227,7 +238,7 @@ footer {
   color: white;
 }
 
-footer > section {
+footer > section, footer > form {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -237,18 +248,18 @@ footer > section {
 }
 
 /* NEWSLETTER */
-footer > section.newsletter {
+footer > form.newsletter {
   font-size: 1.1rem;
 }
 
-footer > section.newsletter label {
+footer > form.newsletter label {
   font-size: 2rem;
   text-transform: uppercase;
   position: relative;
   bottom: 6px;
 }
 
-footer > section.newsletter input {
+footer > form.newsletter input {
   font-size: 1rem;
   padding: 0.5em 0 0.5em 1em;
   background: none;
@@ -308,6 +319,13 @@ footer > section.newsletter input:focus {
 }
 
 @media (max-width: 440px) {
+  :root {
+    --darkgreen: #104547;
+    --lightgreen: #60894A;
+    --pink: #AF929D;
+    --general-margin: 1.5rem;
+  }
+
   nav.mobile {
     display: flex;
     flex-direction: column;

@@ -6,10 +6,10 @@
     </article>
 
     <article class="welcome-text-container">
-      <p>Test how your new roommate will adapt to your home.</p>
-      <p>Virtual Reality Integration<br/>
+      <p class="welcome-text">Test how your new roommate will adapt to your home.</p>
+      <p class="bold welcome-text-vr"><span class="lightgreen-font">V</span>irtual <span class="lightgreen-font">R</span>eality Integration<br/>
         Right here, right now</p>
-      <button>Know more</button>
+       <router-link to="/about"><button class="white">Know more</button></router-link>
     </article>
   </section>
 </template>
@@ -28,6 +28,7 @@ export default {
 <style scoped>
 .welcome-wrapper {
   width: 100%;
+  padding: 0 0 5rem 0;
 }
 
 .welcome-image-container {
@@ -37,12 +38,14 @@ export default {
   padding: 5rem 0;
   position: relative;
 }
+
 /* Left and right leaf */
 .welcome-image-container:before, .welcome-image-container:after {
   content: "";
   position: absolute;
   height: 100%;
-  width: 300px;
+  width: 30%;
+  max-width: 300px;
   top: 0;
   transition: 0.5s ease-out;
 }
@@ -83,6 +86,33 @@ export default {
   transform: translateX(-100px);
 }
 
+/* Text Container */
+
+.welcome-text-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75em;
+}
+
+.welcome-text {
+  font-size: 1.5rem;
+  font-weight: lighter;
+  max-width: 380px;
+}
+
+.welcome-text-vr {
+  font-size: 1.3rem;
+}
+
+.white {
+  width: 35%;
+  margin-top: 2em;
+  border: 2px solid var(--darkgreen);
+  min-width: 250px;
+}
+
 
 @media (max-width: 655px) {
   .welcome-image-container:before, .welcome-image-container:after {
@@ -96,6 +126,19 @@ export default {
   .welcome-image-container:after {
     background-position-x: 200px;
   }
+
+  .welcome-text {
+    font-size: 1.2rem;
+    font-weight: lighter;
+    max-width: 380px;
+    margin: 0 1em;
+  }
+
+  .welcome-text-vr {
+    margin: 0 1em;
+    font-size: 1rem;
+  }
+
 }
 
 </style>

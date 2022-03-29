@@ -31,19 +31,19 @@ export default {
       ads: [
         {
           img: "1",
-          url: require("../assets/ads/img1.jpg")
+          url: "require(../assets/ads/img1.jpg)"
         },
         {
           img: "2",
-          url: require("../assets/ads/img2.jpg")
+          url: "require(../assets/ads/img2.jpg)"
         },
         {
           img: "3",
-          url: require("../assets/ads/img3.jpg")
+          url: "require(../assets/ads/img3.jpg)"
         },
         {
           img: "4",
-          url: require("../assets/ads/img4.jpg")
+          url: "require(../assets/ads/img4.jpg)"
         }
       ]
     }
