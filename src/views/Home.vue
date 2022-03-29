@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <WelcomeScreen ></WelcomeScreen>
+    <ExploreCategories ></ExploreCategories>
   </div>
 </template>
 
@@ -8,12 +8,14 @@
 // @ is an alias to /src
 import ImageCarousel from '@/components/ImageCarousel.vue'
 import WelcomeScreen from '@/components/WelcomeScreen.vue'
+import ExploreCategories from '@/components/ExploreCategories.vue'
 
 export default {
   name: 'Home',
   components: {
     ImageCarousel,
-    WelcomeScreen
+    WelcomeScreen,
+    ExploreCategories
   }
 }
 </script>
