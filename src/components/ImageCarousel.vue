@@ -5,7 +5,7 @@
       <div v-for="ad in ads" class="img"></div>
     </div>
     <div class="controller">
-      <button @click="clearSlideTimer(); setSlideTimer(); this.selected = ad.img;" v-for="ad in ads">{{ ad.img }}</button>
+      <button @click="clearSlideTimer(); openSlide(ad.img); setSlideTimer(); " v-for="ad in ads">{{ ad.img }}</button>
     </div>
   </div>
 </template>
@@ -40,18 +40,26 @@ export default {
     }
   },
   methods: {
-    nextSlide(slide) {
-      this.selected = slide;
+    openSlide(num) {
+      this.selected = this.getNextSlideNum(num);
       console.log(this.selected)
       document.getElementById("carouselWrapper").style.left=`-${ (this.selected - 1) * 100 }%`;
     },
     setSlideTimer() {
-      interval = setInterval(this.nextSlide((this.selected < this.ads ? this.selected + 1 : 1)), 4000);
+      interval = setInterval(() => {
+        this.openSlide(parseInt(this.selected) + 1);
+      }, 4000);
     },
     clearSlideTimer() {
-      this.nextSlide();
       clearInterval(interval);
     },
+    getNextSlideNum(slide) {
+      console.log("Metido: " + slide)
+      if (slide > this.ads.length) {
+        return 1;
+      }
+      return slide;
+    }
   },
   mounted() {
     this.setSlideTimer();
