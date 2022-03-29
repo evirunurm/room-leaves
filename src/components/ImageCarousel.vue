@@ -94,7 +94,7 @@ export default {
 }
 
 .img {
-  height: 200px;
+  height: 250px;
   min-width: 100%;
 }
 
