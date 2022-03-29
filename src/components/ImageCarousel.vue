@@ -2,17 +2,17 @@
   <div class="container">
 
     <div id="carouselWrapper" class="wrapper">
-      <div v-for="ad in ads" class="img"></div>
+      <div v-for="ad in ads" class="img-container">
+        <img :src="ad.url" :alt="ad.url">
+      </div>
     </div>
     <div class="controller">
       <div v-for="ad in ads">
         <button class="controller-button" @click="clearSlideTimer(); openSlide(ad.img); setSlideTimer(); "
                  v-show="this.selected != ad.img" >
-          {{ ad.img }}
         </button>
         <button class="controller-button --marked" @click="clearSlideTimer(); openSlide(ad.img); setSlideTimer();"
                 v-show="this.selected == ad.img">
-          {{ ad.img }}
         </button>
       </div>
 
@@ -21,7 +21,6 @@
 </template>
 
 <script>
-
 let interval;
 
 export default {
@@ -32,19 +31,19 @@ export default {
       ads: [
         {
           img: "1",
-          href: ""
+          url: require("../assets/ads/img1.jpg")
         },
         {
           img: "2",
-          href: ""
+          url: require("../assets/ads/img2.jpg")
         },
         {
           img: "3",
-          href: ""
+          url: require("../assets/ads/img3.jpg")
         },
         {
           img: "4",
-          href: ""
+          url: require("../assets/ads/img4.jpg")
         }
       ]
     }
@@ -93,24 +92,31 @@ export default {
   transition: 0.5s ease-in-out;
 }
 
-.img {
+.img-container {
   height: 250px;
   min-width: 100%;
 }
 
+.img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-.img:nth-child(1) {
+.img-container:nth-child(1) {
   background: green;
 }
-.img:nth-child(2) {
+.img-container:nth-child(2) {
   background: blue;
 }
-.img:nth-child(3) {
+.img-container:nth-child(3) {
   background: yellow;
 }
-.img:nth-child(4) {
+.img-container:nth-child(4) {
   background: brown;
 }
+
+
 
 .controller {
   position: absolute;
@@ -127,8 +133,8 @@ export default {
   border-radius: 50%;
   border: 2px solid white;
   background: none;
-  width: 20px;
-  height: 20px;
+  width: 1rem;
+  height: 1rem;
   cursor: pointer;
   box-shadow: 0 5px 8px 0px rgba(0,0,0, 0.5);
 }
