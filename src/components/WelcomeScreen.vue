@@ -17,9 +17,6 @@
 <script>
 export default {
   name: "WelcomeScreen",
-  data() {
-
-  }
 }
 
 </script>
@@ -107,10 +104,12 @@ export default {
 }
 
 .white {
-  width: 35%;
+  max-width: 350px;
+  min-width: 100px;
   margin-top: 2em;
   border: 2px solid var(--darkgreen);
-  min-width: 250px;
+  width: 50vw;
+  transition: 0.2s ease-out;
 }
 
 

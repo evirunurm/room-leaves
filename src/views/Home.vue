@@ -1,6 +1,9 @@
 <template>
   <div class="home">
+
+    <WelcomeScreen ></WelcomeScreen>
     <ExploreCategories ></ExploreCategories>
+    <ImageCarousel class="hello"></ImageCarousel>
   </div>
 </template>
 
