@@ -1,9 +1,6 @@
 <template>
   <div class="home">
-
-    <WelcomeScreen ></WelcomeScreen>
-    <ExploreCategories ></ExploreCategories>
-    <ImageCarousel class="hello"></ImageCarousel>
+    <ProductCarousel title="Hello"  ></ProductCarousel>
   </div>
 </template>
 
@@ -12,13 +9,15 @@
 import ImageCarousel from '@/components/ImageCarousel.vue'
 import WelcomeScreen from '@/components/WelcomeScreen.vue'
 import ExploreCategories from '@/components/ExploreCategories.vue'
+import ProductCarousel from '@/components/ProductCarousel.vue'
 
 export default {
   name: 'Home',
   components: {
     ImageCarousel,
     WelcomeScreen,
-    ExploreCategories
+    ExploreCategories,
+    ProductCarousel
   }
 }
 </script>
