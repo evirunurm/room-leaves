@@ -1,25 +1,30 @@
 <template>
   <header>
     <div class="logo">
-      <img src="./assets/logo.png" alt="Room Leaves logotype" height="48" >
+      <router-link to="/"><img src="./assets/logo.png" alt="Room Leaves logotype" height="48"></router-link>
     </div>
     <div class="right" id="right">
       <nav class="desktop">
         <router-link to="/">Home</router-link>
-        <router-link to="/about">About</router-link>
+        <router-link to="/products">Products</router-link>
+        <router-link to="/categories">Categories</router-link>
       </nav>
        <nav class="mobile" v-show="isMenuOpen">
         <router-link to="/">Home</router-link>
-        <router-link to="/about">About</router-link>
+        <router-link to="/products">Products</router-link>
+        <router-link to="/categories">Categories</router-link>
       </nav>
       <div class="header-icons">
-        <button @click="isSearchbarOpen = true; searchbarOpened()"><img height="20" src="./assets/search-icon.png" alt="Search Icon"></button>
-        <Transition name="widthAppearance">
-          <div v-show="isSearchbarOpen" id="searchbar">
-            <input name="search" type="text" placeholder="Search...">
-          </div>
-        </Transition>
-        <button><img height="20" src="./assets/shopping-cart-icon.png" alt="Cart Icon"></button>
+        <form action="">
+          <button @click="isSearchbarOpen = true; searchbarOpened()"><img height="20" src="./assets/search-icon.png" alt="Search Icon"></button>
+          <Transition name="widthAppearance">
+            <div v-show="isSearchbarOpen" id="searchbar">
+              <input name="search" type="text" placeholder="Search...">
+            </div>
+          </Transition>
+        </form>
+
+        <router-link to="/cart"><img height="20" src="./assets/shopping-cart-icon.png" alt="Cart Icon"></router-link>
         <button id="burgerMenuButton" @click="isMenuOpen = !isMenuOpen" ><img height="20" src="./assets/menu-icon.png" alt="Menu Icon"></button>
       </div>
     </div>
@@ -73,6 +78,9 @@ export default {
         this.isSearchbarOpen = false;
         document.body.removeEventListener("click", this.closeSearchBar);
       }
+    },
+    handleSearchForm() {
+      // TODO
     }
   }
 }
