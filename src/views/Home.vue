@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <ProductCarousel title="Hello"  ></ProductCarousel>
+    <ProductCarousel title="New Arrivals" query="{ order: [ 'date', 'DESC' ] }" ></ProductCarousel>
   </div>
 </template>
 

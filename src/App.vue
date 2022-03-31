@@ -87,6 +87,7 @@ export default {
   --lightgreen: #60894A;
   --pink: #AF929D;
   --general-margin: 3rem;
+  --general-max-width: 800px;
 }
 
 /* NORMALIZATION */

@@ -76,7 +76,7 @@ export default {
 
 .explore-category-wrapper {
   width: 100%;
-  max-width: 800px;
+  max-width: var(--general-max-width);;
   display: flex;
   align-items: center;
   justify-content: space-between;
