@@ -15,8 +15,8 @@
         <router-link to="/categories">Categories</router-link>
       </nav>
       <div class="header-icons">
-        <form action="">
-          <button @click="isSearchbarOpen = true; searchbarOpened()"><img height="20" src="./assets/search-icon.png" alt="Search Icon"></button>
+        <form @submit="handleSearchForm" class="header-search-form">
+          <button type="submit" @click="isSearchbarOpen = true; searchbarOpened()"><img height="20" src="./assets/search-icon.png" alt="Search Icon"></button>
           <Transition name="widthAppearance">
             <div v-show="isSearchbarOpen" id="searchbar">
               <input name="search" type="text" placeholder="Search...">
@@ -79,8 +79,10 @@ export default {
         document.body.removeEventListener("click", this.closeSearchBar);
       }
     },
-    handleSearchForm() {
-      // TODO
+    handleSearchForm(e) {
+      e.preventDefault();
+      let objForm = this;
+      this.
     }
   }
 }
@@ -219,6 +221,10 @@ nav a:hover {
   padding: 0.25em 0 0.25em 0.75em;
 }
 
+.header-search-form {
+  display: flex;
+  gap: 1em;
+}
 .widthAppearance-enter-active,
 .widthAppearance-leave-active {
   animation: showSearchbar 0.25s ease-out;
