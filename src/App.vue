@@ -15,11 +15,11 @@
         <router-link to="/categories">Categories</router-link>
       </nav>
       <div class="header-icons">
-        <form @submit="handleSearchForm" class="header-search-form">
+        <form @submit="handleSearchForm" class="header-search-form" id="searchform" method="GET" action="/products">
           <button type="submit" @click="isSearchbarOpen = true; searchbarOpened()"><img height="20" src="./assets/search-icon.png" alt="Search Icon"></button>
           <Transition name="widthAppearance">
             <div v-show="isSearchbarOpen" id="searchbar">
-              <input name="search" type="text" placeholder="Search...">
+              <input name="query" id="searchinput" type="text" placeholder="Search..." maxlength="150" >
             </div>
           </Transition>
         </form>
@@ -81,8 +81,13 @@ export default {
     },
     handleSearchForm(e) {
       e.preventDefault();
-      let objForm = this;
-      this.
+
+      const query = document.getElementById("searchinput").value;
+      // Validate query
+      if (query !== "" && query !== undefined && query.length > 1 && query) {
+        const form = document.getElementById("searchform");
+        form.submit();
+      }
     }
   }
 }
