@@ -3,8 +3,7 @@
     <h1>This is where all the products will go</h1>
   </div>
   <section class="products-container">
-
-    <PlantImage v-for="plant in plants" :plantId="plant.image_id" ></PlantImage>
+    <PlantImage  :clickable="true" v-for="plant in plants" :plantId="plant.image_id" ></PlantImage>
   </section>
 </template>
 

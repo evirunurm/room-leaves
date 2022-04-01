@@ -1,7 +1,7 @@
 <template>
   <div class="product">
     <h1>This is the product page</h1>
-    <PlantImage plantImage="" plantId="plant"></PlantImage>
+    <PlantImage :stock="true" :clickable="false" :plantId="plantId"></PlantImage>
   </div>
 </template>
 
@@ -12,10 +12,18 @@ export default {
   components: {
     PlantImage,
   },
-  methods: {
-    printRoute() {
-      console.log(this.$route)
+  data() {
+    return {
+      plantId: this.$route.params.id
     }
+  },
+  methods: {
+    getPlantData() {
+
+    }
+  },
+  mounted() {
+
   }
 }
 </script>
