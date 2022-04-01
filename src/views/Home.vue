@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <ProductCarousel title="New Arrivals" query="{ order: [ 'date', 'DESC' ] }" ></ProductCarousel>
+    <ProductCarousel title="New Arrivals" :query="orderQuery" :plants="plants"></ProductCarousel>
   </div>
 </template>
 
@@ -18,6 +18,37 @@ export default {
     WelcomeScreen,
     ExploreCategories,
     ProductCarousel
+  },
+  data() {
+    return {
+      plants: [
+        {
+          name: "Plant 1",
+          image_id: "1"
+        },{
+          name: "Plant 1",
+          image_id: "1"
+        },{
+          name: "Plant 1",
+          image_id: "1"
+        },{
+          name: "Plant 1",
+          image_id: "1"
+        },{
+          name: "Plant 1",
+          image_id: "1"
+        },{
+          name: "Plant 1",
+          image_id: "1"
+        }
+      ],
+      orderQuery: {
+        order: [
+          'date',
+          'DESC'
+        ],
+      }
+    }
   }
 }
 </script>

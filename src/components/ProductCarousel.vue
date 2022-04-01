@@ -22,30 +22,11 @@ export default {
   props: {
     title: String,
     query: Object,
+    plants: Array
   },
   data() {
     return {
-      plants: [
-        {
-          name: "Plant 1",
-          image_id: "1"
-        },{
-          name: "Plant 1",
-          image_id: "1"
-        },{
-          name: "Plant 1",
-          image_id: "1"
-        },{
-          name: "Plant 1",
-          image_id: "1"
-        },{
-          name: "Plant 1",
-          image_id: "1"
-        },{
-          name: "Plant 1",
-          image_id: "1"
-        }
-      ]
+
     }
   }
 }

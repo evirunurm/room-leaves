@@ -65,7 +65,8 @@ export default {
   data() {
     return {
       isSearchbarOpen: false,
-      isMenuOpen: false
+      isMenuOpen: false,
+
     }
   },
   methods: {
