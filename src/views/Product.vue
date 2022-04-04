@@ -5,8 +5,13 @@
       <PlantImage class="plant-image" :stock="true" :clickable="false" :plantId="plantId"></PlantImage>
       <div class="plant-data">
         <div>
-          <div class="plant-rating"></div>
-          <p class="plant-price">{{ plant.price }}€</p>
+          <p class="plant-price">{{ plant.price }}</p>
+          <div class="plant-rating">
+            <svg  class="star" width="31" height="29" viewBox="0 0 31 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.5 0L18.98 10.7102H30.2414L21.1307 17.3295L24.6107 28.0398L15.5 21.4205L6.38933 28.0398L9.8693 17.3295L0.758624 10.7102H12.02L15.5 0Z" fill="#F2C72E"/>
+            </svg>
+
+          </div>
         </div>
         <div class="plant-options">
           <button class="green cart-button">Add to Cart</button>
@@ -143,6 +148,9 @@ export default {
     async getPlantData() {
       // let plant = await axios.get("https://room-leaves-api.herokuapp.com/plants/" + this.plantId);
       // console.log(plant.data);
+    },
+    async getPlantScore(id) {
+
     }
   },
   mounted() {
@@ -188,11 +196,20 @@ h1 {
 .plant-data {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: space-between;
   width: 50%;
 }
 
+.plant-price {
+ font-size: 1.25rem;
+}
+
+.plant-price:after {
+  content: "€";
+  font-size: 0.8em;
+  font-weight: 600;
+}
 /* Buttons */
 .plant-options {
   display: flex;
@@ -220,6 +237,10 @@ h1 {
   }
   .plant-main > .plant-image {
     width: 100%;
+  }
+
+  .plant-data {
+  width: 100%;
 }
 
 }
