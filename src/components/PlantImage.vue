@@ -17,7 +17,7 @@
 export default {
   name: "PlantImage",
   props: {
-    plantId: String,
+    plantId: Number,
     stock: Boolean,
     clickable: Boolean
   },

@@ -8,8 +8,7 @@
 
       <section class="carousel-wrapper">
         <div class="carousel-img-container" id="" v-for="plant in plants">
-          <img :src="'./src/assets/plants/imgs/plant_' + plant.image_id + '.png'" alt="Plant">
-          <p>{{ plant.name }}</p>
+          <PlantImage :clickable="true" :plant-id="plant.id" :stock="plant.stock > 0"></PlantImage>
         </div>
       </section>
     </div>
@@ -17,8 +16,12 @@
 </template>
 
 <script>
+import PlantImage from "@/components/PlantImage";
 export default {
   name: "ProductCarousel",
+  components: {
+    PlantImage,
+  },
   props: {
     title: String,
     query: Object,
@@ -28,7 +31,8 @@ export default {
     return {
 
     }
-  }
+  },
+
 }
 </script>
 
@@ -37,7 +41,6 @@ export default {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: var(--general-margin);
 }
 
 .ProductCarousel-container {
@@ -50,7 +53,7 @@ export default {
 .title {
   position: relative;
   border-bottom: 2px solid black;
-  padding: 0.25rem 0;
+  padding: 0 0 0.5rem 0;
 }
 
 .title h3 {
@@ -73,23 +76,16 @@ export default {
 }
 
 .carousel-wrapper {
-  padding: 0.75rem 0;
+  padding: 1.25rem 0;
   display: flex;
   gap: 0.75rem;
   overflow-x: auto;
 }
 
 .carousel-img-container {
-  height: 100px;
-  width: 100px;
-  min-width: 100px;
+  max-width: 200px;
+  min-width: 150px;
 }
-.carousel-img-container img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-
 
 .carousel-wrapper::-webkit-scrollbar {
   width: 0.25rem;

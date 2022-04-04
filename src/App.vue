@@ -116,24 +116,38 @@ export default {
 }
 
 /* General */
-
-button.white {
+button.white, button.green {
   font-size: 1rem;
-  background: white;
-  border: 2px solid white;
   padding-top: 0.75em;
   padding-bottom: 0.75em;
   border-radius: 2rem;
-  font-weight: bold;
-  color: var(--darkgreen);
   cursor: pointer;
   transition: 0.1s ease-in;
+}
+
+button.white {
+  background: white;
+  border: 2px solid var(--darkgreen);
+  font-weight: bold;
+  color: var(--darkgreen);
 }
 
 button.white:hover {
   background: var(--darkgreen);
   border: 2px solid white;
   color: white;
+}
+
+button.green {
+  color: white;
+  background: var(--darkgreen);
+  border: 2px solid var(--darkgreen);
+  font-weight: 600;
+}
+
+button.green:hover {
+  background: white;
+  color: var(--darkgreen);
 }
 
 .serif {
