@@ -34,7 +34,6 @@
             </div>
           </div>
           <p class="plant-price">{{ plant.price }}</p>
-
         </div>
         <div class="plant-options">
           <button class="green cart-button">Add to Cart</button>
@@ -54,7 +53,7 @@
               </svg>
               <p>Humidity</p>
             </div>
-            <p>{{ plant.humidity }}%</p>
+            <p class="plant-stat-data">{{ plant.humidity }}%</p>
           </div>
           <div class="plant-stat" v-if="plant.temperature">
             <div class="plant-stat-name">
@@ -63,7 +62,7 @@
               </svg>
               <p>Temperature</p>
             </div>
-            <p>{{ plant.temperature }}ºC</p>
+            <p class="plant-stat-data">{{ plant.temperature }}ºC</p>
           </div>
           <div class="plant-stat">
             <div class="plant-stat-name">
@@ -73,7 +72,7 @@
 
               <p>Height</p>
             </div>
-            <p>{{ plant.height }}cm</p>
+            <p class="plant-stat-data">{{ plant.height }}cm</p>
           </div>
         </div>
       </article>
@@ -326,6 +325,11 @@ h1 {
   gap: 1em;
 }
 
+.plant-stat-data {
+  color: var(--darkgreen);
+  font-weight: 500;
+}
+
 /* Mobile */
 @media (max-width: 600px) {
   .plant-main {
@@ -336,8 +340,37 @@ h1 {
   }
 
   .plant-data {
-  width: 100%;
-}
+    width: 100%;
+  }
+
+  .plant-review-data {
+    max-height: 100%;
+    overflow-y: auto;
+  }
+
+  .plant-values {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .plant-review {
+    display: none;
+  }
+
+  .plant-about > article {
+    flex-direction: column;
+  }
+
+  .plant-about > article > p {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .plant-stats, .plant-stat {
+    width: 100%;
+  }
 
 }
 </style>
