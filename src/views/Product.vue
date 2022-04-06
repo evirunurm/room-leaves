@@ -4,14 +4,37 @@
     <section class="plant-main">
       <PlantImage class="plant-image" :stock="true" :clickable="false" :plantId="plantId"></PlantImage>
       <div class="plant-data">
-        <div>
-          <p class="plant-price">{{ plant.price }}</p>
+        <div class="plant-values">
           <div class="plant-rating">
-            <svg  class="star" width="31" height="29" viewBox="0 0 31 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15.5 0L18.98 10.7102H30.2414L21.1307 17.3295L24.6107 28.0398L15.5 21.4205L6.38933 28.0398L9.8693 17.3295L0.758624 10.7102H12.02L15.5 0Z" fill="#F2C72E"/>
-            </svg>
-
+            <div class="plant-stars">
+              <svg  class="star" width="31" height="29" viewBox="0 0 31 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.5 0L18.98 10.7102H30.2414L21.1307 17.3295L24.6107 28.0398L15.5 21.4205L6.38933 28.0398L9.8693 17.3295L0.758624 10.7102H12.02L15.5 0Z" fill="#F2C72E"/>
+              </svg>
+              <svg  class="star" width="31" height="29" viewBox="0 0 31 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.5 0L18.98 10.7102H30.2414L21.1307 17.3295L24.6107 28.0398L15.5 21.4205L6.38933 28.0398L9.8693 17.3295L0.758624 10.7102H12.02L15.5 0Z" fill="#F2C72E"/>
+              </svg>
+              <svg  class="star" width="31" height="29" viewBox="0 0 31 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.5 0L18.98 10.7102H30.2414L21.1307 17.3295L24.6107 28.0398L15.5 21.4205L6.38933 28.0398L9.8693 17.3295L0.758624 10.7102H12.02L15.5 0Z" fill="#F2C72E"/>
+              </svg>
+              <svg  class="star" width="31" height="29" viewBox="0 0 31 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.5 0L18.98 10.7102H30.2414L21.1307 17.3295L24.6107 28.0398L15.5 21.4205L6.38933 28.0398L9.8693 17.3295L0.758624 10.7102H12.02L15.5 0Z" fill="#F2C72E"/>
+              </svg>
+              <svg  class="star" width="31" height="29" viewBox="0 0 31 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.5 0L18.98 10.7102H30.2414L21.1307 17.3295L24.6107 28.0398L15.5 21.4205L6.38933 28.0398L9.8693 17.3295L0.758624 10.7102H12.02L15.5 0Z" fill="#F2C72E"/>
+              </svg>
+            </div>
+            <div class="plant-review">
+              <p class="plant-review-title">{{ lastReview.name }}</p>
+              <div class="plant-review-stars">
+                <svg v-for="index in Math.floor(lastReview.score)" class="star-small" width="31" height="29" viewBox="0 0 31 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15.5 0L18.98 10.7102H30.2414L21.1307 17.3295L24.6107 28.0398L15.5 21.4205L6.38933 28.0398L9.8693 17.3295L0.758624 10.7102H12.02L15.5 0Z" fill="#F2C72E"/>
+                </svg>
+              </div>
+              <p class="plant-review-data">{{ lastReview.comment }}</p>
+            </div>
           </div>
+          <p class="plant-price">{{ plant.price }}</p>
+
         </div>
         <div class="plant-options">
           <button class="green cart-button">Add to Cart</button>
@@ -141,7 +164,12 @@ export default {
             "updatedAt": "2022-04-04T16:00:30.000Z",
             "categoryId": null
         }
-    ]
+    ],
+      lastReview: {
+        name: "Marina Poppins",
+        score: 4,
+        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ni..."
+      }
     }
   },
   methods: {
@@ -229,6 +257,21 @@ h1 {
   left: 0.75em;
   font-size: 0.85em;
 }
+
+.plant-review {
+  margin-bottom: 1rem;
+}
+
+.star-small {
+  height: 1.25rem;
+}
+
+
+.plant-review-data {
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
 
 /* Mobile */
 @media (max-width: 600px) {
