@@ -116,7 +116,7 @@ export default {
 }
 
 /* General */
-button.white, button.green {
+button.white, button.green, button.white--white {
   font-size: 1rem;
   padding-top: 0.75em;
   padding-bottom: 0.75em;
@@ -136,6 +136,13 @@ button.white:hover {
   background: var(--darkgreen);
   border: 2px solid white;
   color: white;
+}
+
+button.white--white {
+  background: white;
+  border: 2px solid var(--darkgreen);
+  font-weight: bold;
+  color: var(--darkgreen);
 }
 
 button.green {
@@ -353,11 +360,8 @@ footer > section.newsletter input:focus {
   }
 }
 
-@media (max-width: 440px) {
+@media (max-width: 600px) {
   :root {
-    --darkgreen: #104547;
-    --lightgreen: #60894A;
-    --pink: #AF929D;
     --general-margin: 1.5rem;
   }
 

@@ -77,8 +77,8 @@ export default {
 
 .heart-it-button {
   position: absolute;
-  top: 0.45rem;
-  right: 0.45rem;
+  top: 0%;
+  right: 0%;
   cursor: pointer;
   border: none;
   padding: 0.75rem;
@@ -96,6 +96,8 @@ export default {
   bottom: 0;
   right: 0;
 }
+
+
 
 
 </style>
