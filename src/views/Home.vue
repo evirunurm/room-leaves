@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <ProductCarousel title="New Arrivals" :query="orderQuery" :plants="plants"></ProductCarousel>
+    <WelcomeScreen></WelcomeScreen>
+    <ExploreCategories></ExploreCategories>
+    <WelcomeScreen></WelcomeScreen>
   </div>
 </template>
 

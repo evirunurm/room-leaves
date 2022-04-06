@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "ExploreCategories",
   data() {
@@ -26,25 +28,21 @@ export default {
           id: "1",
           img: require("../assets/cactus-category.png"),
           name: "cactus",
-          url: ""
         },
         {
           id: "2",
           img: require("../assets/cactus-category.png"),
           name: "aloe vera",
-          url: ""
         },
         {
           id: "3",
           img: require("../assets/cactus-category.png"),
           name: "succulent",
-          url: ""
         },
         {
           id: "4",
           img: require("../assets/cactus-category.png"),
           name: "flowers",
-          url: ""
         }
       ],
       limit: 3
@@ -56,10 +54,14 @@ export default {
           .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
           .join(" ");
     },
-
+    async fetchCategories() {
+      // let categories = await axios.get("https://room-leaves-api.herokuapp.com/categories");
+      // console.log(categories);
+      // this.categories = categories.data;
+    }
   },
   mounted() {
-
+    this.fetchCategories();
   }
 }
 </script>

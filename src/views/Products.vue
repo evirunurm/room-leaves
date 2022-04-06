@@ -77,7 +77,6 @@ export default  {
   methods: {
     async getPlantsData() {
       // let plants = await axios.get("https://room-leaves-api.herokuapp.com/plants");
-      // console.log(plants.data);
       // this.plants = plants.data;
     }
   },

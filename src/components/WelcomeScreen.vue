@@ -9,7 +9,7 @@
       <p class="welcome-text">Test how your new roommate will adapt to your home.</p>
       <p class="bold welcome-text-vr"><span class="lightgreen-font">V</span>irtual <span class="lightgreen-font">R</span>eality Integration<br/>
         Right here, right now</p>
-       <router-link to="/about"><button class="white">Know more</button></router-link>
+       <router-link to="/"><button class="white">Know more</button></router-link>
     </article>
   </section>
 </template>

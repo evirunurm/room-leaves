@@ -175,6 +175,8 @@ export default {
     async getPlantData() {
       // let plant = await axios.get("https://room-leaves-api.herokuapp.com/plants/" + this.plantId);
       // console.log(plant.data);
+      // this.plant = plant.data;
+      this.getPlantScore(this.plant.id);
     },
     async getPlantScore(id) {
 
@@ -211,7 +213,8 @@ section {
 }
 
 .plant-main > .plant-image {
-    width: 50%;
+  width: 50%;
+  height: 100%;
 }
 
 h1 {
@@ -334,7 +337,6 @@ h1 {
   font-weight: 500;
 }
 
->>>>>>> 0e7e96d47e6da64267927ac5b38e54593987ba82
 /* Mobile */
 @media (max-width: 600px) {
   .plant-main {
