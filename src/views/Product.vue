@@ -266,12 +266,10 @@ h1 {
   height: 1.25rem;
 }
 
-
 .plant-review-data {
   max-height: 100px;
   overflow-y: scroll;
 }
-
 
 /* Mobile */
 @media (max-width: 600px) {
