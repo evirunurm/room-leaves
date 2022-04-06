@@ -1,20 +1,20 @@
 <template>
-  <div class="products">
-    <h1>This is where all the products will go</h1>
-  </div>
   <section class="products-container">
-    <PlantImage  :clickable="true" v-for="plant in plants" :plantId="plant.id" :stock="plant.stock > 0" ></PlantImage>
+    <div class="products-wrapper">
+      <ProductGrid v-for="plant in plants" :plantPrice="plant.price" :plantName="plant.name" :plantId="plant.id" :plantStock="plant.stock"></ProductGrid>
+    </div>
   </section>
 </template>
 
 <script>
 import PlantImage from "../components/PlantImage";
+import ProductGrid from "../components/ProductGrid";
 import axios from "axios";
-
 
 export default  {
   components: {
     PlantImage,
+    ProductGrid
   },
   data() {
     return {
@@ -88,9 +88,18 @@ export default  {
 </script>
 
 <style scoped>
+
 .products-container {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr 1fr;
+  margin: var(--general-margin);
+  display: flex;
+  justify-content: center;
 }
+
+.products-wrapper {
+  display: grid;
+  gap: var(--general-margin);
+  grid-template-columns: 1fr 1fr;
+  max-width: var(--general-max-width);
+}
+
 </style>
