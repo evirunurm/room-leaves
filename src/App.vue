@@ -369,11 +369,15 @@ footer > section.newsletter input:focus {
     display: flex;
     flex-direction: column;
     position: absolute;
-    background: red;
+    background: var(--darkgreen);
     z-index: 100;
     padding: 1.5em;
     top: 100%;
     right: 0;
+  }
+
+  nav.mobile a {
+    color: white;
   }
 
   nav.desktop {

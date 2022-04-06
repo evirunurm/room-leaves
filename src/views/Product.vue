@@ -36,7 +36,7 @@
           <p class="plant-price">{{ plant.price }}</p>
         </div>
         <div class="plant-options">
-          <button class="green cart-button">Add to Cart</button>
+          <router-link class="router-cart" to="/cart"><button class="green cart-button">Add to Cart</button></router-link>
           <button class="white--white ar-button">Visualize in AR</button>
         </div>
       </div>
@@ -257,6 +257,10 @@ h1 {
   position: relative;
   left: 0.75em;
   font-size: 0.85em;
+}
+
+.router-cart > button {
+  width: 100%;
 }
 
 .plant-review {
