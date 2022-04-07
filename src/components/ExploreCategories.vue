@@ -7,8 +7,8 @@
       </article>
       |
       <div v-for="category in categories.slice(0, limit)" class="category-container">
-        <img :src="category.img" alt="">
-        <a :href="category.url" class="category-title">{{ capitalize(category.name) }}</a>
+        <img :src="loadImg(category.name.toLowerCase())" alt="">
+        <a  class="category-title">{{ capitalize(category.name) }}</a>
       </div>
       <div class="explore-category-more"><a href="">More +</a></div>
 
@@ -23,28 +23,7 @@ export default {
   name: "ExploreCategories",
   data() {
     return {
-      categories: [
-        {
-          id: "1",
-          img: require("../assets/cactus-category.png"),
-          name: "cactus",
-        },
-        {
-          id: "2",
-          img: require("../assets/cactus-category.png"),
-          name: "aloe vera",
-        },
-        {
-          id: "3",
-          img: require("../assets/cactus-category.png"),
-          name: "succulent",
-        },
-        {
-          id: "4",
-          img: require("../assets/cactus-category.png"),
-          name: "flowers",
-        }
-      ],
+      categories: [],
       limit: 3
     }
   },
@@ -56,8 +35,18 @@ export default {
     },
     async fetchCategories() {
       // let categories = await axios.get("https://room-leaves-api.herokuapp.com/categories");
-      // console.log(categories);
-      // this.categories = categories.data;
+      let categories = await axios.get("http://localhost/categories");
+      this.categories = categories.data;
+    },
+    loadImg(id) {
+      let img;
+      try {
+        img = require('../assets/' + id + '-category.png');
+        console.log(img)
+        return img;
+      } catch (err) {
+        console.log("Image not found for plant with id: " + id);
+      }
     }
   },
   mounted() {

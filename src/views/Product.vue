@@ -97,73 +97,8 @@ export default {
   data() {
     return {
       plantId: parseInt(this.$route.params.id),
-      plant: {
-        "id": 11,
-        "stock": 10,
-        "description": "The agave plant was originally found growing in Mexico, the southwest United States, and central South America. This is an impressive looking, succulent plant that grows well both indoors and outdoors. Because some...",
-        "name": "Agave",
-        "price": 69.99,
-        "humidity": 60,
-        "temperature": 26,
-        "height": 20,
-        "createdAt": "2022-04-02T13:15:45.000Z",
-        "updatedAt": "2022-04-02T13:15:45.000Z",
-        "categoryId": 1
-      },
-      plants: [
-        {
-            "id": 1,
-            "stock": 10,
-            "description": "Una planta random",
-            "name": "Plant1",
-            "price": 69,
-            "humidity": null,
-            "temperature": null,
-            "height": 0.2,
-            "createdAt": "2022-04-02T13:15:11.000Z",
-            "updatedAt": "2022-04-02T13:15:11.000Z",
-            "categoryId": null
-        },
-        {
-            "id": 11,
-            "stock": 10,
-            "description": "Una planta random",
-            "name": "Plant2",
-            "price": 69,
-            "humidity": null,
-            "temperature": null,
-            "height": 0.2,
-            "createdAt": "2022-04-02T13:15:45.000Z",
-            "updatedAt": "2022-04-02T13:15:45.000Z",
-            "categoryId": 1
-        },
-        {
-            "id": 81,
-            "stock": 10,
-            "description": "Una planta random",
-            "name": "Plant3",
-            "price": 69,
-            "humidity": null,
-            "temperature": null,
-            "height": 0.2,
-            "createdAt": "2022-04-04T16:00:24.000Z",
-            "updatedAt": "2022-04-04T16:00:24.000Z",
-            "categoryId": null
-        },
-        {
-            "id": 91,
-            "stock": 10,
-            "description": "Una planta random",
-            "name": "Plant4",
-            "price": 69,
-            "humidity": null,
-            "temperature": null,
-            "height": 0.2,
-            "createdAt": "2022-04-04T16:00:30.000Z",
-            "updatedAt": "2022-04-04T16:00:30.000Z",
-            "categoryId": null
-        }
-    ],
+      plant: {},
+      plants: [],
       lastReview: {
         name: "Marina Poppins",
         score: 4,
@@ -174,8 +109,10 @@ export default {
   methods: {
     async getPlantData() {
       // let plant = await axios.get("https://room-leaves-api.herokuapp.com/plants/" + this.plantId);
-      // console.log(plant.data);
-      // this.plant = plant.data;
+      let plant = await axios.get("http://localhost/plants/" + this.plantId);
+      console.log(plant.data);
+      this.plant = plant.data;
+
       this.getPlantScore(this.plant.id);
     },
     async getPlantScore(id) {

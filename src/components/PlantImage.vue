@@ -33,7 +33,7 @@ export default {
         img = require("../../public/plants/plant_" + id + ".png");
         return img;
       } catch (err) {
-        console.log("Image not found for plant with the id: " + id);
+        console.log("Image not found for plant with id: " + id);
       }
     }
   }
