@@ -61,6 +61,12 @@ export default {
   width: 2.3rem;
   cursor: pointer;
   transition: 0.15s ease-in;
+  background: none;
+}
+
+.cart-button svg {
+  position: relative;
+  left: 1px; /* To center perfectly */
 }
 
 .cart-button:hover {
