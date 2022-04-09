@@ -15,7 +15,7 @@
         <router-link to="/categories">Categories</router-link>
       </nav>
       <div class="header-icons">
-        <form @submit="handleSearchForm" class="header-search-form" id="searchform" method="GET" action="/products">
+        <form @submit.prevent="handleSearchForm" class="header-search-form" id="searchform" method="GET" action="/products">
           <button type="submit" @click="isSearchbarOpen = true; searchbarOpened()"><img height="20" src="./assets/search-icon.png" alt="Search Icon"></button>
           <Transition name="widthAppearance">
             <div v-show="isSearchbarOpen" id="searchbar">
@@ -23,8 +23,8 @@
             </div>
           </Transition>
         </form>
-
         <router-link to="/cart"><img height="20" src="./assets/shopping-cart-icon.png" alt="Cart Icon"></router-link>
+        <router-link to="/me"><img height="20" src="./assets/user-icon.png" alt="Profile Icon"></router-link>
         <button id="burgerMenuButton" @click="isMenuOpen = !isMenuOpen" ><img height="20" src="./assets/menu-icon.png" alt="Menu Icon"></button>
       </div>
     </div>
@@ -33,14 +33,14 @@
   <router-view />
 
   <footer>
-    <form class="newsletter" action="/" method="POST">
+    <form @submit.prevent="" class="newsletter" action="/" method="POST">
       <p>Be the first one to receive all the exclusive discounts</p>
       <div class="newsletter-title">
         <p>Subscribe to our</p>
-        <label for="email" class="big serif">Newsletter</label>
+        <label for="newsletter-email" class="big serif">Newsletter</label>
       </div>
 
-      <input id="email" type="email" name="email" placeholder="example@mail.com" required>
+      <input id="newsletter-email" type="email" name="email" placeholder="example@mail.com" required>
       <button class="white" type="submit" >Sign in</button>
     </form>
     <section class="legal">

@@ -51,7 +51,6 @@ export default {
   methods: {
     openSlide(num) {
       this.selected = this.getNextSlideNum(num);
-      console.log(this.selected)
       document.getElementById("carouselWrapper").style.left=`-${ (this.selected - 1) * 100 }%`;
     },
     setSlideTimer() {
@@ -63,7 +62,6 @@ export default {
       clearInterval(interval);
     },
     getNextSlideNum(slide) {
-      console.log("Metido: " + slide)
       if (slide > this.ads.length) {
         return 1;
       }

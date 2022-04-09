@@ -1,5 +1,6 @@
 <template>
   <section class="products-container">
+    <ImageCarousel></ImageCarousel>
     <article class="product-settings-wrapper">
       <button class="extra-button sort-filter-button" @click="isSortFilterOpened = !isSortFilterOpened">Sort and Filter</button>
       <button @click="rowView = !rowView" class="view-type-button extra-button">
@@ -25,16 +26,16 @@
 </template>
 
 <script>
-import PlantImage from "../components/PlantImage";
 import ProductGrid from "../components/ProductGrid";
 import ProductRow from "@/components/ProductRow";
-import axios from "axios";
+import ImageCarousel from "@/components/ImageCarousel";
+import PlantService from "@/services/PlantService";
 
 export default  {
   components: {
-    PlantImage,
     ProductGrid,
-    ProductRow
+    ProductRow,
+    ImageCarousel
   },
   data() {
     return {
@@ -44,15 +45,19 @@ export default  {
     }
   },
   methods: {
-    async getPlantsData() {
+    async fetchPlants() {
       // let plants = await axios.get("https://room-leaves-api.herokuapp.com/plants");
       let plants = await axios.get("http://localhost/plants/");
       console.log(plants.data);
       this.plants = plants.data;
+    },
+    async getPlants() {
+      let plants = await PlantService.getAll();
+      this.plants = plants.data;
     }
   },
   mounted() {
-    this.getPlantsData();
+    this.getPlants();
   }
 }
 </script>
@@ -60,7 +65,7 @@ export default  {
 <style scoped>
 
 .products-container {
-  margin: var(--general-margin);
+  margin: 0 var(--general-margin);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -82,7 +87,7 @@ export default  {
 }
 
 .product-settings-wrapper {
-  margin: 1.5rem var(--general-margin);
+  margin: 1.5rem var(--general-margin) 2.5rem var(--general-margin) ;
   max-width: calc(var(--general-max-width) - 150px); /* Size of the gap between each plant box */
   width: 100%;
   display: flex;
