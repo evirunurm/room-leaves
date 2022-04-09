@@ -15,8 +15,11 @@
     <article v-if="isSortFilterOpened" class="sort-filter" id="sortFilterBox">
         <h1>Hello</h1>
     </article>
-    <div class="products-wrapper">
-      <ProductGrid v-for="plant in plants" :plantPrice="plant.price" :plantName="plant.name" :plantId="plant.id" :plantStock="plant.stock"></ProductGrid>
+    <div class="products-wrapper --grid">
+      <ProductGrid v-if="!rowView" v-for="plant in plants" :plantPrice="plant.price" :plantName="plant.name" :plantId="plant.id" :plantStock="plant.stock"></ProductGrid>
+    </div>
+    <div class="products-wrapper --row">
+      <ProductRow v-if="rowView" v-for="plant in plants" :plantPrice="plant.price" :plantName="plant.name" :plantId="plant.id" :plantStock="plant.stock"></ProductRow>
     </div>
   </section>
 </template>
@@ -24,12 +27,14 @@
 <script>
 import PlantImage from "../components/PlantImage";
 import ProductGrid from "../components/ProductGrid";
+import ProductRow from "@/components/ProductRow";
 import axios from "axios";
 
 export default  {
   components: {
     PlantImage,
-    ProductGrid
+    ProductGrid,
+    ProductRow
   },
   data() {
     return {
@@ -62,11 +67,18 @@ export default  {
   align-items: center;
 }
 
-.products-wrapper {
+.--grid {
   display: grid;
   gap: var(--general-margin);
   grid-template-columns: 1fr 1fr;
-  max-width: var(--general-max-width);
+}
+
+.--row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--general-margin);
+  width: 100%;
+  max-width: calc(var(--general-max-width) - 150px);
 }
 
 .product-settings-wrapper {
@@ -95,11 +107,12 @@ export default  {
 
 .sort-filter-button {
   padding: 0.3rem 1.25rem;
+  font-size: 1rem;
 }
 
 .view-type-button {
-  height: 2.1rem;
-  width: 2.1rem;
+  height: 2.42rem;
+  width: 2.42rem;
   display: grid;
   place-items: center;
 }

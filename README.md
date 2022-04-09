@@ -10,7 +10,7 @@
 - Search bar functionality
 - Notification appearing when you spend too much time in the same page
 - Change contrast hearts / Plant Image
-- Product component in rows for Products view
+- ~~Product component in rows for Products view~~
 - Sorting system (Products)
 - Newspaper form
 - AR in AFrame 
