@@ -8,7 +8,7 @@
 
 <script>
 import CategoryDesc from "@/components/CategoryDesc";
-import axios from "axios";
+import CategoryService from "@/services/CategoryService";
 
 export default {
   components: {
@@ -22,8 +22,7 @@ export default {
   },
   methods: {
     async fetchCategories() {
-      // let plants = await axios.get("https://room-leaves-api.herokuapp.com/plants");
-      let categories = await axios.get("http://localhost/categories/");
+      let categories = await CategoryService.getAll();
       this.categories = categories.data;
     },
     assignColors() {

@@ -2,7 +2,7 @@
   <div class="signup">
     <div class="signup-wrapper">
       <img class="logo-image" src="../assets/logo.png" alt="Room Leaves logo">
-      <form @submit.prevent="handleSubmit" class="signup-form" action="" method="POST" id="signup-form">
+      <form @submit.prevent="validateData" class="signup-form" action="" method="POST" id="signup-form">
         <div class="form-input">
           <label class="required-input" for="fullname">Full name</label>
           <p v-if="failedName" class="error-message">Check your name</p>
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import UserService from "@/services/UserService";
+
 export default {
   data() {
     return {
@@ -40,7 +42,7 @@ export default {
     }
   },
   methods: {
-    handleSubmit(e) {
+    validateData(e) {
       e.preventDefault()
 
       const name = document.getElementById("fullname").value;
@@ -75,9 +77,22 @@ export default {
 
       if (!this.failedName && !this.failedEmail && !this.failedPass && !this.failedPass2 ) {
         const form = document.getElementById("signup-form");
-        form.submit();
+        this.submitForm(form);
       }
 
+    },
+    async submitForm(form) {
+      const data = {};
+      Object.keys(form).forEach((key) => {
+        data[form[key].name] = form[key].value;
+      });
+
+     try {
+        await UserService.create(data);
+        this.$emit('increaseBy', 1);
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 }
@@ -99,12 +114,13 @@ export default {
   max-width: calc(var(--general-max-width) - 300px);
 }
 
-.signup-wrapper form, .signup-wrapper img {
+.signup-wrapper form {
   width: 100%;
 }
 
 .logo-image {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  width: 50%;
 }
 
 /* FORM */

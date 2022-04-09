@@ -46,18 +46,12 @@ export default  {
   },
   methods: {
     async fetchPlants() {
-      // let plants = await axios.get("https://room-leaves-api.herokuapp.com/plants");
-      let plants = await axios.get("http://localhost/plants/");
-      console.log(plants.data);
-      this.plants = plants.data;
-    },
-    async getPlants() {
       let plants = await PlantService.getAll();
       this.plants = plants.data;
     }
   },
   mounted() {
-    this.getPlants();
+    this.fetchPlants();
   }
 }
 </script>
