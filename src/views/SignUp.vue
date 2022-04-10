@@ -31,6 +31,7 @@
 
 <script>
 import UserService from "@/services/UserService";
+import AuthService from "@/services/AuthService";
 
 export default {
   data() {
@@ -87,12 +88,19 @@ export default {
         data[form[key].name] = form[key].value;
       });
 
-     try {
+    /* try {
         await UserService.create(data);
         this.$emit('increaseBy', 1);
       } catch (err) {
         console.log(err);
+      }*/
+
+      try {
+        await AuthService.create(data);
+      } catch (err) {
+        console.log(err);
       }
+      
     }
   }
 }

@@ -2,33 +2,72 @@
   <div class="login">
     <div class="login-wrapper">
       <img class="logo-image" src="../assets/logo.png" alt="Room Leaves logo">
-      <form @submit.prevent="validateData" class="signup-form" action="" method="POST" id="signup-form">
+      <form @submit.prevent="validateData" class="login-form" action="" method="POST" id="login-form">
         <div class="form-input">
-          <label class="required-input" for="signup-email">Email</label>
-          <input id="signup-email" name="email"  type="email" >
+          <label class="required-input" for="login-email">Email</label>
+          <input id="login-email" name="email"  type="email" >
         </div>
         <div class="form-input">
           <label class="required-input" for="password">Password</label>
           <input id="password" name="password"  type="password" minlength="6" maxlength="16">
-          <p class="error-message">Wrong email or password</p>
+          <p v-if="wrongData" class="error-message">Wrong email or password</p>
         </div>
         <button class="green submit-button">Log in</button>
       </form>
       <a href="">Forgotten your password?</a>
-      <p>Don´t have an account? <a href="">Sign up</a></p>
+      <p>Don´t have an account? <router-link to="/signup">Sign up</router-link></p>
     </div>
   </div>
 </template>
 
 <script>
+import AuthService from "@/services/AuthService";
+
 export default {
   data() {
     return {
-
+      wrongData: false
     }
   },
   methods: {
+    validateData(e) {
+      e.preventDefault();
 
+      const email = document.getElementById("login-email").value;
+      const password = document.getElementById("password").value;
+
+      if ( email === "" || email === undefined || email.length < 1 ) {
+        this.wrongData = true;
+      }
+
+      if ( password === "" || password === undefined || password.length < 6 || password.length > 16 || !password ) {
+        this.wrongData = true;
+      }
+
+      if (!this.wrongData) {
+        const form = document.getElementById("login-form");
+        this.submitForm(form);
+      }
+    },
+    async submitForm(form) {
+      const data = {};
+      Object.keys(form).forEach((key) => {
+        data[form[key].name] = form[key].value;
+      });
+
+
+      try {
+        let response = await AuthService.login(data);
+        let token = response.data?.accessToken;
+        let userId = response.data?.id;
+        localStorage.setItem("accessToken", token);
+        localStorage.setItem("userId", userId);
+        await this.$router.push("/me");
+      } catch (err) {
+        console.log(err);
+      }
+
+    }
   }
 }
 </script>
@@ -64,7 +103,7 @@ export default {
   gap: 0.15rem;
 }
 
-.signup-form {
+.login-form {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;

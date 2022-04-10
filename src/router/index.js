@@ -78,16 +78,26 @@ const router = createRouter({
 
 router.beforeEach( async (to, from, next) => {
    if (to.matched.some(record => record.meta.requiresAuth)) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
-    if (!store.getters.isLoggedIn) {
-      next({ name: 'Login' })
+    // Requires auth, check if logged in
+
+    if (!localStorage.getItem("accessToken")) {
+      // If not, redirect to login page.
+      next( { name: 'LogIn' } )
     } else {
       next() // go to wherever I'm going
     }
-  } else {
-    next() // does not require auth, make sure to always call next()!
-  }
+
+  } else if (to.matched.some(record => record.meta.hideForAuth)) {
+
+     if (localStorage.getItem("accessToken")) {
+       next( { name: 'Me' } )
+     } else {
+       next()
+     }
+
+   } else {
+       next() // Does not require auth.
+   }
 })
 
 export default router
