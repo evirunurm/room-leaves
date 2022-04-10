@@ -15,8 +15,8 @@ export default {
   methods: {
     async getName() {
       try {
-        console.log(localStorage.getItem("userId"))
-        let user = await UserService.get(localStorage.getItem("userId"));
+        console.log("User", localStorage.getItem("userId"))
+        let user = await UserService.get(localStorage.getItem("userId"), );
         this.name = user.data["full_name"];
       } catch (err) {
         console.log(err);

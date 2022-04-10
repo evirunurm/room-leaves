@@ -2,12 +2,13 @@
   <div class="home">
     <WelcomeScreen></WelcomeScreen>
     <ExploreCategories></ExploreCategories>
-    <WelcomeScreen></WelcomeScreen>
+    <ProductCarousel title="New Arrivals" :plants="plants" ></ProductCarousel>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import PlantService from "@/services/PlantService";
 import ImageCarousel from '@/components/ImageCarousel.vue'
 import WelcomeScreen from '@/components/WelcomeScreen.vue'
 import ExploreCategories from '@/components/ExploreCategories.vue'
@@ -23,34 +24,29 @@ export default {
   },
   data() {
     return {
-      plants: [
-        {
-          name: "Plant 1",
-          image_id: "1"
-        },{
-          name: "Plant 1",
-          image_id: "1"
-        },{
-          name: "Plant 1",
-          image_id: "1"
-        },{
-          name: "Plant 1",
-          image_id: "1"
-        },{
-          name: "Plant 1",
-          image_id: "1"
-        },{
-          name: "Plant 1",
-          image_id: "1"
-        }
-      ],
+      plants: [],
       orderQuery: {
-        order: [
-          'date',
-          'DESC'
-        ],
+        "updatedAt": "DESC"
       }
     }
+  },
+  methods: {
+    async fetchPlants() {
+      let plants = await PlantService.getAll();
+      console.log(plants.data)
+      this.plants = plants.data;
+      this.orderPlants();
+    },
+    orderPlants() {
+      this.plants.sort( (curr, next) => {
+        let currDate = Date.parse(curr["updatedAt"]);
+        let nextDate = Date.parse(next["updatedAt"]);
+        return nextDate - currDate;
+      })
+    }
+  },
+  mounted() {
+    this.fetchPlants();
   }
 }
 </script>

@@ -8,7 +8,7 @@
 
       <section class="carousel-wrapper">
         <div class="carousel-img-container" id="" v-for="plant in plants">
-          <PlantImage :clickable="true" :plant-id="plant.id" :stock="plant.stock > 0"></PlantImage>
+          <PlantImage :clickable="true" :plant-id="plant.id" :stock="plant.stock > 0" />
         </div>
       </section>
     </div>
@@ -24,15 +24,8 @@ export default {
   },
   props: {
     title: String,
-    query: Object,
     plants: Array
-  },
-  data() {
-    return {
-
-    }
-  },
-
+  }
 }
 </script>
 

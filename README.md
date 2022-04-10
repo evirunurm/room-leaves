@@ -1,4 +1,4 @@
-# room-leaves
+# Room Leaves
 
 ## Pending
 
@@ -16,4 +16,4 @@
 - AR in AFrame 
 - Plant score
 - Save View settings in Products to Local Storage.
-- 
+- ~~Implementation with Back-End~~

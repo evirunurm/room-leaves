@@ -59,9 +59,8 @@ export default {
         let response = await AuthService.login(data);
         let token = response.data?.accessToken;
         let userId = response.data?.id;
-        console.log(response)
-        localStorage.setItem("accessToken", token);
-        localStorage.setItem("userId", userId);
+        await localStorage.setItem("accessToken", token);
+        await localStorage.setItem("userId", userId);
         await this.$router.push("/me");
       } catch (err) {
         console.log(err);

@@ -61,6 +61,9 @@
 </template>
 
 <script>
+import PlantService from "@/services/PlantService";
+let plants;
+
 export default {
   data() {
     return {
@@ -89,7 +92,14 @@ export default {
         const form = document.getElementById("searchform");
         form.submit();
       }
+    },
+    async fetchPlants() {
+      let plants = await PlantService.getAll();
+      plants = plants.data;
     }
+  },
+  mounted() {
+    this.fetchPlants();
   }
 }
 
