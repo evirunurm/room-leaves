@@ -52,7 +52,10 @@ export default {
 </script>
 
 <style scoped>
-.hello {
-  margin: 0 var(--general-margin);
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 </style>

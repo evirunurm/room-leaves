@@ -6,8 +6,8 @@ class AuthService {
     return http.post("/auth/login", data);
   }
 
-  create(id, data) {
-    return http.post(`/users/signup`, data);
+  create(data) {
+    return http.post(`/auth/signup`, data);
   }
 
 }

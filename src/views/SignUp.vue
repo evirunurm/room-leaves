@@ -88,17 +88,12 @@ export default {
         data[form[key].name] = form[key].value;
       });
 
-    /* try {
-        await UserService.create(data);
-        this.$emit('increaseBy', 1);
-      } catch (err) {
-        console.log(err);
-      }*/
-
       try {
         await AuthService.create(data);
+        await this.$router.push("/login");
       } catch (err) {
         console.log(err);
+        this.failedEmail = true;
       }
       
     }
