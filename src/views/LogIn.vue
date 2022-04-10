@@ -55,11 +55,11 @@ export default {
         data[form[key].name] = form[key].value;
       });
 
-
       try {
         let response = await AuthService.login(data);
         let token = response.data?.accessToken;
         let userId = response.data?.id;
+        console.log(response)
         localStorage.setItem("accessToken", token);
         localStorage.setItem("userId", userId);
         await this.$router.push("/me");

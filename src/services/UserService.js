@@ -6,8 +6,8 @@ class UserService {
     return http.get("/users");
   }
 
-  get(id) {
-    return http.get(`/users/${id}`);
+  get(id, data) {
+    return http.post(`/users/${id}`, data);
   }
 
   create(data) {
