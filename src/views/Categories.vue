@@ -40,7 +40,6 @@ export default {
   async mounted() {
     await this.fetchCategories();
     this.assignColors();
-    console.log(this.categories)
   }
 }
 </script>
@@ -49,7 +48,6 @@ export default {
 * {
   box-sizing: border-box;
 }
-
 
 .categories {
   width: 100%;
@@ -72,7 +70,5 @@ export default {
   padding: 0.5em 0;
   font-weight: 500;
 }
-
-
 
 </style>

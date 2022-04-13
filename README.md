@@ -6,12 +6,13 @@
 - Cart view
 - Orders view
 - Home view
-- Categories view
+- ~~Categories view~~
 - Search bar functionality
 - Notification appearing when you spend too much time in the same page
 - Change contrast hearts / Plant Image
 - ~~Product component in rows for Products view~~
 - Sorting system (Products)
+- ~~Filtering system (Products)~~
 - Newspaper form
 - AR in AFrame 
 - Plant score

@@ -1,6 +1,6 @@
 <template>
   <section class="products-container">
-    <ImageCarousel></ImageCarousel>
+    <ImageCarousel class="carousel"></ImageCarousel>
     <article class="product-settings-wrapper">
       <button class="extra-button sort-filter-button" @click="isSortFilterOpened = !isSortFilterOpened">Sort and Filter</button>
       <button @click="rowView = !rowView" class="view-type-button extra-button">
@@ -12,9 +12,31 @@
         </svg>
 
       </button>
-    </article>
-    <article v-if="isSortFilterOpened" class="sort-filter" id="sortFilterBox">
-        <h1>Hello</h1>
+      <article v-if="isSortFilterOpened" class="sort-filter" id="sortFilterBox">
+        <div class="filter">
+          <p>Categories</p>
+          <div v-for="category in categories">
+            <label :for="category.name">
+              <input @change="refreshInput($event)" v-model="categoryFilter[category.id]" checked data-filter="category" @input="refreshInput" :id="category.name" :name="category.name" type="checkbox">
+              {{ category.name }}
+            </label>
+          </div>
+        </div>
+        <div class="filter">
+          <p>Price</p>
+          <div>
+            <label class="value">{{ priceFilter }}€</label>
+            <input data-filter="price" @input="refreshInput($event)" class="filterInput" v-model="priceFilter" type="range" step="1" min="0" :max="Math.round(maxPrice) + 1">
+          </div>
+        </div>
+        <div class="filter">
+          <p>Height</p>
+          <div>
+            <label class="value">{{ heightFilter }}m</label>
+            <input data-filter="height" @input="refreshInput($event)" class="filterInput" v-model="heightFilter" type="range" step="0.1" min="0" :max="Math.round(maxHeight) + 1">
+          </div>
+        </div>
+      </article>
     </article>
     <div class="products-wrapper --grid">
       <ProductGrid v-if="!rowView" v-for="plant in plants" :plantPrice="plant.price" :plantName="plant.name" :plantId="plant.id" :plantStock="plant.stock"></ProductGrid>
@@ -30,6 +52,7 @@ import ProductGrid from "../components/ProductGrid";
 import ProductRow from "@/components/ProductRow";
 import ImageCarousel from "@/components/ImageCarousel";
 import PlantService from "@/services/PlantService";
+import CategoryService from "@/services/CategoryService";
 
 export default  {
   components: {
@@ -40,18 +63,52 @@ export default  {
   data() {
     return {
       plants: [],
+      originalPlants: [],
       rowView: false,
       isSortFilterOpened: false,
+      categories: [],
+      categoryFilter: {},
+      maxPrice: 100,
+      priceFilter: this.maxPrice,
+      maxHeight: 100,
+      heightFilter: this.maxPrice,
     }
   },
   methods: {
     async fetchPlants() {
       let plants = await PlantService.getAll();
-      this.plants = plants.data;
-    }
+      this.originalPlants = plants.data;
+      this.plants = this.originalPlants;
+    },
+    async fetchCategories() {
+      let categories = await CategoryService.getAll();
+      this.categories = categories.data;
+      /* Set to true each category inside filter object */
+      for (let i = 0; i < this.categories.length; i++) {
+        this.categoryFilter[this.categories[i].id] = true;
+      }
+    },
+    setHigherPrice() {
+      this.maxPrice = Math.max(...this.plants.map(plant => plant.price));
+      this.priceFilter = Math.max(...this.plants.map(plant => plant.price));
+    },
+    setHigherHeight() {
+      this.maxHeight = Math.max(...this.plants.map(plant => plant.height));
+      this.heightFilter = Math.max(...this.plants.map(plant => plant.height));
+    },
+    refreshInput() {
+      /* Filter by Category, Price and Category */
+      this.plants = this.originalPlants.filter(plant => {
+        return plant.height <= this.heightFilter && plant.price <= this.priceFilter && this.categoryFilter[plant.categoryId] != false;
+      });
+    },
+
   },
-  mounted() {
-    this.fetchPlants();
+  async mounted() {
+    await this.fetchPlants();
+    await this.fetchCategories();
+    this.setHigherPrice();
+    this.setHigherHeight()
   }
 }
 </script>
@@ -59,11 +116,16 @@ export default  {
 <style scoped>
 
 .products-container {
-  margin: 0 var(--general-margin);
+  margin: 0 var(--general-margin) var(--general-margin) var(--general-margin);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.carousel {
+  width: 100%;
+  margin: 1.5rem 0 ;
 }
 
 .--grid {
@@ -86,6 +148,7 @@ export default  {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .extra-button {
@@ -118,7 +181,27 @@ export default  {
 
 .sort-filter {
   position: absolute;
+  bottom: 0;
+  transform: translateY(100%);
+  z-index: 100;
   background: white;
+  border: 2px solid black;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filter > p {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid black;
+}
+
+
+.filter .value {
+  opacity: 50%;
+  display: block;
 }
 
 </style>
