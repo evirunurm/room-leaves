@@ -1,5 +1,6 @@
 <template>
   <div class="categories">
+    <h1 class="serif categories-title">Categories</h1>
     <section class="categories-wrapper">
       <CategoryDesc v-for="category in categories" :category="category"  ></CategoryDesc>
     </section>
@@ -45,14 +46,33 @@ export default {
 </script>
 
 <style scoped>
+* {
+  box-sizing: border-box;
+}
+
+
 .categories {
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
 .categories-wrapper {
   width: 100%;
-  margin: 0 var(--general-margin);
+  margin-bottom: 2.5rem;
 }
+
+.categories-title {
+  width: calc(100% - var(--general-margin));
+  display: block;
+  margin: var(--general-margin);
+  max-width: var(--general-max-width);
+  border-bottom: 2px solid black;
+  padding: 0.5em 0;
+  font-weight: 500;
+}
+
+
+
 </style>

@@ -10,7 +10,7 @@
         <img :src="loadImg(category.name.toLowerCase())" alt="">
         <a  class="category-title">{{ capitalize(category.name) }}</a>
       </div>
-      <div class="explore-category-more"><a href="">More +</a></div>
+      <div class="explore-category-more"><router-link to="/categories">More +</router-link></div>
 
     </div>
   </section>
