@@ -13,11 +13,23 @@
 
       </button>
       <article v-if="isSortFilterOpened" class="sort-filter" id="sortFilterBox">
+        <div class="sort">
+          <select v-model="sortBy" @change="sort($event)">
+            <option selected disabled value="">Order by</option>
+            <option value="name">Name</option>
+            <option value="height">Height</option>
+            <option value="price">Price</option>
+            <option value="temperature">Temperature</option>
+            <option value="score">Score</option>
+          </select>
+          <button class="white" @click="sortDesc=!sortDesc; sort($event)" v-if="sortDesc">DESC</button>
+          <button class="white" @click="sortDesc=!sortDesc; sort($event)" v-if="!sortDesc">ASC</button>
+        </div>
         <div class="filter">
           <p>Categories</p>
           <div v-for="category in categories">
             <label :for="category.name">
-              <input @change="refreshInput($event)" v-model="categoryFilter[category.id]" checked data-filter="category" @input="refreshInput" :id="category.name" :name="category.name" type="checkbox">
+              <input @change="refreshFilter($event)" v-model="categoryFilter[category.id]" checked data-filter="category" @input="refreshInput" :id="category.name" :name="category.name" type="checkbox">
               {{ category.name }}
             </label>
           </div>
@@ -26,14 +38,14 @@
           <p>Price</p>
           <div>
             <label class="value">{{ priceFilter }}€</label>
-            <input data-filter="price" @input="refreshInput($event)" class="filterInput" v-model="priceFilter" type="range" step="1" min="0" :max="Math.round(maxPrice) + 1">
+            <input data-filter="price" @input="refreshFilter($event)" class="filterInput" v-model="priceFilter" type="range" step="1" min="0" :max="Math.round(maxPrice) + 1">
           </div>
         </div>
         <div class="filter">
           <p>Height</p>
           <div>
             <label class="value">{{ heightFilter }}m</label>
-            <input data-filter="height" @input="refreshInput($event)" class="filterInput" v-model="heightFilter" type="range" step="0.1" min="0" :max="Math.round(maxHeight) + 1">
+            <input data-filter="height" @input="refreshFilter($event)" class="filterInput" v-model="heightFilter" type="range" step="0.1" min="0" :max="Math.round(maxHeight) + 1">
           </div>
         </div>
       </article>
@@ -72,6 +84,8 @@ export default  {
       priceFilter: this.maxPrice,
       maxHeight: 100,
       heightFilter: this.maxPrice,
+      sortBy: "",
+      sortDesc: false,
     }
   },
   methods: {
@@ -96,13 +110,25 @@ export default  {
       this.maxHeight = Math.max(...this.plants.map(plant => plant.height));
       this.heightFilter = Math.max(...this.plants.map(plant => plant.height));
     },
-    refreshInput() {
+    refreshFilter() {
       /* Filter by Category, Price and Category */
       this.plants = this.originalPlants.filter(plant => {
         return plant.height <= this.heightFilter && plant.price <= this.priceFilter && this.categoryFilter[plant.categoryId] != false;
       });
     },
+    sort() {
+      this.plants.sort( (curr, next) => {
+        if (this.sortDesc) {
+          if (this.sortBy === "name") {
+            return next[this.sortBy] - curr[this.sortBy];
+          }
+          return next[this.sortBy] - curr[this.sortBy];
+        } else {
+          return curr[this.sortBy] - next[this.sortBy];
+        }
 
+      });
+    }
   },
   async mounted() {
     await this.fetchPlants();
@@ -202,6 +228,27 @@ export default  {
 .filter .value {
   opacity: 50%;
   display: block;
+}
+
+.sort {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.sort > button {
+  padding: 0.25rem 1rem;
+  cursor: pointer;
+  border-radius: 0;
+  font-weight: 500;
+}
+
+.sort > select {
+  cursor: pointer;
+  border-radius: 0;
+  border: 2px solid var(--darkgreen);
+  font-size: 1rem;
+  padding-left: 1em;
 }
 
 </style>
