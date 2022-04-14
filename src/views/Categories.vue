@@ -64,7 +64,7 @@ export default {
 .categories-title {
   width: calc(100% - var(--general-margin));
   display: block;
-  margin: var(--general-margin);
+  margin: 0 var(--general-margin) var(--general-margin) var(--general-margin);
   max-width: var(--general-max-width);
   border-bottom: 2px solid black;
   padding: 0.5em 0;

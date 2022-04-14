@@ -70,6 +70,9 @@ export default {
   },
   mounted() {
     this.setSlideTimer();
+  },
+  beforeUnmount() {
+    this.clearSlideTimer();
   }
 }
 </script>

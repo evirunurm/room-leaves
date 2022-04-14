@@ -50,10 +50,10 @@
       </article>
     </article>
     <div class="products-wrapper --grid">
-      <ProductGrid v-if="!rowView" v-for="plant in plants" :plantPrice="plant.price" :plantName="plant.name" :plantId="plant.id" :plantStock="plant.stock"></ProductGrid>
+      <ProductGrid v-if="!rowView" v-for="plant in plants" :plant="plant"></ProductGrid>
     </div>
     <div class="products-wrapper --row">
-      <ProductRow v-if="rowView" v-for="plant in plants" :plantPrice="plant.price" :plantName="plant.name" :plantId="plant.id" :plantStock="plant.stock"></ProductRow>
+      <ProductRow v-if="rowView" v-for="plant in plants" :plant="plant"></ProductRow>
     </div>
   </section>
 </template>

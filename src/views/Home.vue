@@ -2,7 +2,7 @@
   <div class="home">
     <WelcomeScreen></WelcomeScreen>
     <ExploreCategories></ExploreCategories>
-    <ProductCarousel title="New Arrivals" :plants="plants" ></ProductCarousel>
+    <ProductCarousel class="new-arrivals-wrapper" title="New Arrivals" :plants="plants" ></ProductCarousel>
   </div>
 </template>
 
@@ -58,4 +58,9 @@ export default {
   gap: 2.5rem;
   padding-bottom: 2.5rem;
 }
+.new-arrivals-wrapper {
+  width: calc(100% - var(--general-margin) * 2);
+  margin: 0 var(--general-margin);
+}
+
 </style>

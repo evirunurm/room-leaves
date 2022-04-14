@@ -1,9 +1,9 @@
 <template>
 <div class="product-row">
-    <PlantImage class="product-image" :clickable="true" :plantId="plantId" :stock="plantStock > 0" ></PlantImage>
+    <PlantImage class="product-image" :clickable="true" :plantId="plant.id" :stock="plant.stock > 0" ></PlantImage>
     <div class="product-data">
       <div class="product-data-title">
-        <p class="product-name">{{ plantName }}</p>
+        <p class="product-name">{{ plant.name }}</p>
         <div class="products-stars">
               <svg  class="star" width="31" height="29" viewBox="0 0 31 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.5 0L18.98 10.7102H30.2414L21.1307 17.3295L24.6107 28.0398L15.5 21.4205L6.38933 28.0398L9.8693 17.3295L0.758624 10.7102H12.02L15.5 0Z" fill="#F2C72E"/>
@@ -21,7 +21,7 @@
                 <path d="M15.5 0L18.98 10.7102H30.2414L21.1307 17.3295L24.6107 28.0398L15.5 21.4205L6.38933 28.0398L9.8693 17.3295L0.758624 10.7102H12.02L15.5 0Z" fill="#F2C72E"/>
               </svg>
             </div>
-        <p class="product-price">{{ plantPrice }}</p>
+        <p class="product-price">{{ plant.price }}</p>
       </div>
       <div class="product-buttons">
         <button class="view-button white-black">View</button>
@@ -45,11 +45,7 @@ export default {
     PlantImage,
   },
   props: {
-    plantId: Number,
-    plantName: String,
-    plantPrice: Number,
-    plantStock: Number,
-    plantScore: Number
+    plant: Object
   }
 }
 </script>

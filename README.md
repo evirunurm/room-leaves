@@ -3,7 +3,7 @@
 ## Pending
 
 - Settings view
-- Cart view
+- ~~Cart view~~
 - Orders view
 - Home view
 - ~~Categories view~~
@@ -12,6 +12,7 @@
 - Change contrast hearts / Plant Image
 - ~~Product component in rows for Products view~~
 - ~~Sorting system (Products)~~
+- Enable sorting when selecting a category in Category View
 - ~~Filtering system (Products)~~
 - Newspaper form
 - AR in AFrame 
