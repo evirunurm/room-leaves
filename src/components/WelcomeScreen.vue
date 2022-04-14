@@ -23,6 +23,25 @@ export default {
 
 
 <style scoped>
+/* GET RID OF APP.VUE STYLES */
+h2 {
+  border: none;
+}
+
+h1 {
+   margin: 0;
+}
+
+h1, h2 {
+  border-bottom: none;
+  padding-bottom: 0;
+  font-weight: 500;
+}
+
+h2 {
+  margin-bottom: 0;
+}
+
 .welcome-wrapper {
   width: 100%;
   padding: 0 0 5rem 0;

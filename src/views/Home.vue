@@ -63,4 +63,5 @@ export default {
   margin: 0 var(--general-margin);
 }
 
+
 </style>

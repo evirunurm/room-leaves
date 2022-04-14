@@ -107,6 +107,20 @@ export default {
 
 <style>
 
+h1 {
+   margin: 0 var(--general-margin);
+}
+
+h1, h2 {
+  border-bottom: 2px solid black;
+  padding-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
 /* VARIABLES */
 :root {
   --darkgreen: #104547;

@@ -82,7 +82,6 @@ export default {
 
 .cart-button svg {
   position: relative;
-  left: 1px; /* To center perfectly */
 }
 
 .cart-button:hover {
