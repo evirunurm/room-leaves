@@ -11,7 +11,7 @@
 - Notification appearing when you spend too much time in the same page
 - Change contrast hearts / Plant Image
 - ~~Product component in rows for Products view~~
-- Sorting system (Products)
+- ~~Sorting system (Products)~~
 - ~~Filtering system (Products)~~
 - Newspaper form
 - AR in AFrame 

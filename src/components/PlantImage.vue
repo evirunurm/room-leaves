@@ -23,19 +23,26 @@ export default {
   },
   data() {
     return {
-      plantImage: this.loadImg(this.plantId)
+      plantImage: ""
     }
   },
   methods: {
-    loadImg(id) {
+    loadImg() {
       let img;
       try {
-        img = require("../../public/plants/plant_" + id + ".png");
-        return img;
+        img = require("../../public/plants/plant_" + this.plantId + ".png");
+        this.plantImage = img;
       } catch (err) {
-        console.log("Image not found for plant with id: " + id);
+        console.log("Image not found for plant with id: " + this.plantId);
       }
     }
+  },
+  updated() {
+    this.loadImg();
+  },
+  /* WHEN THE COMPONENT IS NOT SHOWN WITH V-IF */
+  mounted() {
+    this.loadImg();
   }
 }
 </script>

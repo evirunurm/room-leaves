@@ -16,7 +16,6 @@
         <div class="sort">
           <select v-model="sortBy" @change="sort($event)">
             <option selected disabled value="">Order by</option>
-            <option value="name">Name</option>
             <option value="height">Height</option>
             <option value="price">Price</option>
             <option value="temperature">Temperature</option>
@@ -115,13 +114,11 @@ export default  {
       this.plants = this.originalPlants.filter(plant => {
         return plant.height <= this.heightFilter && plant.price <= this.priceFilter && this.categoryFilter[plant.categoryId] != false;
       });
+      console.log(this.plants)
     },
     sort() {
       this.plants.sort( (curr, next) => {
         if (this.sortDesc) {
-          if (this.sortBy === "name") {
-            return next[this.sortBy] - curr[this.sortBy];
-          }
           return next[this.sortBy] - curr[this.sortBy];
         } else {
           return curr[this.sortBy] - next[this.sortBy];
