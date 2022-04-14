@@ -88,7 +88,7 @@ export default {
 .plant-data-section {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+/*  gap: 1.5rem;*/
 }
 
 .plant-name, .plant-price {
@@ -96,7 +96,7 @@ export default {
 }
 
 .plant-name {
-  width: 80%;
+  width: 70%;
   word-wrap: break-word;
 }
 

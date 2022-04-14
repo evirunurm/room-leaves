@@ -1,15 +1,17 @@
 <template>
   <div class="cart-container">
     <div class="cart-wrapper">
-      <h1 v-if="items.length > 0">My Cart ({{ items.length }})</h1>
-      <h1 v-else="items.length == 0">My Cart</h1>
-
-      <section class="cart-items">
-        <ProductCart @update="getFromLocal" v-for="item in items" :item="item"></ProductCart>
-      </section>
-
-       <section class="cart-section">
-        <h2>Subtotal</h2>
+      <div>
+        <h1 class="serif" v-if="items.length > 0">My Cart ({{ items.length }})</h1>
+        <h1 class="serif" v-else="items.length == 0">My Cart</h1>
+        <section class="cart-items">
+          <p class="no-items-note" v-if="items.length < 1">No items</p>
+          <ProductCart @update="getFromLocal" v-for="item in items" :item="item"></ProductCart>
+        </section>
+      </div>
+      <div class="cart-right">
+        <section class="cart-section">
+        <h2 class="serif">Subtotal</h2>
         <article>
           <p class="subtotal-name">Subtotal</p>
           <p class="subtotal-value">{{ subtotal }}</p>
@@ -23,16 +25,22 @@
           <p class="subtotal-value">{{ tax }}</p>
         </article>
          <article>
-          <p class="subtotal-name">Total</p>
-          <p class="subtotal-value">{{ subtotal + delivery + tax }}</p>
+          <p class="subtotal-name total">Total</p>
+          <p class="subtotal-value total">{{ subtotal + delivery + tax }}</p>
         </article>
       </section>
 
       <section class="cart-section">
-        <h2>Discounts</h2>
+        <h2 class="serif">Discounts</h2>
         <p>Applied on checkout</p>
       </section>
 
+      <section class="cart-section checkout-section">
+        <button class="white">Log in</button>
+        <p class="checkout-divisor">or</p>
+        <button class="green">Continue to checkout</button>
+      </section>
+      </div>
     </div>
   </div>
 </template>
@@ -50,12 +58,13 @@ export default {
       subtotal: 0,
       delivery: 0,
       tax: 0,
-
     }
   },
   methods: {
     getFromLocal() {
-      this.items = JSON.parse(localStorage.getItem("cart"));
+      let cart = JSON.parse(localStorage.getItem("cart"));
+      let cleanItems = cart.filter(item => item.amount > 0);
+      this.items = cleanItems;
     },
     loadPrice() {
       this.getTotal();
@@ -89,17 +98,94 @@ export default {
 
 <style scoped>
 
+.cart-container {
+  display: grid;
+  place-items: center;
+}
+
+.cart-wrapper {
+  width: 100%;
+  display: flex;
+}
+
+.cart-wrapper > div {
+  width: 50%;
+}
+
+h1 {
+   margin: 0 var(--general-margin);
+}
+
+h1, h2 {
+  border-bottom: 2px solid black;
+  padding-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
 .cart-items {
   display: flex;
   flex-direction: column;
-  gap:2rem;
+  gap: 2rem;
   margin: var(--general-margin);
   max-width: var(--general-max-width);
 }
 
 .subtotal-value:after {
-  content: "€";
+  content: " €";
   font-size: 0.9em;
 }
 
+/* SECTIONS */
+
+.cart-section {
+  margin: var(--general-margin);
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-section > article {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.total {
+  font-weight: 600;
+}
+
+.checkout-section {
+  align-items: center;
+}
+
+.checkout-section > button {
+  width: 100%;
+  max-width: 400px;
+}
+
+.checkout-divisor {
+  margin: 0.5rem 0;
+}
+
+.no-items-note {
+  opacity: 70%;
+  align-self: center;
+  pointer-events: none;
+}
+
+@media (max-width: 1000px) {
+  .cart-wrapper {
+    max-width: var(--general-max-width);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cart-wrapper > div {
+    width: 100%;
+  }
+}
 </style>
