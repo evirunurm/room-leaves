@@ -4,7 +4,7 @@
 
 - Settings view
 - ~~Cart view~~
-- Orders view
+- ~~Orders view~~
 - Home view
 - ~~Categories view~~
 - Search bar functionality

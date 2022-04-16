@@ -17,14 +17,19 @@
         </div>
         <article>
           <p class="no-orders-warning" v-if="orders.length < 1">No orders</p>
-
-          <div class="order" v-for="order in orders">
-            <p>Order nº {{ (order.id).toString().padStart(6, '0') }}</p>
-            <p v-for="item in order.details">{{ item.plantData.name }}
-              <a href="">{{ item.amount }}</a> -
-               <a href="">{{ item.price }}</a>
-            </p>
-          </div>
+          <details class="order" v-for="order in orders.slice(0, 3)">
+            <summary class="summary">
+              <p class="order-title">Order nº {{ (order.id).toString().padStart(6, '0') }}</p>
+              <p class="order-opacity">State: {{ order.state }}</p>
+              <p class="order-opacity">{{ months[new Date(Date.parse(order.createdAt)).getMonth()] }} {{ new Date(Date.parse(order.createdAt)).getDay() }}, {{ new Date(Date.parse(order.createdAt)).getFullYear() }}</p>
+            </summary>
+            <div class="details">
+              <div class="item-container" v-for="item in order.details">
+                <p><a :href="'products/' + item.plantId">{{ item.plantData.name }}</a></p>
+                <p>x{{ item.amount }} - <span class="price">{{ item.price }}</span></p>
+              </div>
+            </div>
+          </details>
         </article>
       </section>
       <p>Having a problem with an order? Send us an email to <a href="">xxx@roomleaves.com</a>, we’ll be happy to assist you!</p>
@@ -44,7 +49,21 @@ export default {
   data() {
     return {
       name: "",
-      orders: []
+      orders: [],
+      months: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+      ]
     }
   },
   methods: {
@@ -143,6 +162,31 @@ h1 {
   align-self: center;
 }
 
+.summary {
+  cursor: pointer;
+}
+
+.summary > .order-title {
+  display: inline;
+}
+
+.order {
+  border-bottom: 2px solid rgba(0, 0, 0, .2);
+  padding: 1rem 0;
+}
+
+.order .order-opacity {
+  opacity: 60%;
+}
+
+.details {
+  padding: 0.5rem 0 0 0;
+}
+
+.item-container {
+  display: flex;
+  justify-content: space-between;
+}
 
 /* LOG OUT */
 .logout-button {
