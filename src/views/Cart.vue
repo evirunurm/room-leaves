@@ -36,7 +36,7 @@
       </section>
 
       <section class="cart-section checkout-section">
-        <button class="white">Log in</button>
+        <button class="white" v-if="!loggedIn">Log in</button>
         <p class="checkout-divisor">or</p>
         <button class="green">Continue to checkout</button>
       </section>
@@ -58,6 +58,7 @@ export default {
       subtotal: 0,
       delivery: 0,
       tax: 0,
+      loggedIn: localStorage.getItem('userId')
     }
   },
   methods: {

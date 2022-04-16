@@ -17,9 +17,14 @@
         </div>
         <article>
           <p class="no-orders-warning" v-if="orders.length < 1">No orders</p>
-          <p v-for="order in orders">{{ order.id }}
-            <a v-for="item in order.details">{{ getPlantsData(item.id).name }}</a>
-          </p>
+
+          <div class="order" v-for="order in orders">
+            <p>Order nº {{ (order.id).toString().padStart(6, '0') }}</p>
+            <p v-for="item in order.details">{{ item.plantData.name }}
+              <a href="">{{ item.amount }}</a> -
+               <a href="">{{ item.price }}</a>
+            </p>
+          </div>
         </article>
       </section>
       <p>Having a problem with an order? Send us an email to <a href="">xxx@roomleaves.com</a>, we’ll be happy to assist you!</p>
@@ -63,15 +68,6 @@ export default {
         console.log(this.orders);
       } catch (err) {
         console.log(err.message)
-      }
-    },
-    async getPlantsData(id) {
-      try {
-        let plant = await PlantService.get(id);
-        console.log(plant)
-        return plant.data;
-      } catch (err) {
-        console.log(err.message);
       }
     }
   },
