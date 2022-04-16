@@ -91,8 +91,12 @@ export default {
 /*  gap: 1.5rem;*/
 }
 
-.plant-name, .plant-price {
+.plant-name {
   font-size: 1.5rem;
+}
+
+.plant-price {
+  font-size: 1.2rem;
 }
 
 .plant-name {
@@ -143,10 +147,10 @@ export default {
 
 .remove-button:hover path {
   stroke: white;
-
 }
 
 .plant-amount-input {
+  margin-bottom: 0.25rem;
   padding: 0.25rem;
   border: 2px solid var(--lightgreen)
 }

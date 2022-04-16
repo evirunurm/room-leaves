@@ -36,7 +36,7 @@
           <p class="plant-price">{{ plant.price }}</p>
         </div>
         <div class="plant-options">
-          <router-link class="router-cart" to="/cart"><button class="green cart-button">Add to Cart</button></router-link>
+          <router-link class="router-cart" to="/cart"><button @click="addToCart" class="green cart-button">Add to Cart</button></router-link>
           <button class="white--white ar-button">Visualize in AR</button>
         </div>
       </div>
@@ -79,7 +79,7 @@
 
     </section>
     <section>
-      <ProductCarousel title="More like this one" :plants="plants"></ProductCarousel>
+      <ProductCarousel title="More like this one" :plants="sameCategoryPlants"></ProductCarousel>
     </section>
   </div>
 </template>
@@ -87,7 +87,8 @@
 <script>
 import PlantImage from '@/components/PlantImage';
 import ProductCarousel from '@/components/ProductCarousel';
-import axios from "axios";
+import PlantService from "@/services/PlantService";
+
 
 export default {
   components: {
@@ -98,7 +99,7 @@ export default {
     return {
       plantId: parseInt(this.$route.params.id),
       plant: {},
-      plants: [],
+      sameCategoryPlants: [],
       lastReview: {
         name: "Marina Poppins",
         score: 4,
@@ -107,20 +108,39 @@ export default {
     }
   },
   methods: {
-    async getPlantData() {
-      // let plant = await axios.get("https://room-leaves-api.herokuapp.com/plants/" + this.plantId);
-      let plant = await axios.get("http://localhost/plants/" + this.plantId);
-      console.log(plant.data);
+    async fetchPlantData() {
+      let plant = await PlantService.get(this.plantId);
       this.plant = plant.data;
-
-      this.getPlantScore(this.plant.id);
     },
-    async getPlantScore(id) {
-
+    async fetchPlantScore(id) {
+      // TODO: fetch score and set last review
+    },
+    async fetchPlants(id) {
+      let plants = await PlantService.getAll(id);
+      this.sameCategoryPlants =  plants.data.filter( plant => {
+        return plant.categoryId === this.plant.categoryId
+      });
+    },
+    addToCart() {
+      if (this.plant.stock > 0) {
+        let cart = JSON.parse(localStorage.getItem("cart"));
+        if (!cart) {
+          cart = [];
+        }
+        // If cart contains an object with id = plant.id
+        let itemArr = cart.filter(item => item.id === this.plant.id)
+        if (itemArr?.length > 0) {
+          itemArr[0].amount++;
+        } else {
+          cart.push({...this.plant, amount: 1});
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }
     }
   },
   mounted() {
-    this.getPlantData();
+    this.fetchPlantData();
+    this.fetchPlants(this.plant.id);
   }
 }
 </script>
@@ -275,7 +295,7 @@ h1 {
 }
 
 /* Mobile */
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   .plant-main {
     flex-direction: column;
   }

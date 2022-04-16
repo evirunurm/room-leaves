@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import CategoryService from "@/services/CategoryService";
 
 export default {
   name: "ExploreCategories",
@@ -34,15 +34,13 @@ export default {
           .join(" ");
     },
     async fetchCategories() {
-      // let categories = await axios.get("https://room-leaves-api.herokuapp.com/categories");
-      let categories = await axios.get("http://localhost/categories");
+      let categories = await CategoryService.getAll();
       this.categories = categories.data;
     },
     loadImg(id) {
       let img;
       try {
         img = require('../assets/' + id + '-category.png');
-        console.log(img)
         return img;
       } catch (err) {
         console.log("Image not found for plant with id: " + id);

@@ -6,6 +6,7 @@
 - ~~Cart view~~
 - ~~Orders view~~
 - Home view
+- Push notification when added to cart
 - ~~Categories view~~
 - Search bar functionality
 - Notification appearing when you spend too much time in the same page

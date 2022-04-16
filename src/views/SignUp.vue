@@ -92,7 +92,7 @@ export default {
         await AuthService.create(data);
         await this.$router.push("/login");
       } catch (err) {
-        console.log(err);
+        console.log(err.message);
         this.failedEmail = true;
       }
       

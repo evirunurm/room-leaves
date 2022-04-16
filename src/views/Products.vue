@@ -29,7 +29,7 @@
           <div v-for="category in categories">
             <label :for="category.name">
               <input @change="refreshFilter($event)" v-model="categoryFilter[category.id]" checked data-filter="category" @input="refreshInput" :id="category.name" :name="category.name" type="checkbox">
-              {{ category.name }}
+              {{ category.name[0].toUpperCase() + category.name.substring(1) }}
             </label>
           </div>
         </div>
@@ -49,11 +49,13 @@
         </div>
       </article>
     </article>
-    <div class="products-wrapper --grid">
-      <ProductGrid v-if="!rowView" v-for="plant in plants" :plant="plant"></ProductGrid>
+    <div v-if="!rowView" class="products-wrapper --grid">
+      <p v-if="plants.length < 1" class="no-plants-warning">No plants in this forest...</p>
+      <ProductGrid  v-for="plant in plants" :plant="plant"></ProductGrid>
     </div>
-    <div class="products-wrapper --row">
-      <ProductRow v-if="rowView" v-for="plant in plants" :plant="plant"></ProductRow>
+    <div v-if="rowView" class="products-wrapper --row">
+      <p v-if="plants.length < 1" class="no-plants-warning">No plants in this forest...</p>
+      <ProductRow  v-for="plant in plants" :plant="plant"></ProductRow>
     </div>
   </section>
 </template>
@@ -114,7 +116,6 @@ export default  {
       this.plants = this.originalPlants.filter(plant => {
         return plant.height <= this.heightFilter && plant.price <= this.priceFilter && this.categoryFilter[plant.categoryId] != false;
       });
-      console.log(this.plants)
     },
     sort() {
       this.plants.sort( (curr, next) => {
@@ -123,15 +124,29 @@ export default  {
         } else {
           return curr[this.sortBy] - next[this.sortBy];
         }
-
       });
+    },
+    extractRoute() {
+      if ("category" in this.$route.query) {
+        Object.keys(this.categoryFilter).forEach( key => {
+          if (key === this.$route.query["category"]) {
+            this.categoryFilter[key] = true;
+          } else {
+            this.categoryFilter[key] = false;
+          }
+        });
+        this.refreshFilter()
+      }
+
+
     }
   },
   async mounted() {
     await this.fetchPlants();
     await this.fetchCategories();
     this.setHigherPrice();
-    this.setHigherHeight()
+    this.setHigherHeight();
+    this.extractRoute();
   }
 }
 </script>
@@ -246,6 +261,10 @@ export default  {
   border: 2px solid var(--darkgreen);
   font-size: 1rem;
   padding-left: 1em;
+}
+
+.no-plants-warning {
+  align-self: center;
 }
 
 </style>

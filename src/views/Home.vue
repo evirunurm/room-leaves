@@ -33,7 +33,6 @@ export default {
   methods: {
     async fetchPlants() {
       let plants = await PlantService.getAll();
-      console.log(plants.data)
       this.plants = plants.data;
       this.orderPlants();
     },

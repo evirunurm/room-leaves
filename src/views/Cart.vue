@@ -26,7 +26,7 @@
         </article>
          <article>
           <p class="subtotal-name total">Total</p>
-          <p class="subtotal-value total">{{ subtotal + delivery + tax }}</p>
+          <p class="subtotal-value total">{{ Math.round( (subtotal + delivery + tax) * 100 ) / 100 }}</p>
         </article>
       </section>
 
@@ -37,7 +37,7 @@
 
       <section class="cart-section checkout-section">
         <button class="white" v-if="!loggedIn">Log in</button>
-        <p class="checkout-divisor">or</p>
+        <p v-if="!loggedIn" class="checkout-divisor">or</p>
         <button class="green">Continue to checkout</button>
       </section>
       </div>
@@ -64,8 +64,7 @@ export default {
   methods: {
     getFromLocal() {
       let cart = JSON.parse(localStorage.getItem("cart"));
-      let cleanItems = cart.filter(item => item.amount > 0);
-      this.items = cleanItems;
+      this.items = cart.filter(item => item.amount > 0);
     },
     loadPrice() {
       this.getTotal();
@@ -73,26 +72,32 @@ export default {
       this.getTax();
     },
     getTotal() {
-      let subtotal = this.items.reduce( (prev, curr) => {
-        return prev + parseFloat(curr.price)
+      this.subtotal = this.items.reduce( (acc, curr) => {
+        return acc + parseFloat(curr.price * curr.amount)
       }, 0);
-      this.subtotal = subtotal;
       return this.subtotal;
     },
     getDelivery() {
-      let delivery = Math.round(this.subtotal / 100 * 10 );
-      this.delivery = delivery;
+      this.delivery = Math.round((this.subtotal / 100 * 10) * 100 ) / 100;
       return this.delivery;
     },
     getTax() {
-      let tax = Math.round(this.subtotal / 100 * 21 );
-      this.tax = tax;
+      this.tax = Math.round((this.subtotal / 100 * 21) * 100 ) / 100;
       return this.tax;
     }
   },
   mounted() {
     this.getFromLocal();
     this.loadPrice();
+  },
+  watch: {
+    items: {
+      // Watch for changes in array of objects
+      deep: true,
+      handler() {
+        this.loadPrice();
+      }
+    }
   }
 }
 </script>

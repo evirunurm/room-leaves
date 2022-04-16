@@ -63,7 +63,7 @@ export default {
         await localStorage.setItem("userId", userId);
         await this.$router.push("/me");
       } catch (err) {
-        console.log(err);
+        console.log(err.message);
       }
 
     }

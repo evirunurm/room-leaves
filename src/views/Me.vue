@@ -72,7 +72,7 @@ export default {
         let user = await UserService.get(localStorage.getItem("userId"));
         this.name = ", " + user.data["full_name"];
       } catch (err) {
-        console.log(err);
+        console.log(err.message);
       }
     },
     async logOut() {
@@ -84,7 +84,6 @@ export default {
       try {
         let orders = await OrderService.getAll(localStorage.getItem("userId"));
         this.orders = orders.data
-        console.log(this.orders);
       } catch (err) {
         console.log(err.message)
       }
