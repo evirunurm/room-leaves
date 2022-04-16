@@ -17,6 +17,9 @@
         </div>
         <article>
           <p class="no-orders-warning" v-if="orders.length < 1">No orders</p>
+          <p v-for="order in orders">{{ order.id }}
+            <a v-for="item in order.details">{{ getPlantsData(item.id).name }}</a>
+          </p>
         </article>
       </section>
       <p>Having a problem with an order? Send us an email to <a href="">xxx@roomleaves.com</a>, we’ll be happy to assist you!</p>
@@ -29,6 +32,8 @@
 
 <script>
 import UserService from "@/services/UserService";
+import OrderService from "@/services/OrderService";
+import PlantService from "@/services/PlantService";
 
 export default {
   data() {
@@ -40,7 +45,7 @@ export default {
   methods: {
     async getName() {
       try {
-        let user = await UserService.get(localStorage.getItem("userId"), );
+        let user = await UserService.get(localStorage.getItem("userId"));
         this.name = ", " + user.data["full_name"];
       } catch (err) {
         console.log(err);
@@ -50,10 +55,29 @@ export default {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("userId");
       await this.$router.push("/login");
+    },
+    async getOrders() {
+      try {
+        let orders = await OrderService.getAll(localStorage.getItem("userId"));
+        this.orders = orders.data
+        console.log(this.orders);
+      } catch (err) {
+        console.log(err.message)
+      }
+    },
+    async getPlantsData(id) {
+      try {
+        let plant = await PlantService.get(id);
+        console.log(plant)
+        return plant.data;
+      } catch (err) {
+        console.log(err.message);
+      }
     }
   },
   mounted() {
-    this.getName()
+    this.getName();
+    this.getOrders();
   }
 }
 </script>
