@@ -95,7 +95,7 @@ export default {
         console.log(err.message);
         this.failedEmail = true;
       }
-      
+
     }
   }
 }

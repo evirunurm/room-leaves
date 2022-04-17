@@ -1,12 +1,18 @@
 <template>
   <div class="me-container">
     <div class="me-wrapper">
-      <h1 class="serif" >Welcome back{{ name }}</h1>
+      <h1 class="serif">Welcome back{{ name }}</h1>
       <section class="settings">
         <ul>
-          <li><router-link to="">Profile settings</router-link></li>
-          <li><router-link to="">My favorites</router-link></li>
-          <li><router-link to="">Newsletter</router-link></li>
+          <li>
+            <router-link to="/me/settings">Profile settings</router-link>
+          </li>
+          <li>
+            <router-link to="">My favorites</router-link>
+          </li>
+          <li>
+            <router-link to="">Newsletter</router-link>
+          </li>
         </ul>
       </section>
 
@@ -21,7 +27,9 @@
             <summary class="summary">
               <p class="order-title">Order nº {{ (order.id).toString().padStart(6, '0') }}</p>
               <p class="order-opacity">State: {{ order.state }}</p>
-              <p class="order-opacity">{{ months[new Date(Date.parse(order.createdAt)).getMonth()] }} {{ new Date(Date.parse(order.createdAt)).getDay() }}, {{ new Date(Date.parse(order.createdAt)).getFullYear() }}</p>
+              <p class="order-opacity">{{ months[new Date(Date.parse(order.createdAt)).getMonth()] }}
+                {{ new Date(Date.parse(order.createdAt)).getDay() }},
+                {{ new Date(Date.parse(order.createdAt)).getFullYear() }}</p>
             </summary>
             <div class="details">
               <div class="item-container" v-for="item in order.details">
@@ -32,7 +40,8 @@
           </details>
         </article>
       </section>
-      <p>Having a problem with an order? Send us an email to <a href="">xxx@roomleaves.com</a>, we’ll be happy to assist you!</p>
+      <p>Having a problem with an order? Send us an email to <a href="">xxx@roomleaves.com</a>, we’ll be happy to assist
+        you!</p>
       <button class="white logout-button" @click="logOut">Log out</button>
     </div>
 

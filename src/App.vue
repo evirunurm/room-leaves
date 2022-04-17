@@ -69,7 +69,6 @@ export default {
     return {
       isSearchbarOpen: false,
       isMenuOpen: false,
-
     }
   },
   methods: {
@@ -85,7 +84,6 @@ export default {
     },
     handleSearchForm(e) {
       e.preventDefault();
-
       const query = document.getElementById("searchinput").value;
       // Validate query
       if (query !== "" && query !== undefined && query.length > 1 && query) {
@@ -94,7 +92,7 @@ export default {
       }
     },
     async fetchPlants() {
-      let plants = await PlantService.getAll();
+      let plants = (await PlantService.getAll());
       plants = plants.data;
     }
   },

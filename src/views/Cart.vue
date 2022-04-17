@@ -10,24 +10,26 @@
         </section>
       </div>
       <div class="cart-right">
+
         <section class="cart-section">
-        <h2 class="serif">Subtotal</h2>
-        <article>
-          <p class="subtotal-name">Subtotal</p>
-          <p class="subtotal-value">{{ subtotal }}</p>
-        </article>
-         <article>
-          <p class="subtotal-name">Delivery fees</p>
-          <p class="subtotal-value">{{ delivery }}</p>
-        </article>
-         <article>
-          <p class="subtotal-name">Tax</p>
-          <p class="subtotal-value">{{ tax }}</p>
-        </article>
-         <article>
-          <p class="subtotal-name total">Total</p>
-          <p class="subtotal-value total">{{ Math.round( (subtotal + delivery + tax) * 100 ) / 100 }}</p>
-        </article>
+          <h2 class="serif">Subtotal</h2>
+          <p class="no-items-note" v-if="items.length < 1">Nothing to calculate here</p>
+          <article v-if="items.length > 0">
+            <p class="subtotal-name">Subtotal</p>
+            <p class="subtotal-value">{{ subtotal }}</p>
+          </article>
+           <article v-if="items.length > 0">
+            <p class="subtotal-name">Delivery fees</p>
+            <p class="subtotal-value">{{ delivery }}</p>
+          </article>
+           <article v-if="items.length > 0">
+            <p class="subtotal-name">Tax</p>
+            <p class="subtotal-value">{{ tax }}</p>
+          </article>
+           <article >
+            <p class="subtotal-name total">Total</p>
+            <p class="subtotal-value total">{{ Math.round( (subtotal + delivery + tax) * 100 ) / 100 }}</p>
+          </article>
       </section>
 
       <section class="cart-section">
