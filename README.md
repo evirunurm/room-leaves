@@ -11,9 +11,9 @@
 - ~~Implementation with Back-End~~
 - ~~Enable sorting when selecting a category in Category View~~
 - ~~Settings view~~
+- ~~Plant score~~
+- ~~Scores logic~~
 
-
-- Plant score
 - Favorites logic
 - Checkout view
 - Finish Home view
@@ -34,6 +34,7 @@
     - Add more plants and categories
     - Add Automatic log out when an error refusing resources occurs.
     - Change to <main> all wrappers of views
+    - Add currency orders
 
 - Search bar functionality
 - AR in AFrame
