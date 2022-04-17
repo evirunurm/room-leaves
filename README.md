@@ -14,7 +14,7 @@
 - ~~Plant score~~
 - ~~Scores logic~~
 
-- Favorites logic
+- ~~Favorites logic~~
 - Checkout view
 - Finish Home view
     - Prepared with love
@@ -35,6 +35,7 @@
     - Add Automatic log out when an error refusing resources occurs.
     - Change to <main> all wrappers of views
     - Add currency orders
+    - Add favorites fetching in Product Carousel component
 
 - Search bar functionality
 - AR in AFrame
