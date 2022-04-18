@@ -23,23 +23,26 @@
 - Quick fixes
     - Adding brand images to sections
     - Add images to Image Carousel component
-    - Change contrast hearts / Plant Image
-    - Add href to Explore Categories component
-    - Uppercase category name in Categories view
-    - Change links color footer
-    - Align titles in Cart view
-    - Add discounts
-    - Fix Product view paddings
+    - ~~Change contrast hearts / Plant Image~~
+    - ~~Add href to Explore Categories component~~
+    - ~~Uppercase category name in Categories view~~
+    - ~~Change links color footer~~
+    - ~~Align titles in Cart view~~
+    - ~~Fix Product view paddings~~
     - Cut again leaves from Home view
     - Add more images
     - Add more plants and categories
-    - Add Automatic log out when an error refusing resources occurs.
-    - Change to <main> all wrappers of views
-    - Add currency orders
-    - Add favorites fetching in Product Carousel component
-    - Fix 0 amount of plants sometimes staying in cart.
+    - ~~Add Automatic log out when an error refusing resources occurs~~
+    - ~~Change to <main> all wrappers of views~~
+    - ~~Add currency orders~~
+    - ~~Fix 0 amount of plants sometimes staying in cart~~
     - Create a 404 page
-    - Redirect to /me after successful chackout.
+    - Redirect to /me after successful checkout
+    - ~~Score in Products View~~
+    - ~~Favorites bug in Cart~~
+    - ~~Similar plants include the plant itself~~
+    - ~~View button not doing anything~~
+    - Add a message when no items
 
 
 - Payment system

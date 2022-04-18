@@ -1,5 +1,5 @@
 <template>
-	<div class="me-container">
+	<main class="me-container">
 		<div class="me-wrapper">
 			<h1 class="serif">Welcome back{{ name }}</h1>
 			<section class="settings">
@@ -45,9 +45,7 @@
 				you!</p>
 			<button class="white logout-button" @click="logOut">Log out</button>
 		</div>
-
-	</div>
-
+	</main>
 </template>
 
 <script>
@@ -83,6 +81,7 @@ export default {
 				this.name = ", " + user.data["full_name"];
 			} catch (err) {
 				console.log(err.message);
+				await this.logOut();
 			}
 		},
 		async logOut() {
@@ -95,7 +94,8 @@ export default {
 				let orders = await OrderService.getAll(localStorage.getItem("userId"));
 				this.orders = orders.data
 			} catch (err) {
-				console.log(err.message)
+				console.log(err.message);
+				await this.logOut();
 			}
 		}
 	},
@@ -197,12 +197,17 @@ h1 {
 	justify-content: space-between;
 }
 
+
+.price:after {
+	content: "€";
+	font-size: 0.9em;
+}
+
 /* LOG OUT */
 .logout-button {
 	width: 100%;
 	max-width: 200px;
 	margin: 2rem 0;
 }
-
 
 </style>

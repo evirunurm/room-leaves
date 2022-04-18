@@ -1,29 +1,28 @@
 <template>
-	<div class="cart-container">
+	<main class="cart-container">
 		<div class="cart-wrapper">
 			<div>
-				<h1 class="serif" v-if="items.length > 0">My Cart ({{ items.length }})</h1>
+				<h1 class="serif" v-if="items?.length > 0">My Cart ({{ items?.length }})</h1>
 				<h1 class="serif" v-else="items.length == 0">My Cart</h1>
 				<section class="cart-items">
-					<p class="no-items-note" v-if="items.length < 1">No items</p>
+					<p class="no-items-note" v-if="items?.length < 1">No items</p>
 					<ProductCart @update="getFromLocal" v-for="item in items" :item="item"></ProductCart>
 				</section>
 			</div>
 			<div class="cart-right">
-
 				<section class="cart-section">
 					<h2 class="serif">Subtotal</h2>
-					<p class="no-items-note" v-if="items.length < 1">Nothing to calculate here</p>
-					<article v-if="items.length > 0">
+					<p class="no-items-note" v-if="items?.length < 1">Nothing to calculate here</p>
+					<article v-if="items?.length > 0">
 						<p class="subtotal-name">Subtotal</p>
 						<p class="subtotal-value">{{ subtotal }}</p>
 					</article>
-					<article v-if="items.length > 0">
-						<p class="subtotal-name">Delivery fees</p>
+					<article v-if="items?.length > 0">
+						<p class="subtotal-name">Delivery fees (10%)</p>
 						<p class="subtotal-value">{{ delivery }}</p>
 					</article>
-					<article v-if="items.length > 0">
-						<p class="subtotal-name">Tax</p>
+					<article v-if="items?.length > 0">
+						<p class="subtotal-name">Tax (21%)</p>
 						<p class="subtotal-value">{{ tax }}</p>
 					</article>
 					<article>
@@ -31,12 +30,10 @@
 						<p class="subtotal-value total">{{ Math.round((subtotal + delivery + tax) * 100) / 100 }}</p>
 					</article>
 				</section>
-
 				<section class="cart-section">
 					<h2 class="serif">Discounts</h2>
 					<p>Applied on checkout</p>
 				</section>
-
 				<section class="cart-section checkout-section">
 					<button class="white" v-if="!loggedIn">Log in</button>
 					<p v-if="!loggedIn" class="checkout-divisor">or</p>
@@ -46,7 +43,7 @@
 				</section>
 			</div>
 		</div>
-	</div>
+	</main>
 </template>
 
 <script>
@@ -58,7 +55,7 @@ export default {
 	},
 	data() {
 		return {
-			items: [],
+			items: null,
 			subtotal: 0,
 			delivery: 0,
 			tax: 0,
@@ -68,7 +65,8 @@ export default {
 	methods: {
 		getFromLocal() {
 			let cart = JSON.parse(localStorage.getItem("cart"));
-			this.items = cart.filter(item => item.amount > 0);
+			this.items = cart;
+			console.log(this.items)
 		},
 		loadPrice() {
 			this.getTotal();
@@ -76,10 +74,13 @@ export default {
 			this.getTax();
 		},
 		getTotal() {
-			this.subtotal = this.items.reduce((acc, curr) => {
-				return acc + parseFloat(curr.price * curr.amount)
-			}, 0);
-			return this.subtotal;
+			if (this.items) {
+				this.subtotal = this.items.reduce((acc, curr) => {
+					return acc + parseFloat(curr.price * curr.amount)
+				}, 0);
+				return this.subtotal;
+			}
+
 		},
 		getDelivery() {
 			this.delivery = Math.round((this.subtotal / 100 * 10) * 100) / 100;
@@ -152,7 +153,7 @@ h2 {
 /* SECTIONS */
 
 .cart-section {
-	margin: var(--general-margin);
+	margin: 0.7rem var(--general-margin) var(--general-margin) var(--general-margin);
 	display: flex;
 	flex-direction: column;
 }
@@ -196,6 +197,7 @@ h2 {
 		width: 100%;
 		display: flex;
 		flex-direction: column;
+		align-items: baseline;
 	}
 
 	.cart-wrapper > div {

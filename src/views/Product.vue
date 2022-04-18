@@ -1,8 +1,9 @@
 <template>
-	<div class="product">
+	<main class="product">
 		<h1 class="serif">{{ plant.name }}</h1>
 		<section class="plant-main">
-			<PlantImage class="plant-image" :stock="true" :clickable="false" :plantId="plantId"></PlantImage>
+			<PlantImage :can-be-favorite="true" class="plant-image" :stock="true" :clickable="false"
+							:plantId="plantId"></PlantImage>
 			<div class="plant-data">
 				<div class="plant-values">
 					<div class="plant-rating">
@@ -129,7 +130,7 @@
 		<section>
 			<ProductCarousel title="More like this one" :plants="sameCategoryPlants"></ProductCarousel>
 		</section>
-	</div>
+	</main>
 </template>
 
 <script>
@@ -169,7 +170,7 @@ export default {
 		async fetchPlants(id) {
 			let plants = await PlantService.getAll(id);
 			this.sameCategoryPlants = plants.data.filter(plant => {
-				return plant.categoryId === this.plant.categoryId
+				return plant.categoryId === this.plant.categoryId && plant.id !== this.plant.id
 			});
 		},
 		addToCart() {
@@ -279,6 +280,7 @@ section {
 	width: 100%;
 	max-width: var(--general-max-width);
 	gap: 2.5rem;
+	margin-top: 1rem;
 }
 
 .plant-main > .plant-image {
@@ -291,6 +293,7 @@ h1 {
 	width: 100%;
 	text-align: center;
 	padding: 0 0 0.5rem 0;
+	max-width: var(--general-max-width);
 }
 
 /* Right / Under */
@@ -453,12 +456,6 @@ h1 {
 	fill: #F2C72E;
 }
 
-
-/*.plant-stars--hover .stars-button:hover path,
-.plant-stars--hover .stars-button:hover path ~ .stars-button path {
-	fill: #F2C72E;
-}*/
-
 .stars-button svg, .stars-button path {
 	pointer-events: none;
 }
@@ -467,6 +464,7 @@ h1 {
 @media (max-width: 650px) {
 	.plant-main {
 		flex-direction: column;
+		margin-top: 0.5rem;
 	}
 
 	.plant-main > .plant-image {
@@ -505,6 +503,7 @@ h1 {
 	.plant-stats, .plant-stat {
 		width: 100%;
 	}
+
 
 }
 </style>

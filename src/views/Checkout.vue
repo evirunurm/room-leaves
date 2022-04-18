@@ -200,9 +200,13 @@ export default {
 	},
 	methods: {
 		async fetchUser() {
-			let data = await UserService.get(localStorage.getItem("userId"));
-			this.userData = data.data;
-			this.userData.address = "Evelin Virunnurm street x, 21, Pamplona, navarra, spain"
+			try {
+				let data = await UserService.get(localStorage.getItem("userId"));
+				this.userData = data.data;
+			} catch (err) {
+				console.log(err.message);
+				await this.logOut();
+			}
 		},
 		formatCardNumber(event) {
 			if (event.inputType === "insertText" && isNaN(parseInt(event.data))) {
@@ -286,10 +290,14 @@ export default {
 				let data = await OrderService.create(localStorage.getItem("userId"), this.order);
 				console.log(data)
 			} catch (err) {
-				console.log(err.message)
+				console.log(err.message);
 			}
-
-		}
+		},
+		async logOut() {
+			localStorage.removeItem("accessToken");
+			localStorage.removeItem("userId");
+			await this.$router.push("/login");
+		},
 	},
 	async mounted() {
 		await this.fetchUser();

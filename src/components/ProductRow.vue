@@ -1,46 +1,39 @@
 <template>
 	<div class="product-row">
-		<PlantImage :initialFavoriteState="plant.isFavorite" class="product-image" :clickable="true" :plantId="plant.id"
+		<PlantImage :can-be-favorite="true" :initialFavoriteState="plant.isFavorite" class="product-image"
+						:clickable="true" :plantId="plant.id"
 						:stock="plant.stock > 0"></PlantImage>
 		<div class="product-data">
 			<div class="product-data-title">
 				<p class="product-name">{{ plant.name }}</p>
 				<div class="products-stars">
-					<svg class="star" width="31" height="29" viewBox="0 0 31 29" fill="none"
+					<svg v-for="index in Math.floor(avgScore)" class="star" width="31" height="29" viewBox="0 0 31 29"
+						  fill="none"
 						  xmlns="http://www.w3.org/2000/svg">
 						<path
 							d="M15.5 0L18.98 10.7102H30.2414L21.1307 17.3295L24.6107 28.0398L15.5 21.4205L6.38933 28.0398L9.8693 17.3295L0.758624 10.7102H12.02L15.5 0Z"
 							fill="#F2C72E"/>
 					</svg>
-					<svg class="star" width="31" height="29" viewBox="0 0 31 29" fill="none"
+					<svg v-if="avgScoreHalf" width="30" height="29" viewBox="0 0 30 29" fill="none"
 						  xmlns="http://www.w3.org/2000/svg">
-						<path
-							d="M15.5 0L18.98 10.7102H30.2414L21.1307 17.3295L24.6107 28.0398L15.5 21.4205L6.38933 28.0398L9.8693 17.3295L0.758624 10.7102H12.02L15.5 0Z"
-							fill="#F2C72E"/>
+						<path fill-rule="evenodd" clip-rule="evenodd"
+								d="M14.7414 0L11.2614 10.7102H1.70135H4.57764e-05L1.37643 11.7102L9.11067 17.3295L5.63071 28.0398H5.63075L7.00713 27.0398L14.7414 21.4205H14.7414L22.4757 27.0398L23.8521 28.0398L23.3264 26.4217L20.3721 17.3295L28.1064 11.7102L29.4828 10.7102H27.7815H18.2214L15.2672 1.61803L14.7414 0L14.7414 0.00013208V0ZM14.7414 20.1844V3.2362L14.7414 3.23607L17.2703 11.0193L17.4948 11.7102H18.2214H26.4051L19.7843 16.5205L19.1966 16.9476L19.4211 17.6385L21.95 25.4217L15.3292 20.6115L14.7414 20.1844L14.7414 20.1844Z"
+								fill="#F2C72E"/>
 					</svg>
-					<svg class="star" width="31" height="29" viewBox="0 0 31 29" fill="none"
-						  xmlns="http://www.w3.org/2000/svg">
+					<svg v-for="index in 5 - (Math.floor(avgScore) + (avgScoreHalf ? 1 : 0))" width="31" height="29"
+						  viewBox="0 0 31 29"
+						  fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path
-							d="M15.5 0L18.98 10.7102H30.2414L21.1307 17.3295L24.6107 28.0398L15.5 21.4205L6.38933 28.0398L9.8693 17.3295L0.758624 10.7102H12.02L15.5 0Z"
-							fill="#F2C72E"/>
-					</svg>
-					<svg class="star" width="31" height="29" viewBox="0 0 31 29" fill="none"
-						  xmlns="http://www.w3.org/2000/svg">
-						<path
-							d="M15.5 0L18.98 10.7102H30.2414L21.1307 17.3295L24.6107 28.0398L15.5 21.4205L6.38933 28.0398L9.8693 17.3295L0.758624 10.7102H12.02L15.5 0Z"
-							fill="#F2C72E"/>
-					</svg>
-					<svg class="star" width="31" height="29" viewBox="0 0 31 29" fill="none"
-						  xmlns="http://www.w3.org/2000/svg">
-						<path
-							d="M15.5 0L18.98 10.7102H30.2414L21.1307 17.3295L24.6107 28.0398L15.5 21.4205L6.38933 28.0398L9.8693 17.3295L0.758624 10.7102H12.02L15.5 0Z"
-							fill="#F2C72E"/>
+							d="M15.5 1.61807L18.5044 10.8648L18.6167 11.2103H18.98H28.7025L20.8368 16.925L20.5429 17.1386L20.6552 17.4841L23.6596 26.7308L15.7939 21.016L15.5 20.8025L15.2061 21.016L7.34039 26.7308L10.3448 17.4841L10.4571 17.1386L10.1632 16.925L2.29747 11.2103H12.02H12.3833L12.4956 10.8648L15.5 1.61807Z"
+							stroke="#F2C72E"/>
 					</svg>
 				</div>
 				<p class="product-price">{{ plant.price }}</p>
 			</div>
 			<div class="product-buttons">
-				<button class="view-button white-black">View</button>
+				<router-link class="view-link" :to="'/products/' + plant.id">
+					<button class="view-button white-black">View</button>
+				</router-link>
 				<button @click="addToCart" class="cart-button">
 					<svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path
@@ -65,6 +58,12 @@ export default {
 	props: {
 		plant: Object
 	},
+	data() {
+		return {
+			avgScore: null,
+			avgScoreHalf: null
+		}
+	},
 	methods: {
 		addToCart() {
 			if (this.plant.stock > 0) {
@@ -81,7 +80,20 @@ export default {
 				}
 				localStorage.setItem("cart", JSON.stringify(cart));
 			}
-		}
+		},
+		setAvgScore() {
+			let sum = 0;
+			let avg;
+			for (let i = 0; i < this.plant.scores.length; i++) {
+				sum += this.plant.scores[i].value;
+			}
+			avg = sum / this.plant.scores.length;
+			this.avgScore = Math.floor(avg);
+			this.avgScoreHalf = (avg - Math.floor(avg)) > 0.25;
+		},
+	},
+	mounted() {
+		this.setAvgScore();
 	}
 }
 </script>
@@ -127,6 +139,11 @@ export default {
 }
 
 /* BUTTONS */
+.view-link {
+	display: block;
+	width: 100%;
+}
+
 .view-button {
 	background: none;
 	border: 2px solid black;
@@ -135,7 +152,7 @@ export default {
 	cursor: pointer;
 	transition: 0.25s ease-out;
 	min-width: 3rem;
-
+	height: 100%;
 }
 
 .view-button:hover {

@@ -1,7 +1,7 @@
 <template>
 	<div class="PlantImage" :data-plant="plantId">
 		<img class="img" :src="plantImage">
-		<button v-if="!isFavorite" @click="favorite" class="heart-it-button">
+		<button v-if="!isFavorite && canBeFavorite" @click="favorite" class="heart-it-button">
 			<svg class="heart-it" width="32" height="32" viewBox="0 0 23 19" fill="none"
 				  xmlns="http://www.w3.org/2000/svg">
 				<path
@@ -9,7 +9,7 @@
 					stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
 			</svg>
 		</button>
-		<button v-if="isFavorite" @click="unfavorite" class="heart-it-button unheart-it-button">
+		<button v-if="isFavorite && canBeFavorite" @click="unfavorite" class="heart-it-button unheart-it-button">
 			<svg class="unheart-it" width="32" height="32" viewBox="0 0 23 19" fill="none"
 				  xmlns="http://www.w3.org/2000/svg">
 				<path
@@ -33,7 +33,8 @@ export default {
 		plantId: Number,
 		stock: Boolean,
 		clickable: Boolean,
-		initialFavoriteState: Boolean
+		initialFavoriteState: Boolean,
+		canBeFavorite: Boolean,
 	},
 	data() {
 		return {

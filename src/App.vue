@@ -1,104 +1,104 @@
 <template>
-  <header>
-    <div class="logo">
-      <router-link to="/"><img src="./assets/logo.png" alt="Room Leaves logotype" height="48"></router-link>
-    </div>
-    <div class="right" id="right">
-      <nav class="desktop">
-        <router-link to="/">Home</router-link>
-        <router-link to="/products">Products</router-link>
-        <router-link to="/categories">Categories</router-link>
-      </nav>
-       <nav class="mobile" v-show="isMenuOpen">
-        <router-link to="/">Home</router-link>
-        <router-link to="/products">Products</router-link>
-        <router-link to="/categories">Categories</router-link>
-      </nav>
-      <div class="header-icons">
-        <form @submit.prevent="handleSearchForm" class="header-search-form" id="searchform" method="GET" action="/products">
-          <button type="submit" @click="isSearchbarOpen = true; searchbarOpened()"><img height="20" src="./assets/search-icon.png" alt="Search Icon"></button>
-          <Transition name="widthAppearance">
-            <div v-show="isSearchbarOpen" id="searchbar">
-              <input name="query" id="searchinput" type="text" placeholder="Search..." maxlength="150" >
-            </div>
-          </Transition>
-        </form>
-        <router-link to="/cart"><img height="20" src="./assets/shopping-cart-icon.png" alt="Cart Icon"></router-link>
-        <router-link to="/me"><img height="20" src="./assets/user-icon.png" alt="Profile Icon"></router-link>
-        <button id="burgerMenuButton" @click="isMenuOpen = !isMenuOpen" ><img height="20" src="./assets/menu-icon.png" alt="Menu Icon"></button>
-      </div>
-    </div>
-  </header>
+	<header>
+		<div class="logo">
+			<router-link to="/"><img src="./assets/logo.png" alt="Room Leaves logotype" height="48"></router-link>
+		</div>
+		<div class="right" id="right">
+			<nav class="desktop">
+				<router-link to="/">Home</router-link>
+				<router-link to="/products">Products</router-link>
+				<router-link to="/categories">Categories</router-link>
+			</nav>
+			<nav class="mobile" v-show="isMenuOpen">
+				<router-link to="/">Home</router-link>
+				<router-link to="/products">Products</router-link>
+				<router-link to="/categories">Categories</router-link>
+			</nav>
+			<div class="header-icons">
+				<form @submit.prevent="handleSearchForm" class="header-search-form" id="searchform" method="GET"
+						action="/products">
+					<button type="submit" @click="isSearchbarOpen = true; searchbarOpened()"><img height="20"
+																															src="./assets/search-icon.png"
+																															alt="Search Icon"></button>
+					<Transition name="widthAppearance">
+						<div v-show="isSearchbarOpen" id="searchbar">
+							<input name="query" id="searchinput" type="text" placeholder="Search..." maxlength="150">
+						</div>
+					</Transition>
+				</form>
+				<router-link to="/cart"><img height="20" src="./assets/shopping-cart-icon.png" alt="Cart Icon">
+				</router-link>
+				<router-link to="/me"><img height="20" src="./assets/user-icon.png" alt="Profile Icon"></router-link>
+				<button id="burgerMenuButton" @click="isMenuOpen = !isMenuOpen"><img height="20"
+																											src="./assets/menu-icon.png"
+																											alt="Menu Icon"></button>
+			</div>
+		</div>
+	</header>
 
-  <router-view />
+	<router-view/>
 
-  <footer>
-    <form @submit.prevent="" class="newsletter" action="/" method="POST">
-      <p>Be the first one to receive all the exclusive discounts</p>
-      <div class="newsletter-title">
-        <p>Subscribe to our</p>
-        <label for="newsletter-email" class="big serif">Newsletter</label>
-      </div>
+	<footer>
+		<form @submit.prevent="" class="newsletter" action="/" method="POST">
+			<p>Be the first one to receive all the exclusive discounts</p>
+			<div class="newsletter-title">
+				<p>Subscribe to our</p>
+				<label for="newsletter-email" class="big serif">Newsletter</label>
+			</div>
 
-      <input id="newsletter-email" type="email" name="email" placeholder="example@mail.com" required>
-      <button class="white" type="submit" >Sign in</button>
-    </form>
-    <section class="legal">
-      <ul>
-        <li><a href="">Careers</a></li>
-        <li><a href="">Terms of Use</a></li>
-        <li><a href="">Privacy</a></li>
-        <li><a href="">Site Map</a></li>
-        <li><a href="">Contact Us</a></li>
-      </ul>
-    </section>
-    <section class="credits">
-      <a href="https://www.flaticon.com/free-icons/cart" title="cart icons">Cart icons created by Catalin Fertu - Flaticon</a>
-      <a href="https://www.flaticon.com/free-icons/open-menu" title="open menu icons">Open menu icons created by Pixel perfect - Flaticon</a>
-      <a href="https://www.flaticon.com/free-icons/search" title="search icons">Search icons created by Catalin Fertu - Flaticon</a>
-    </section>
-  </footer>
+			<input id="newsletter-email" type="email" name="email" placeholder="example@mail.com" required>
+			<button class="white" type="submit">Sign in</button>
+		</form>
+		<section class="legal">
+			<ul>
+				<li><a href="">Careers</a></li>
+				<li><a href="">Terms of Use</a></li>
+				<li><a href="">Privacy</a></li>
+				<li><a href="">Site Map</a></li>
+				<li><a href="">Contact Us</a></li>
+			</ul>
+		</section>
+		<section class="credits">
+			<a href="https://www.flaticon.com/free-icons/cart" title="cart icons">Cart icons created by Catalin Fertu -
+				Flaticon</a>
+			<a href="https://www.flaticon.com/free-icons/open-menu" title="open menu icons">Open menu icons created by
+				Pixel perfect - Flaticon</a>
+			<a href="https://www.flaticon.com/free-icons/search" title="search icons">Search icons created by Catalin Fertu
+				- Flaticon</a>
+		</section>
+	</footer>
 </template>
 
 <script>
-import PlantService from "@/services/PlantService";
-let plants;
 
 export default {
-  data() {
-    return {
-      isSearchbarOpen: false,
-      isMenuOpen: false,
-    }
-  },
-  methods: {
-    searchbarOpened() {
-      document.body.addEventListener("click", this.closeSearchBar.bind(event));
-    },
-    closeSearchBar(event) {
-      /* Hides the searchbar only in case you're clicking outside of the general box containing the nav bar and cart/search idons. */
-      if (!document.querySelector("#right").contains(event.target)) {
-        this.isSearchbarOpen = false;
-        document.body.removeEventListener("click", this.closeSearchBar);
-      }
-    },
-    handleSearchForm(e) {
-      e.preventDefault();
-      const query = document.getElementById("searchinput").value;
-      // Validate query
-      if (query !== "" && query !== undefined && query.length > 1 && query) {
-        const form = document.getElementById("searchform");
-        form.submit();
-      }
-    },
-    async fetchPlants() {
-      let plants = (await PlantService.getAll());
-      plants = plants.data;
-    }
-  },
-  mounted() {
-    this.fetchPlants();
-  }
+	data() {
+		return {
+			isSearchbarOpen: false,
+			isMenuOpen: false,
+		}
+	},
+	methods: {
+		searchbarOpened() {
+			document.body.addEventListener("click", this.closeSearchBar.bind(event));
+		},
+		closeSearchBar(event) {
+			/* Hides the searchbar only in case you're clicking outside of the general box containing the nav bar and cart/search idons. */
+			if (!document.querySelector("#right").contains(event.target)) {
+				this.isSearchbarOpen = false;
+				document.body.removeEventListener("click", this.closeSearchBar);
+			}
+		},
+		handleSearchForm(e) {
+			e.preventDefault();
+			const query = document.getElementById("searchinput").value;
+			// Validate query
+			if (query !== "" && query !== undefined && query.length > 1 && query) {
+				const form = document.getElementById("searchform");
+				form.submit();
+			}
+		},
+	}
 }
 
 </script>
@@ -106,309 +106,316 @@ export default {
 <style>
 
 h1 {
-   margin: 0 var(--general-margin);
+	margin: 0 var(--general-margin);
 }
 
 h1, h2 {
-  border-bottom: 2px solid black;
-  padding-bottom: 0.5rem;
-  font-weight: 500;
+	border-bottom: 2px solid black;
+	padding-bottom: 0.5rem;
+	font-weight: 500;
 }
 
 h2 {
-  margin-bottom: 1rem;
+	margin-bottom: 1rem;
 }
 
 /* VARIABLES */
 :root {
-  --darkgreen: #104547;
-  --lightgreen: #60894A;
-  --pink: #AF929D;
-  --general-margin: 3rem;
-  --general-max-width: 800px;
+	--darkgreen: #104547;
+	--lightgreen: #60894A;
+	--pink: #AF929D;
+	--general-margin: 3rem;
+	--general-max-width: 800px;
 }
 
 /* NORMALIZATION */
 
 *, *:before, *:after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: 'Poppins', sans-serif;
 }
 
 /* General */
 button.white, button.green, button.white--white {
-  font-size: 1rem;
-  padding-top: 0.75em;
-  padding-bottom: 0.75em;
-  border-radius: 2rem;
-  cursor: pointer;
-  transition: 0.1s ease-in;
+	font-size: 1rem;
+	padding-top: 0.75em;
+	padding-bottom: 0.75em;
+	border-radius: 2rem;
+	cursor: pointer;
+	transition: 0.1s ease-in;
 }
 
 button.white {
-  background: white;
-  border: 2px solid var(--darkgreen);
-  font-weight: bold;
-  color: var(--darkgreen);
+	background: white;
+	border: 2px solid var(--darkgreen);
+	font-weight: bold;
+	color: var(--darkgreen);
 }
 
 button.white:hover {
-  background: var(--darkgreen);
-  border: 2px solid white;
-  color: white;
+	background: var(--darkgreen);
+	border: 2px solid white;
+	color: white;
 }
 
 button.white--white {
-  background: white;
-  border: 2px solid var(--darkgreen);
-  font-weight: bold;
-  color: var(--darkgreen);
+	background: white;
+	border: 2px solid var(--darkgreen);
+	font-weight: bold;
+	color: var(--darkgreen);
 }
 
 button.green {
-  color: white;
-  background: var(--darkgreen);
-  border: 2px solid var(--darkgreen);
-  font-weight: 600;
+	color: white;
+	background: var(--darkgreen);
+	border: 2px solid var(--darkgreen);
+	font-weight: 600;
 }
 
 button.green:hover {
-  background: white;
-  color: var(--darkgreen);
+	background: white;
+	color: var(--darkgreen);
 }
 
 .serif {
-  font-family: 'Abril Fatface', cursive;
+	font-family: 'Abril Fatface', cursive;
 }
 
 .bold {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 .lightgreen-font {
-  color: var(--lightgreen);
+	color: var(--lightgreen);
 }
 
 /********************/
 /****** Header ******/
 /********************/
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  padding: 1rem var(--general-margin);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+	padding: 1rem var(--general-margin);
 }
 
 .header-icons {
-  display: flex;
-  list-style: none;
-  gap: 1em;
+	display: flex;
+	list-style: none;
+	gap: 1em;
 }
 
 .header-icons button {
-  cursor: pointer;
-  background: none;
-  border: none;
-  position: relative;
+	cursor: pointer;
+	background: none;
+	border: none;
+	position: relative;
 }
 
 /* The green dot pointing to the hovered icon */
 .header-icons button:hover::after {
- content: "";
-  position: absolute;
-  background: #60894A;
-  height: 0.5rem;
-  width: 0.5rem;
-  top: -0.45rem;
-  border-radius: 50%;
+	content: "";
+	position: absolute;
+	background: #60894A;
+	height: 0.5rem;
+	width: 0.5rem;
+	top: -0.45rem;
+	border-radius: 50%;
 }
 
 .right {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  align-items: baseline;
+	display: flex;
+	justify-content: space-between;
+	gap: 2rem;
+	align-items: baseline;
 }
 
 #burgerMenuButton {
-  display: none;
+	display: none;
 }
 
 nav {
-  display: flex;
-  gap: 1em;
+	display: flex;
+	gap: 1em;
 }
 
 nav.mobile {
-  display: none;
+	display: none;
 }
 
 nav a {
-  color: black;
-  text-decoration: none;
-  font-size: 1.1rem;
+	color: black;
+	text-decoration: none;
+	font-size: 1.1rem;
 }
 
 nav a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 #searchbar {
-  overflow: hidden;
-  width: 175px; /* Same as it's child, the input */
+	overflow: hidden;
+	width: 175px; /* Same as it's child, the input */
 }
 
 #searchbar input {
-  width: calc(100% - 4px); /* Same as it's parent */
-  border: none;
-  border-bottom: 1px solid rgba(0,0,0, 0.3);
-  font-size: 0.9rem;
-  margin: 2px;
-  padding: 0.25em 0 0.25em 0.75em;
+	width: calc(100% - 4px); /* Same as it's parent */
+	border: none;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+	font-size: 0.9rem;
+	margin: 2px;
+	padding: 0.25em 0 0.25em 0.75em;
 }
 
 .header-search-form {
-  display: flex;
-  gap: 1em;
+	display: flex;
+	gap: 1em;
 }
+
 .widthAppearance-enter-active,
 .widthAppearance-leave-active {
-  animation: showSearchbar 0.25s ease-out;
+	animation: showSearchbar 0.25s ease-out;
 }
 
 .widthAppearance-enter-from,
 .widthAppearance-leave-to {
- animation: hideSearchbar 0.25s ease-out;
+	animation: hideSearchbar 0.25s ease-out;
 }
 
 #searchbar input:focus {
-  outline: 2px solid rgba(16, 69, 71, 0.5);
+	outline: 2px solid rgba(16, 69, 71, 0.5);
 }
 
 /********************/
 /****** Footer ******/
 /********************/
 footer {
-  background: var(--darkgreen);
-  width: 100%;
-  padding: var(--general-margin) var(--general-margin);
-  display: flex;
-  flex-direction: column;
-  gap: 2.5em;
-  align-items: center;
-  color: white;
+	background: var(--darkgreen);
+	width: 100%;
+	padding: var(--general-margin) var(--general-margin);
+	display: flex;
+	flex-direction: column;
+	gap: 2.5em;
+	align-items: center;
+	color: white;
 }
 
 footer > section, footer > form {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  gap: 1rem;
-  width: 100%;
-  max-width: 500px;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	gap: 1rem;
+	width: 100%;
+	max-width: 500px;
 }
 
 /* NEWSLETTER */
 footer > form.newsletter {
-  font-size: 1.1rem;
+	font-size: 1.1rem;
 }
 
 footer > form.newsletter label {
-  font-size: 2rem;
-  text-transform: uppercase;
-  position: relative;
-  bottom: 6px;
+	font-size: 2rem;
+	text-transform: uppercase;
+	position: relative;
+	bottom: 6px;
 }
 
 footer > form.newsletter input {
-  font-size: 1rem;
-  padding: 0.5em 0 0.5em 1em;
-  background: none;
-  border: none;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  color: white;
-  text-align: center;
-  margin-bottom: 1em;
+	font-size: 1rem;
+	padding: 0.5em 0 0.5em 1em;
+	background: none;
+	border: none;
+	border: 2px solid rgba(255, 255, 255, 0.5);
+	color: white;
+	text-align: center;
+	margin-bottom: 1em;
 }
 
 /* LEGAL */
 
 footer > section.legal {
-  border-top: 1px solid white;
-  width: 100%;
-  padding-top: 2em;
+	border-top: 1px solid white;
+	width: 100%;
+	padding-top: 2em;
 }
 
 
 footer > section.legal > ul {
-  list-style: none;
+	list-style: none;
 }
 
 footer > section.legal > ul a {
-  color: white;
-  text-decoration: none;
+	color: white;
+	text-decoration: none;
 }
 
 footer > section.legal > ul a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 footer > section.newsletter input:focus {
-  outline: 2px solid rgba(255, 255, 255, 0.5);
+	outline: 2px solid rgba(255, 255, 255, 0.5);
 }
 
+.credits > a {
+	color: white;
+	text-decoration: none;
+	font-size: 0.8rem;
+}
 
-
-
+.credits > a:hover {
+	text-decoration: underline;
+}
 
 @keyframes showSearchbar {
-  0% {
-    width: 0px;
-  }
-  100% {
-    width: 175px; /* Same as the container it's applied to --> #searchbar */
-  }
+	0% {
+		width: 0px;
+	}
+	100% {
+		width: 175px; /* Same as the container it's applied to --> #searchbar */
+	}
 }
 
 @keyframes hideSearchbar {
-  0% {
-    width: 175px; /* Same as the container it's applied to --> #searchbar */
-  }
-  100% {
-    width: 0px;
-  }
+	0% {
+		width: 175px; /* Same as the container it's applied to --> #searchbar */
+	}
+	100% {
+		width: 0px;
+	}
 }
 
 @media (max-width: 600px) {
-  :root {
-    --general-margin: 1.5rem;
-  }
+	:root {
+		--general-margin: 1.5rem;
+	}
 
-  nav.mobile {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    background: var(--darkgreen);
-    z-index: 100;
-    padding: 1.5em;
-    top: 100%;
-    right: 0;
-  }
+	nav.mobile {
+		display: flex;
+		flex-direction: column;
+		position: absolute;
+		background: var(--darkgreen);
+		z-index: 100;
+		padding: 1.5em;
+		top: 100%;
+		right: 0;
+	}
 
-  nav.mobile a {
-    color: white;
-  }
+	nav.mobile a {
+		color: white;
+	}
 
-  nav.desktop {
-    display: none;
-  }
+	nav.desktop {
+		display: none;
+	}
 
-  #burgerMenuButton {
-    display: block;
-  }
+	#burgerMenuButton {
+		display: block;
+	}
 }
 
 </style>

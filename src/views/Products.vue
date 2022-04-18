@@ -1,7 +1,7 @@
 <template>
-	<section class="products-container">
+	<main class="products-container">
 		<ImageCarousel class="carousel"></ImageCarousel>
-		<article class="product-settings-wrapper">
+		<section class="product-settings-wrapper">
 			<button class="extra-button sort-filter-button" @click="isSortFilterOpened = !isSortFilterOpened">Sort and
 				Filter
 			</button>
@@ -37,7 +37,7 @@
 					<div v-for="category in categories">
 						<label :for="category.name">
 							<input @change="refreshFilter($event)" v-model="categoryFilter[category.id]" checked
-									 data-filter="category" @input="refreshInput" :id="category.name" :name="category.name"
+									 data-filter="category" :id="category.name" :name="category.name"
 									 type="checkbox">
 							{{ category.name[0].toUpperCase() + category.name.substring(1) }}
 						</label>
@@ -60,17 +60,17 @@
 					</div>
 				</div>
 			</article>
-		</article>
-		<div v-if="!rowView" class="products-wrapper --grid">
+		</section>
+		<section v-if="!rowView" class="products-wrapper --grid">
 			<p v-if="plants.length < 1" class="no-plants-warning">No plants in this forest...</p>
 			<ProductGrid v-for="plant in plants"
 							 :plant="plant"></ProductGrid>
-		</div>
-		<div v-if="rowView" class="products-wrapper --row">
+		</section>
+		<section v-if="rowView" class="products-wrapper --row">
 			<p v-if="plants.length < 1" class="no-plants-warning">No plants in this forest...</p>
 			<ProductRow v-for="plant in plants" :plant="plant"></ProductRow>
-		</div>
-	</section>
+		</section>
+	</main>
 </template>
 
 <script>
