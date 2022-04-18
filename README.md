@@ -14,9 +14,9 @@
 - ~~Plant score~~
 - ~~Scores logic~~
 - ~~Favorites logic~~
+- ~~Checkout view~~
 
 
-- Checkout view
 - Finish Home view
     - Prepared with love
     - Reviews
@@ -37,12 +37,17 @@
     - Change to <main> all wrappers of views
     - Add currency orders
     - Add favorites fetching in Product Carousel component
+    - Fix 0 amount of plants sometimes staying in cart.
+    - Create a 404 page
+    - Redirect to /me after successful chackout.
 
+
+- Payment system
 - Search bar functionality
 - AR in AFrame
 
 
-- Push notification when added to cart
+- Push notification when added to cart / things happen
 - Newspaper form
 - Save View settings in Products View to Local Storage.
 - Notification appearing when you spend too much time in the same page

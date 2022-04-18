@@ -27,7 +27,7 @@
 						<p class="subtotal-value">{{ tax }}</p>
 					</article>
 					<article>
-						<p class="subtotal-name total">Total</p>
+						<p class="subtotal-name total">Approximated total</p>
 						<p class="subtotal-value total">{{ Math.round((subtotal + delivery + tax) * 100) / 100 }}</p>
 					</article>
 				</section>
