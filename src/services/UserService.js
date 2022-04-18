@@ -2,29 +2,30 @@ import http from "../http.common";
 
 class UserService {
 
-  getAll() {
-    return http.get("/users");
-  }
+	getAll() {
+		return http.get("/users");
+	}
 
-  get(id, headers) {
-    return http.post(`/users/${id}`, headers);
-  }
+	get(id) {
+		return http.post(`/users/${id}`);
+	}
 
-  create(data) {
-    return http.post("/users", data);
-  }
+	create(data) {
+		return http.post("/users", data);
+	}
 
-  update(id, data) {
-    return http.put(`/users/${id}`, data);
-  }
+	update(id, data) {
+		return http.put(`/users/${id}`, data);
+	}
 
-  delete(id) {
-    return http.delete(`/users/${id}`);
-  }
+	delete(id) {
+		return http.delete(`/users/${id}`);
+	}
 
-  deleteAll() {
-    return http.delete(`/users`);
-  }
+	deleteAll() {
+		return http.delete(`/users`);
+	}
 
 }
+
 export default new UserService();

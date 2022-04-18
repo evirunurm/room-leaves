@@ -13,8 +13,9 @@
 - ~~Settings view~~
 - ~~Plant score~~
 - ~~Scores logic~~
-
 - ~~Favorites logic~~
+
+
 - Checkout view
 - Finish Home view
     - Prepared with love
