@@ -10,39 +10,27 @@ const routes = [
 	{
 		path: '/products',
 		name: 'Products',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		component: () => import(/* webpackChunkName: "about" */ '../views/Products.vue')
+		component: () => import('../views/Products.vue')
 	},
 	{
 		path: '/products/:id',
 		name: 'Product',
-		component: () => import(/* webpackChunkName: "about" */ '../views/Product.vue')
+		component: () => import('../views/Product.vue')
 	},
 	{
 		path: '/cart',
 		name: 'Cart',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		component: () => import(/* webpackChunkName: "about" */ '../views/Cart.vue')
+		component: () => import('../views/Cart.vue')
 	},
 	{
 		path: '/categories',
 		name: 'Categories',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		component: () => import(/* webpackChunkName: "about" */ '../views/Categories.vue')
+		component: () => import('../views/Categories.vue')
 	},
 	{
 		path: '/login',
 		name: 'LogIn',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		component: () => import(/* webpackChunkName: "about" */ '../views/LogIn.vue'),
+		component: () => import('../views/LogIn.vue'),
 		meta: {
 			hideForAuth: true
 		}
@@ -50,10 +38,7 @@ const routes = [
 	{
 		path: '/signup',
 		name: 'SignUp',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		component: () => import(/* webpackChunkName: "about" */ '../views/SignUp.vue'),
+		component: () => import('../views/SignUp.vue'),
 		meta: {
 			hideForAuth: true
 		}
@@ -61,10 +46,7 @@ const routes = [
 	{
 		path: '/me',
 		name: 'Me',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		component: () => import(/* webpackChunkName: "about" */ '../views/Me.vue'),
+		component: () => import('../views/Me.vue'),
 		meta: {
 			requiresAuth: true
 		}
@@ -72,10 +54,7 @@ const routes = [
 	{
 		path: '/me/settings',
 		name: 'Settings',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		component: () => import(/* webpackChunkName: "about" */ '../views/UserSettings.vue'),
+		component: () => import('../views/UserSettings.vue'),
 		meta: {
 			requiresAuth: true
 		}
@@ -83,10 +62,7 @@ const routes = [
 	{
 		path: '/me/favorites',
 		name: 'Favorites',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		component: () => import(/* webpackChunkName: "about" */ '../views/Favorites.vue'),
+		component: () => import('../views/Favorites.vue'),
 		meta: {
 			requiresAuth: true
 		}
@@ -94,10 +70,13 @@ const routes = [
 	{
 		path: '/checkout',
 		name: 'Checkout',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		component: () => import(/* webpackChunkName: "about" */ '../views/Checkout.vue')
+		component: () => import( '../views/Checkout.vue')
+	},
+	{
+		/* NOT FOUND. This object has to be the last one. */
+		path: '/:pathMatch(.*)*',
+		name: "NotFound",
+		component: () => import('../views/NotFound.vue')
 	}
 ]
 

@@ -63,7 +63,8 @@ export default {
 				let userId = response.data?.id;
 				await localStorage.setItem("accessToken", token);
 				await localStorage.setItem("userId", userId);
-				await this.$router.push("/me");
+				/* Reload the page */
+				this.$router.go(0);
 			} catch (err) {
 				console.log(err.message);
 			}

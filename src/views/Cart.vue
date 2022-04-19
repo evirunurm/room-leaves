@@ -5,7 +5,7 @@
 				<h1 class="serif" v-if="items?.length > 0">My Cart ({{ items?.length }})</h1>
 				<h1 class="serif" v-else="items.length == 0">My Cart</h1>
 				<section class="cart-items">
-					<p class="no-items-note" v-if="items?.length < 1">No items</p>
+					<p class="no-items-note" v-if="items?.length < 1 || !items">No items</p>
 					<ProductCart @update="getFromLocal" v-for="item in items" :item="item"></ProductCart>
 				</section>
 			</div>
@@ -35,7 +35,9 @@
 					<p>Applied on checkout</p>
 				</section>
 				<section class="cart-section checkout-section">
-					<button class="white" v-if="!loggedIn">Log in</button>
+					<router-link to="/login">
+						<button class="white" v-if="!loggedIn">Log in</button>
+					</router-link>
 					<p v-if="!loggedIn" class="checkout-divisor">or</p>
 					<router-link to="/checkout">
 						<button class="green">Continue to checkout</button>
@@ -189,6 +191,7 @@ h2 {
 	opacity: 70%;
 	align-self: center;
 	pointer-events: none;
+	padding: 1rem 0;
 }
 
 @media (max-width: 1000px) {

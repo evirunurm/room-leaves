@@ -65,6 +65,8 @@
 				Pixel perfect - Flaticon</a>
 			<a href="https://www.flaticon.com/free-icons/search" title="search icons">Search icons created by Catalin Fertu
 				- Flaticon</a>
+			<a href='https://www.freepik.com/vectors/house-plant'>House plant vector created by freepik -
+				www.freepik.com</a>
 		</section>
 	</footer>
 </template>

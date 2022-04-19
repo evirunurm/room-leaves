@@ -2,6 +2,7 @@
 	<main class="categories">
 		<h1 class="serif categories-title">Categories</h1>
 		<section class="categories-wrapper">
+			<p class="no-categories-warning" v-if="categories.length === 0">There are no categories to see here...</p>
 			<CategoryDesc v-for="category in categories" :category="category"></CategoryDesc>
 		</section>
 	</main>
@@ -69,6 +70,10 @@ export default {
 	border-bottom: 2px solid black;
 	padding: 0.5em 0;
 	font-weight: 500;
+}
+
+.no-categories-warning {
+	text-align: center;
 }
 
 </style>

@@ -266,7 +266,7 @@ export default {
 
 .sort {
 	display: flex;
-	gap: 0.5rem;
+	gap: 1rem;
 	margin-top: 0.5rem;
 }
 
@@ -287,6 +287,33 @@ export default {
 
 .no-plants-warning {
 	align-self: center;
+}
+
+@media (max-width: 400px) {
+	.sort-filter {
+		width: 100%;
+	}
+
+	.sort {
+		width: 100%;
+		gap: 0;
+		justify-content: space-between;
+		gap: 0.5rem;
+	}
+
+	.sort > button, .sort > select {
+		padding: 0;
+		cursor: pointer;
+		border-radius: 0;
+		font-weight: 500;
+		width: 100%;
+	}
+
+	.sort > button {
+		max-width: 50px;
+	}
+
+
 }
 
 </style>

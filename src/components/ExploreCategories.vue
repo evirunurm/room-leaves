@@ -6,6 +6,7 @@
 				<p>Discover your new favorites</p>
 			</article>
 			|
+			<p class="no-categories-warning" v-if="categories.length === 0">There's been an error</p>
 			<div v-for="category in categories.slice(0, limit)" class="category-container">
 				<img :src="loadImg(category.name.toLowerCase())" alt="">
 				<router-link class="category-title" :to="'/products?category=' + category.id">{{
@@ -16,7 +17,6 @@
 			<div class="explore-category-more">
 				<router-link to="/categories">More +</router-link>
 			</div>
-
 		</div>
 	</section>
 </template>
@@ -123,6 +123,10 @@ export default {
 	max-height: 150px;
 	filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.3));
 
+}
+
+.no-categories-warning {
+	padding: 3rem 0;
 }
 
 @media (max-width: 450px) {

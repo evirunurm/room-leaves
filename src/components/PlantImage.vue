@@ -18,7 +18,6 @@
 			</svg>
 		</button>
 		<div v-if="!stock" class="plant-stock">
-			<p>OUT OF STOCK</p>
 		</div>
 		<a v-if="clickable" :href="'/products/' + plantId" class="overlay">See more</a>
 	</div>
@@ -151,6 +150,35 @@ export default {
 	position: absolute;
 	bottom: 0;
 	right: 0;
+	color: white;
+	border-radius: 20px;
+	margin: 0.75rem; /* SAME AS HEART */
+}
+
+.plant-stock:before {
+	content: "OUT OF STOCK";
+	font-size: 1rem;
+	padding: 0.15rem 0.75rem;
+	border-radius: 20px;
+	background: black;
+	opacity: 0.5;
+}
+
+@media (max-width: 400px) {
+	.plant-stock {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		color: white;
+		margin: 0.5rem; /* SAME AS HEART */
+	}
+
+	.plant-stock:before {
+		background: black;
+		content: "NO STOCK";
+		font-size: 0.6rem;
+		padding: 0.1rem 0.5rem;
+	}
 }
 
 

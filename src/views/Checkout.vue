@@ -4,7 +4,8 @@
 			<h1 class="serif">Checkout</h1>
 			<section v-if="step === 1" class="step-1" id="step-1">
 				<h2 class="serif">{{ step }}. Billing Address</h2>
-				<div class="change-address-container" v-if=" userData?.address === null || userData?.address === '' ">
+				<div class="change-address-container"
+					  v-if=" userData?.address === null || userData?.address === '' || !loggedIn ">
 					<form id="address-form" class="address-container">
 						<label for="address">Address</label>
 						<textarea @input="changeAddress=true" v-model="newAddress" id="address" style="resize: none"
@@ -24,7 +25,7 @@
 					</div>
 
 				</div>
-				<div v-if=" userData?.address !== null && userData?.address !== '' ">
+				<div v-if=" userData?.address !== null && userData?.address !== '' && loggedIn">
 					<p>Your address is:</p>
 					<p class="your-info">{{ userData?.address }}</p>
 					<p>Want to change it?</p>
@@ -201,8 +202,10 @@ export default {
 	methods: {
 		async fetchUser() {
 			try {
-				let data = await UserService.get(localStorage.getItem("userId"));
-				this.userData = data.data;
+				if (localStorage.getItem("userId")) {
+					let data = await UserService.get(localStorage.getItem("userId"));
+					this.userData = data.data;
+				}
 			} catch (err) {
 				console.log(err.message);
 				await this.logOut();
@@ -254,7 +257,7 @@ export default {
 			return this.tax;
 		},
 		evalStep() {
-			if (this.step === 1 && this.validAddress(this.userData.address) || (this.changeAddress && this.validAddress(this.newAddress))) {
+			if (this.step === 1 && this.validAddress(this.userData?.address) || (this.changeAddress && this.validAddress(this.newAddress))) {
 				this.step++;
 				return;
 			}
@@ -263,7 +266,6 @@ export default {
 				this.step++;
 				return;
 			}
-
 			if (this.step === 3 && this.order.paymentMethod) {
 				if (this.order.paymentMethod === 2) {
 					this.step++;
@@ -288,6 +290,7 @@ export default {
 			this.order.billingAddress = this.changeAddress ? this.newAddress : this.userData.address;
 			try {
 				let data = await OrderService.create(localStorage.getItem("userId"), this.order);
+				localStorage.removeItem("cart");
 				console.log(data)
 			} catch (err) {
 				console.log(err.message);
@@ -302,7 +305,7 @@ export default {
 	async mounted() {
 		await this.fetchUser();
 		this.loadPrice();
-		console.log(this.cart)
+		console.log(this.loggedIn)
 	}
 }
 </script>
