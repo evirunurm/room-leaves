@@ -45,10 +45,12 @@
     - ~~Add a message when no items~~
     - ~~Subtract stock when buying~~
     - Ask for email instead of log in. Database refactor with clientId not necessary in case
-    - If page is TAB accessible
-    - After order cart empty
-    - Round in checkout total
+    - ~~If page is TAB accessible~~
+    - ~~After order cart empty~~
+    - ~~Round in checkout total~~
     - Better order details in Me
+    - Ask if sure when logging out
+    -
 
 
 - Payment system
@@ -56,7 +58,13 @@
 - AR in AFrame
 
 
-- Push notification when added to cart / things happen
+- Push notification when things happen
+    - Change profile
+    - Add to cart
+    - Order
+    - Remove from cart
+    - Rated
+    -
 - Newspaper form
 - Save View settings in Products View to Local Storage.
 - Notification appearing when you spend too much time in the same page

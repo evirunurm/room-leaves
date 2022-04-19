@@ -126,8 +126,8 @@ h2 {
 	--darkgreen: #104547;
 	--lightgreen: #60894A;
 	--pink: #AF929D;
-	--general-margin: 3rem;
-	--general-max-width: 800px;
+	--general-margin: 5rem;
+	--general-max-width: 1150px;
 }
 
 /* NORMALIZATION */

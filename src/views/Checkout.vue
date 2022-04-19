@@ -246,7 +246,7 @@ export default {
 			this.subtotal = this.cart.reduce((acc, curr) => {
 				return acc + parseFloat(curr.price * curr.amount)
 			}, 0);
-			return this.subtotal;
+			return Math.round((this.subtotal / 100) * 100) / 100;
 		},
 		getDelivery() {
 			this.delivery = Math.round((this.subtotal / 100 * 10) * 100) / 100;

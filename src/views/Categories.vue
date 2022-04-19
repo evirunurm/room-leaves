@@ -1,5 +1,8 @@
 <template>
 	<main class="categories">
+		<div class="categories-deco">
+			<img class="categories-deco-img" src="../assets/decoration/cork_plants.png" alt="">
+		</div>
 		<h1 class="serif categories-title">Categories</h1>
 		<section class="categories-wrapper">
 			<p class="no-categories-warning" v-if="categories.length === 0">There are no categories to see here...</p>
@@ -60,6 +63,7 @@ export default {
 .categories-wrapper {
 	width: 100%;
 	margin-bottom: 2.5rem;
+	max-width: var(--general-max-width);
 }
 
 .categories-title {
@@ -74,6 +78,20 @@ export default {
 
 .no-categories-warning {
 	text-align: center;
+}
+
+.categories-deco {
+	width: 100%;
+	max-height: 300px;
+	display: flex;
+	align-items: flex-end;
+	overflow: hidden;
+	margin-bottom: 2rem;
+	max-width: 1150px;
+}
+
+.categories-deco-img {
+	width: 100%;
 }
 
 </style>

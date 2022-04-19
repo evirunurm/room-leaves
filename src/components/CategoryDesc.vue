@@ -1,5 +1,5 @@
 <template>
-	<article class="category-container" :style="'background: #' + category.color + ';'">
+	<article class="category-container" :style="'background: rgba(0,0,0,.7)'">
 		<div class="category-wrapper">
 			<div class="category-data">
 				<h3 class="category-title">{{ category.name.charAt(0).toUpperCase() + category.name.slice(1) }}</h3>
@@ -120,6 +120,9 @@ picture::before {
 	position: relative;
 	color: white;
 	padding: 2em var(--general-margin);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .category-title {
