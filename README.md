@@ -50,12 +50,14 @@
     - ~~Round in checkout total~~
     - Better order details in Me
     - Ask if sure when logging out
-    -
+    - Adapt mobile
+        - Search bar
+    - Add where push notification would go
 
 
-- Payment system
 - Search bar functionality
 - AR in AFrame
+- Payment system
 
 
 - Push notification when things happen

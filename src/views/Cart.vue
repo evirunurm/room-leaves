@@ -18,30 +18,24 @@
 						<p class="subtotal-value">{{ subtotal }}</p>
 					</article>
 					<article v-if="items?.length > 0">
-						<p class="subtotal-name">Delivery fees (10%)</p>
-						<p class="subtotal-value">{{ delivery }}</p>
+						<p class="subtotal-name">Delivery fees</p>
+						<p class="">On checkout</p>
 					</article>
 					<article v-if="items?.length > 0">
 						<p class="subtotal-name">Tax (21%)</p>
 						<p class="subtotal-value">{{ tax }}</p>
 					</article>
-					<article>
-						<p class="subtotal-name total">Approximated total</p>
+					<article class="total-wrapper" v-if="items?.length > 0">
+						<p class="subtotal-name total">Total</p>
 						<p class="subtotal-value total">{{ Math.round((subtotal + delivery + tax) * 100) / 100 }}</p>
 					</article>
-				</section>
-				<section class="cart-section">
-					<h2 class="serif">Discounts</h2>
-					<p>Applied on checkout</p>
 				</section>
 				<section class="cart-section checkout-section">
 					<router-link to="/login">
 						<button class="white" v-if="!loggedIn">Log in</button>
 					</router-link>
 					<p v-if="!loggedIn" class="checkout-divisor">or</p>
-					<router-link to="/checkout">
-						<button class="green">Continue to checkout</button>
-					</router-link>
+					<button @click="goToCheckout" class="green">Continue to checkout</button>
 				</section>
 			</div>
 		</div>
@@ -68,11 +62,9 @@ export default {
 		getFromLocal() {
 			let cart = JSON.parse(localStorage.getItem("cart"));
 			this.items = cart;
-			console.log(this.items)
 		},
 		loadPrice() {
 			this.getTotal();
-			this.getDelivery();
 			this.getTax();
 		},
 		getTotal() {
@@ -84,13 +76,16 @@ export default {
 			}
 
 		},
-		getDelivery() {
-			this.delivery = Math.round((this.subtotal / 100 * 10) * 100) / 100;
-			return this.delivery;
-		},
 		getTax() {
 			this.tax = Math.round((this.subtotal / 100 * 21) * 100) / 100;
 			return this.tax;
+		},
+		goToCheckout() {
+			if (this.items.length !== 0) {
+				this.$router.push("/checkout");
+				return;
+			}
+			// Add err notification.
 		}
 	},
 	mounted() {
@@ -119,6 +114,7 @@ export default {
 .cart-wrapper {
 	width: 100%;
 	display: flex;
+	min-height: 400px;
 }
 
 .cart-wrapper > div {
@@ -143,7 +139,7 @@ h2 {
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
-	margin: var(--general-margin);
+	margin: 3rem var(--general-margin);
 	max-width: var(--general-max-width);
 }
 
@@ -155,9 +151,10 @@ h2 {
 /* SECTIONS */
 
 .cart-section {
-	margin: 0.7rem var(--general-margin) var(--general-margin) var(--general-margin);
+	margin: 0 var(--general-margin) 0 var(--general-margin);
 	display: flex;
 	flex-direction: column;
+	gap: 0.25rem;
 }
 
 .cart-section > article {
@@ -170,14 +167,16 @@ h2 {
 	font-weight: 600;
 }
 
+.total-wrapper {
+	margin: 0.5rem 0 0 0;
+	padding: 0.5rem 0 0 0;
+	border-top: 1px solid black;
+}
+
 .checkout-section {
 	align-items: center;
 }
 
-.checkout-section a {
-	width: 100%;
-	max-width: 400px;
-}
 
 .checkout-section button {
 	width: 100%;
@@ -194,6 +193,14 @@ h2 {
 	padding: 1rem 0;
 }
 
+.cart-right {
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+	margin-bottom: 2rem;
+	margin-top: 10px; /* ALIGN WITH "My Cart title" */
+}
+
 @media (max-width: 1000px) {
 	.cart-wrapper {
 		max-width: var(--general-max-width);
@@ -206,5 +213,6 @@ h2 {
 	.cart-wrapper > div {
 		width: 100%;
 	}
+
 }
 </style>

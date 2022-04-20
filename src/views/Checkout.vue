@@ -291,7 +291,6 @@ export default {
 			try {
 				let data = await OrderService.create(localStorage.getItem("userId"), this.order);
 				localStorage.removeItem("cart");
-				console.log(data)
 			} catch (err) {
 				console.log(err.message);
 			}
@@ -305,7 +304,6 @@ export default {
 	async mounted() {
 		await this.fetchUser();
 		this.loadPrice();
-		console.log(this.loggedIn)
 	}
 }
 </script>

@@ -1,4 +1,7 @@
 <template>
+
+	<!--	<PushNotification :show="showNotification" message="Hello"></PushNotification>-->
+	<button @click="showNotification=!showNotification">HERE</button>
 	<main class="products-container">
 		<ImageCarousel class="carousel"></ImageCarousel>
 		<section class="product-settings-wrapper">
@@ -80,12 +83,14 @@ import ImageCarousel from "@/components/ImageCarousel";
 import PlantService from "@/services/PlantService";
 import CategoryService from "@/services/CategoryService";
 import FavoriteService from "@/services/FavoriteService";
+import PushNotification from "@/components/PushNotification";
 
 export default {
 	components: {
 		ProductGrid,
 		ProductRow,
-		ImageCarousel
+		ImageCarousel,
+		PushNotification
 	},
 	data() {
 		return {
@@ -101,7 +106,8 @@ export default {
 			heightFilter: this.maxPrice,
 			sortBy: "",
 			sortDesc: false,
-			favorite: []
+			favorite: [],
+			showNotification: false
 		}
 	},
 	methods: {
@@ -188,10 +194,15 @@ export default {
 	margin: 1.5rem 0;
 }
 
+.products-wrapper {
+	width: 100%;
+	max-width: var(--general-max-width);
+}
+
 .--grid {
 	display: grid;
-	gap: var(--general-margin);
-	grid-template-columns: 1fr 1fr;
+	gap: 2rem;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .--row {
@@ -199,12 +210,12 @@ export default {
 	flex-direction: column;
 	gap: var(--general-margin);
 	width: 100%;
-	max-width: calc(var(--general-max-width) - 150px);
+	max-width: calc(var(--general-max-width) - 500px);
 }
 
 .product-settings-wrapper {
-	margin: 1.5rem var(--general-margin) 2.5rem var(--general-margin);
-	max-width: calc(var(--general-max-width) - 150px); /* Size of the gap between each plant box */
+	margin: 1.5rem 0 2.5rem 0;
+	max-width: var(--general-max-width);
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
@@ -289,6 +300,18 @@ export default {
 	align-self: center;
 }
 
+@media (max-width: 900px) {
+	.--grid {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+}
+
+@media (max-width: 700px) {
+	.--grid {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
 @media (max-width: 400px) {
 	.sort-filter {
 		width: 100%;
@@ -313,6 +336,9 @@ export default {
 		max-width: 50px;
 	}
 
+	.products-wrapper.--grid {
+		gap: 1rem;
+	}
 
 }
 

@@ -229,7 +229,6 @@ export default {
 						clientId: localStorage.getItem("userId")
 					});
 				}
-				console.log("requested")
 				await this.fetchPlantData();
 				this.setAvgScore();
 				this.setLastReview();

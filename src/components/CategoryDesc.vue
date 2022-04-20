@@ -81,6 +81,10 @@ export default {
 }
 
 .img {
+	object-fit: cover;
+}
+
+.img {
 	-webkit-mask-image: url("~@/assets/category-mask.svg");
 	-webkit-mask-size: 100% 90%;
 	-webkit-mask-repeat: no-repeat;

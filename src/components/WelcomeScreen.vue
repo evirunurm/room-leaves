@@ -48,6 +48,7 @@ h2 {
 .welcome-wrapper {
 	width: 100%;
 	padding: 0 0 5rem 0;
+	/*	height: calc(100vh - 300px);*/
 }
 
 .welcome-image-container {
@@ -142,15 +143,19 @@ h2 {
 
 @media (max-width: 655px) {
 	.welcome-image-container:before, .welcome-image-container:after {
-		background-size: 200px;
+		background-size: 150px;
 	}
 
 	.welcome-image-container:before {
-		background-position-x: -90px;
+		background-position-x: -70px;
 	}
 
 	.welcome-image-container:after {
-		background-position-x: 200px;
+		background-position-x: 150px;
+	}
+
+	.welcome-image-container {
+		padding: 3rem 0;
 	}
 
 	.welcome-text {
@@ -163,6 +168,14 @@ h2 {
 	.welcome-text-vr {
 		margin: 0 1em;
 		font-size: 1rem;
+	}
+
+	.welcome-wrapper {
+		padding-bottom: 2rem;
+	}
+
+	button.white {
+		margin-top: 1.5rem;
 	}
 
 }

@@ -102,7 +102,7 @@ export default {
 <style scoped>
 .product-row {
 	display: flex;
-	gap: 1rem;
+	gap: 2rem;
 	width: 100%;
 }
 
@@ -122,13 +122,14 @@ export default {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
+	font-size: 1.2rem;
 }
 
 .product-buttons {
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
-	gap: 0.5rem;
+	gap: 1rem;
 }
 
 .product-name {
@@ -205,6 +206,21 @@ export default {
 		gap: 0rem;
 	}
 
+	.product-data-title {
+		font-size: 0.9rem;
+	}
+
+	.product-row {
+		gap: 1rem;
+	}
+
+	.product-buttons {
+		gap: 0.5rem;
+	}
+
+	.view-button {
+		display: none;
+	}
 }
 
 </style>

@@ -26,12 +26,17 @@
 						</div>
 					</Transition>
 				</form>
-				<router-link to="/cart"><img height="20" src="./assets/shopping-cart-icon.png" alt="Cart Icon">
+				<router-link to="/cart">
+					<img height="20" src="./assets/shopping-cart-icon.png" alt="Cart Icon">
 				</router-link>
-				<router-link to="/me"><img height="20" src="./assets/user-icon.png" alt="Profile Icon"></router-link>
-				<button id="burgerMenuButton" @click="isMenuOpen = !isMenuOpen"><img height="20"
-																											src="./assets/menu-icon.png"
-																											alt="Menu Icon"></button>
+				<router-link to="/me">
+					<img height="20" src="./assets/user-icon.png" alt="Profile Icon">
+				</router-link>
+				<button id="burgerMenuButton" @click="isMenuOpen = !isMenuOpen; ">
+					<img height="20"
+						  src="./assets/menu-icon.png"
+						  alt="Menu Icon">
+				</button>
 			</div>
 		</div>
 	</header>
@@ -45,7 +50,6 @@
 				<p>Subscribe to our</p>
 				<label for="newsletter-email" class="big serif">Newsletter</label>
 			</div>
-
 			<input id="newsletter-email" type="email" name="email" placeholder="example@mail.com" required>
 			<button class="white" type="submit">Sign in</button>
 		</form>
@@ -100,6 +104,15 @@ export default {
 				form.submit();
 			}
 		},
+	},
+	watch: {
+		isMenuOpen: {
+			handler() {
+				if (this.isMenuOpen) {
+
+				}
+			}
+		}
 	}
 }
 

@@ -44,7 +44,6 @@ export default {
 	},
 	methods: {
 		updateCart(e) {
-			console.log(this.item)
 			let cart = JSON.parse(localStorage.getItem("cart"));
 			if (this.item.amount == 0) {
 				this.removeItem();
@@ -64,7 +63,6 @@ export default {
 		async moveToFavorites() {
 			try {
 				let data = await FavoriteService.create(localStorage.getItem("localStorage"), this.item.id);
-				console.log(data);
 			} catch (err) {
 				console.log(err.message)
 			}
