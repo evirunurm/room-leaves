@@ -1,8 +1,9 @@
 <template>
 	<main class="favorites-container">
 		<div class="favorites-wrapper">
-			<h1 class="serif">User's favorites</h1>
+			<h1 class="serif">{{ name }}'s favorites</h1>
 			<section class="favorite-plants">
+				<p v-if="favorites.length === 0" class="warning-no-favorites">You have no favorite items</p>
 				<ProductGrid v-for="favorite in favorites" class="plant-container"
 								 :plant="favorite.plantData"></ProductGrid>
 			</section>
@@ -12,6 +13,7 @@
 
 <script>
 import ProductGrid from "@/components/ProductGrid";
+import UserService from "@/services/UserService";
 import FavoriteService from "@/services/FavoriteService";
 
 export default {
@@ -21,14 +23,17 @@ export default {
 	},
 	data() {
 		return {
-			favorites: []
+			favorites: [],
+			name: "",
 		}
 	},
 	methods: {
 		async fetchFavorites() {
 			try {
+				let dataName = await UserService.get(localStorage.getItem("userId"));
 				let data = await FavoriteService.getAll(localStorage.getItem("userId"));
 				this.favorites = data.data;
+				this.name = dataName.data["full_name"];
 				for (let i = 0; i < this.favorites.length; i++) {
 					this.favorites[i].plantData.isFavorite = true;
 				}
@@ -64,7 +69,7 @@ h1 {
 
 .favorite-plants {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
 	gap: 2rem;
 }
 
@@ -72,11 +77,21 @@ h1 {
 	min-width: 100%;
 }
 
+.warning-no-favorites {
+	opacity: 50%;
+	width: 100%;
+}
+
+
+@media (max-width: 900px) {
+	.favorite-plants {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
 @media (max-width: 450px) {
 	.favorite-plants {
-		display: grid;
 		grid-template-columns: 1fr;
-		gap: 2rem;
 	}
 }
 

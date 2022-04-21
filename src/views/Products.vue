@@ -1,7 +1,4 @@
 <template>
-
-	<!--	<PushNotification :show="showNotification" message="Hello"></PushNotification>-->
-	<button @click="showNotification=!showNotification">HERE</button>
 	<main class="products-container">
 		<ImageCarousel class="carousel"></ImageCarousel>
 		<section class="product-settings-wrapper">
@@ -66,14 +63,15 @@
 		</section>
 		<section v-if="!rowView" class="products-wrapper --grid">
 			<p v-if="plants.length < 1" class="no-plants-warning">No plants in this forest...</p>
-			<ProductGrid v-for="plant in plants"
+			<ProductGrid @notification="sendNotification" v-for="plant in plants"
 							 :plant="plant"></ProductGrid>
 		</section>
 		<section v-if="rowView" class="products-wrapper --row">
 			<p v-if="plants.length < 1" class="no-plants-warning">No plants in this forest...</p>
-			<ProductRow v-for="plant in plants" :plant="plant"></ProductRow>
+			<ProductRow @notification="sendNotification" v-for="plant in plants" :plant="plant"></ProductRow>
 		</section>
 	</main>
+
 </template>
 
 <script>
@@ -83,14 +81,12 @@ import ImageCarousel from "@/components/ImageCarousel";
 import PlantService from "@/services/PlantService";
 import CategoryService from "@/services/CategoryService";
 import FavoriteService from "@/services/FavoriteService";
-import PushNotification from "@/components/PushNotification";
 
 export default {
 	components: {
 		ProductGrid,
 		ProductRow,
-		ImageCarousel,
-		PushNotification
+		ImageCarousel
 	},
 	data() {
 		return {
@@ -107,9 +103,9 @@ export default {
 			sortBy: "",
 			sortDesc: false,
 			favorite: [],
-			showNotification: false
 		}
 	},
+	emits: ["notification"],
 	methods: {
 		async fetchPlants() {
 			let plants = await PlantService.getAll();
@@ -168,6 +164,9 @@ export default {
 
 
 		},
+		sendNotification(message) {
+			this.$emit("notification", message)
+		}
 	},
 	async mounted() {
 		await this.fetchPlants();

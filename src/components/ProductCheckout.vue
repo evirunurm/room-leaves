@@ -7,7 +7,7 @@
 			</div>
 			<div class="plant-data-section">
 				<p>Amount: {{ item.amount }}</p>
-				<p class="plant-price">Total: {{ Math.round(item.price * item.amount * 100) / 100 }}</p>
+				<p class="plant-price">Price: {{ Math.round(item.price * item.amount * 100) / 100 }}</p>
 			</div>
 		</div>
 	</article>
@@ -36,7 +36,6 @@ export default {
 }
 
 .plant-data {
-	width: 40%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -49,7 +48,8 @@ export default {
 
 
 .plant-name {
-	width: 70%;
+	width: 100%;
+	font-size: 1.3rem;
 	word-wrap: break-word;
 }
 
@@ -85,9 +85,14 @@ export default {
 		position: relative;
 	}
 
-	.plant-name, .plant-price, .plant-fav {
-		font-size: 0.9rem;
+
+	p {
+		font-size: 1rem;
 		line-height: 110%;
+	}
+
+	.plant-name {
+		font-size: 1.1rem;
 	}
 
 	.plant-data-section {

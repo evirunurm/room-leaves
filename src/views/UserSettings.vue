@@ -31,7 +31,7 @@
 					<input id="password" name="password" type="password" minlength="6" maxlength="16">
 				</div>
 				<p class="change-pass"><a class="link" href="">Want to change your password?</a></p>
-				<button v-if="allowSend" class="white">Save</button>
+				<button @click="validateData" class="white">Save</button>
 			</form>
 		</div>
 
@@ -43,6 +43,7 @@ import UserService from "@/services/UserService";
 
 export default {
 	name: "UserSettings",
+	emits: ["notification"],
 	data() {
 		return {
 			user: "",
@@ -50,8 +51,6 @@ export default {
 			failedEmail: false,
 			failedAddress: false,
 			failedPass: false,
-			saved: false,
-			allowSend: false,
 		}
 	},
 	methods: {
@@ -67,11 +66,10 @@ export default {
 			const name = document.getElementById("fullname").value;
 			const email = document.getElementById("settings-email").value;
 			const address = document.getElementById("address").value;
-			// Filter to not make requests with the same info as in the database
-			if (name !== this.user["full_name"] || email !== this.user.email || address !== this.user.address) {
-				this.allowSend = true;
+			if (name === this.user["full_name"] && email === this.user.email && (address === this.user.address || (!address && this.user.address === null))) {
+				return false;
 			} else {
-				this.allowSend = false;
+				return true;
 			}
 		},
 		validateData(e) {
@@ -100,10 +98,15 @@ export default {
 			} else {
 				this.failedAddress = false;
 			}
-
 			if (!this.failedName && !this.failedEmail && !this.failedAddress) {
-				const form = document.getElementById("settings-form");
-				this.submitForm(form);
+				if (this.checkSimilarityBD()) {
+					const form = document.getElementById("settings-form");
+					this.submitForm(form);
+				} else {
+					this.sendNotification("Nothing to change here.");
+				}
+			} else {
+				this.sendNotification("You must provide valid information.");
 			}
 
 		},
@@ -117,15 +120,20 @@ export default {
 
 			try {
 				await UserService.update(this.user.id, data);
-				this.saved = true;
+				this.sendNotification("Your profile has been updated successfully");
+				await this.getUser();
 			} catch (err) {
 				if (err.response.status == 401) {
 					this.failedPass = true;
 				} else {
 					console.log(err.message);
+					this.sendNotification(err.message)
 				}
 			}
 
+		},
+		sendNotification(message) {
+			this.$emit("notification", message)
 		}
 	},
 	mounted() {

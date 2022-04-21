@@ -1,4 +1,8 @@
 <template>
+	<Transition name="toast" mode="out-in">
+		<PushNotification v-if="isNotificationShown" :message="notificationMessage"
+								:color="notificationColor"></PushNotification>
+	</Transition>
 	<header>
 		<div class="logo">
 			<router-link to="/"><img src="./assets/logo.png" alt="Room Leaves logotype" height="48"></router-link>
@@ -40,9 +44,7 @@
 			</div>
 		</div>
 	</header>
-
-	<router-view/>
-
+	<router-view @notification="showNotification"/>
 	<footer>
 		<form @submit.prevent="" class="newsletter" action="/" method="POST">
 			<p>Be the first one to receive all the exclusive discounts</p>
@@ -76,12 +78,21 @@
 </template>
 
 <script>
+import PushNotification from "@/components/PushNotification";
+
+let notificationTimeout;
 
 export default {
+	components: {
+		PushNotification
+	},
 	data() {
 		return {
 			isSearchbarOpen: false,
 			isMenuOpen: false,
+			isNotificationShown: false,
+			notificationMessage: "",
+			notificationColor: "black",
 		}
 	},
 	methods: {
@@ -104,13 +115,17 @@ export default {
 				form.submit();
 			}
 		},
-	},
-	watch: {
-		isMenuOpen: {
-			handler() {
-				if (this.isMenuOpen) {
-
-				}
+		showNotification(message) {
+			if (typeof message == "string") {
+				clearTimeout(notificationTimeout);
+				this.isNotificationShown = true;
+				this.notificationMessage = message;
+				notificationTimeout = setTimeout(() => {
+					this.isNotificationShown = false;
+				}, 2500)
+			} else {
+				// TODO: Delete
+				console.log(typeof message);
 			}
 		}
 	}
@@ -119,6 +134,20 @@ export default {
 </script>
 
 <style>
+
+/* PUSH NOTIFICATION ANIMATION */
+.toast-enter-active,
+.toast-leave-active {
+	opacity: 1;
+	transition: 0.5s ease-in-out;
+}
+
+.toast-enter-from,
+.toast-leave-to {
+	bottom: 4rem;
+	opacity: 0;
+}
+
 
 h1 {
 	margin: 0 var(--general-margin);
@@ -343,7 +372,7 @@ footer > form.newsletter input {
 	font-size: 1rem;
 	padding: 0.5em 0 0.5em 1em;
 	background: none;
-	border: none;
+
 	border: 2px solid rgba(255, 255, 255, 0.5);
 	color: white;
 	text-align: center;
@@ -430,6 +459,25 @@ footer > section.newsletter input:focus {
 
 	#burgerMenuButton {
 		display: block;
+	}
+
+	header {
+		margin-bottom: 2rem;
+	}
+
+	/*
+	#searchbar {
+		position: absolute;
+		bottom: -1rem;
+		right: 50%;
+		width: calc(100% - var(--general-margin) * 2);
+		transform: translateX(50%);
+	}
+	*/
+	.header-search-form {
+		position: absolute;
+		bottom: 0;
+		left: 0;
 	}
 }
 

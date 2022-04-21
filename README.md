@@ -52,7 +52,8 @@
     - Ask if sure when logging out
     - Adapt mobile
         - Search bar
-    - Add where push notification would go
+    - ~~Add where push notification would go~~
+    - Better toast notification design
 
 
 - Search bar functionality
@@ -60,13 +61,12 @@
 - Payment system
 
 
-- Push notification when things happen
-    - Change profile
-    - Add to cart
-    - Order
-    - Remove from cart
-    - Rated
-    -
+- ~~Push notification when things happen~~
+    - ~~Change profile~~
+    - ~~Add to cart~~
+    - ~~Order~~
+
+
 - Newspaper form
 - Save View settings in Products View to Local Storage.
 - Notification appearing when you spend too much time in the same page

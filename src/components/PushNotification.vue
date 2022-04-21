@@ -1,9 +1,7 @@
-<template class="this">
-	<Transition name="fade" mode="out-in">
-		<div id="notification" class="message">
-			<p>{{ message }}</p>
-		</div>
-	</Transition>
+<template>
+	<div id="notification" class="message">
+		<p :style="'color:' + color">{{ message }}</p>
+	</div>
 </template>
 
 <script>
@@ -12,47 +10,25 @@ export default {
 	name: "PushNotification",
 	props: {
 		message: String,
-	},
-	/*watch: {
-		show: {
-			handler() {
-				if (this.show) {
-					document.getElementById("notification").style.display = "block";
-				} else {
-					document.getElementById("notification").style.display = "none";
-				}
-
-			}
-		}
-	}*/
+		color: String
+	}
 }
 
 </script>
 
 <style scoped>
 
-/* ANIMATION */
-
-.fade-enter-active,
-.fade-leave-active {
-	transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-	opacity: 0;
-}
-
 .message {
 	background: white;
 	border-radius: 100px;
-	box-shadow: 8px 8px 20px rgba(20, 80, 80, 0.35);
+	border: 1px solid black;
 	padding: 0.75rem 3rem;
 	max-width: 350px;
 	width: fit-content;
+	position: fixed;
+	z-index: 500;
+	bottom: 2.5rem;
+	right: 2.5rem;
 }
 
-#notification {
-	transition: ease-out;
-}
 </style>

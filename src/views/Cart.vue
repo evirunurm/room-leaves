@@ -49,6 +49,7 @@ export default {
 	components: {
 		ProductCart
 	},
+	emits: ["notification"],
 	data() {
 		return {
 			items: null,
@@ -81,11 +82,15 @@ export default {
 			return this.tax;
 		},
 		goToCheckout() {
-			if (this.items.length !== 0) {
+			if (this.items && this.items.length !== 0) {
 				this.$router.push("/checkout");
 				return;
 			}
+			this.sendNotification("There are no items in your car");
 			// Add err notification.
+		},
+		sendNotification(message) {
+			this.$emit("notification", message)
 		}
 	},
 	mounted() {

@@ -4,6 +4,8 @@
 			<h1 class="serif">Checkout</h1>
 			<section v-if="step === 1" class="step-1" id="step-1">
 				<h2 class="serif">{{ step }}. Billing Address</h2>
+				<p v-if="invalidBillingAddress" class="warning">Enter a valid address. Try to follow the provided
+					structure.</p>
 				<div class="change-address-container"
 					  v-if=" userData?.address === null || userData?.address === '' || !loggedIn ">
 					<form id="address-form" class="address-container">
@@ -51,10 +53,11 @@
 						<p><a class="a-clickable" @click="changeAddress = false">Cancel</a></p>
 					</div>
 				</div>
-				<button @click="evalStep" class="green next-button">Next</button>
+				<button @click="evalStep($event)" class="green next-button">Next</button>
 			</section>
 			<section v-if="step === 2" class="step-2" id="step-2">
 				<h2 class="serif">{{ step }}. Shipping Method</h2>
+				<p class="warning" v-if="invalidShippingMethod">Please choose a shipping method</p>
 				<article class="container">
 					<p>Choose a shipping method</p>
 					<label for="upsExpress">
@@ -72,11 +75,13 @@
 				</article>
 				<div class="buttons-container">
 					<button @click="step--" class="white">Prev</button>
-					<button @click="evalStep" class="green">Next</button>
+					<button @click="evalStep($event)" class="green">Next</button>
 				</div>
 			</section>
 			<section v-if="step === 3" class="step-3" id="step-3">
 				<h2 class="serif">{{ step }}. Payment Method</h2>
+				<p class="warning" v-if="invalidPaymentMethod">Choose a valid payment method and complete the requested
+					information</p>
 				<article class="container">
 					<p>Choose a payment method</p>
 					<label for="card">
@@ -110,7 +115,7 @@
 				</article>
 				<div class="buttons-container">
 					<button @click="step--" class="white">Prev</button>
-					<button @click="evalStep" class="green">Next</button>
+					<button @click="evalStep($event)" class="green">Next</button>
 				</div>
 			</section>
 			<section v-if="step === 4" class="step-4" id="step-4">
@@ -177,6 +182,7 @@ export default {
 	components: {
 		ProductCheckout
 	},
+	emits: ["notification"],
 	data() {
 		return {
 			loggedIn: localStorage.getItem("userId") !== null,
@@ -197,6 +203,9 @@ export default {
 			subtotal: null,
 			delivery: null,
 			tax: null,
+			invalidBillingAddress: false,
+			invalidShippingMethod: false,
+			invalidPaymentMethod: false,
 		}
 	},
 	methods: {
@@ -208,6 +217,7 @@ export default {
 				}
 			} catch (err) {
 				console.log(err.message);
+				this.sendNotification("There's been an error while fetching your data");
 				await this.logOut();
 			}
 		},
@@ -243,7 +253,7 @@ export default {
 			this.getTax();
 		},
 		getTotal() {
-			this.subtotal = this.cart.reduce((acc, curr) => {
+			this.subtotal = this.cart?.reduce((acc, curr) => {
 				return acc + parseFloat(curr.price * curr.amount)
 			}, 0);
 			return Math.round((this.subtotal / 100) * 100) / 100;
@@ -257,28 +267,40 @@ export default {
 			return this.tax;
 		},
 		evalStep() {
-			if (this.step === 1 && this.validAddress(this.userData?.address) || (this.changeAddress && this.validAddress(this.newAddress))) {
+			if (this.step === 1 && (this.validAddress(this.userData?.address) || (this.changeAddress && this.validAddress(this.newAddress)))) {
+				this.invalidBillingAddress = false;
 				this.step++;
 				return;
+			} else if (this.step === 1) {
+				this.invalidBillingAddress = true;
 			}
 
 			if (this.step === 2 && this.order.shippingMethod) {
+				this.invalidShippingMethod = false;
 				this.step++;
 				return;
+			} else if (this.step === 2) {
+				this.invalidShippingMethod = true;
 			}
+
 			if (this.step === 3 && this.order.paymentMethod) {
 				if (this.order.paymentMethod === 2) {
+					this.invalidPaymentMethod = false;
 					this.step++;
 					return;
-				}
-				if (this.order.paymentMethod === 1 && this.cardNumber && this.cardDate && this.cardCVC) {
+				} else if (this.order.paymentMethod === 1 && this.cardNumber && this.cardDate && this.cardCVC) {
+					this.invalidPaymentMethod = false;
 					this.step++;
 					return;
+				} else {
+					this.invalidPaymentMethod = true;
 				}
+			} else if (this.step === 3) {
+				this.invalidPaymentMethod = true;
 			}
 		},
 		validAddress(address) {
-			return address !== "" && address !== null && address !== undefined && address.length > 10;
+			return address !== "" && address !== null && address !== undefined && address.length > 5;
 		},
 		async submitOrder() {
 			for (let i = 0; i < this.cart.length; i++) {
@@ -291,8 +313,13 @@ export default {
 			try {
 				let data = await OrderService.create(localStorage.getItem("userId"), this.order);
 				localStorage.removeItem("cart");
+				this.sendNotification("Order completed successfully!")
+				setTimeout(() => {
+					this.$router.push("/me");
+				}, 1000)
 			} catch (err) {
 				console.log(err.message);
+				this.sendNotification("There's been a problem with yur order's data. Try again in a few minutes.")
 			}
 		},
 		async logOut() {
@@ -300,6 +327,9 @@ export default {
 			localStorage.removeItem("userId");
 			await this.$router.push("/login");
 		},
+		sendNotification(message) {
+			this.$emit("notification", message)
+		}
 	},
 	async mounted() {
 		await this.fetchUser();
@@ -309,6 +339,12 @@ export default {
 </script>
 
 <style scoped>
+
+/* WARNING */
+.warning {
+	color: rgba(180, 100, 100);
+}
+
 h1 {
 	margin: 0 0 2rem 0;
 }
