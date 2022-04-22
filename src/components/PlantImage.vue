@@ -1,5 +1,5 @@
 <template>
-	<div class="PlantImage" :data-plant="plantId">
+	<div class="PlantImage">
 		<img class="img" :src="plantImage">
 		<button v-if="!isFavorite && canBeFavorite" @click="favorite" class="heart-it-button">
 			<svg class="heart-it" width="32" height="32" viewBox="0 0 23 19" fill="none"

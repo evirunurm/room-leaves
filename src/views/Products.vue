@@ -108,16 +108,24 @@ export default {
 	emits: ["notification"],
 	methods: {
 		async fetchPlants() {
-			let plants = await PlantService.getAll();
-			this.originalPlants = plants.data;
-			this.plants = this.originalPlants;
-			let favorite = await FavoriteService.getAll(localStorage.getItem("userId"));
-			this.favorite = favorite.data;
-			for (let i = 0; i < this.plants.length; i++) {
-				this.plants[i].isFavorite = this.favorite.some((fav) => {
-					return fav.plantId === this.plants[i].id
-				})
+			try {
+				let plants = await PlantService.getAll();
+				this.originalPlants = plants.data;
+				this.plants = this.originalPlants;
+				/* If logged in.. */
+				if (localStorage.getItem("userId")) {
+					let favorite = await FavoriteService.getAll(localStorage.getItem("userId"));
+					this.favorite = favorite.data;
+					for (let i = 0; i < this.plants.length; i++) {
+						this.plants[i].isFavorite = this.favorite.some((fav) => {
+							return fav.plantId === this.plants[i].id
+						})
+					}
+				}
+			} catch (err) {
+				console.log(err.message);
 			}
+
 		},
 		async fetchCategories() {
 			let categories = await CategoryService.getAll();

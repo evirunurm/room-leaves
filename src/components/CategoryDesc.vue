@@ -27,7 +27,6 @@ export default {
 			let img;
 			try {
 				img = require('../assets/' + id + '-category.png');
-				console.log(img)
 				return img;
 			} catch (err) {
 				console.log("Image not found for plant with id: " + id);
