@@ -5,6 +5,7 @@
 			<PlantImage :plant-name="plant.name" v-if="!AR" :can-be-favorite="true" class="plant-image" :stock="true"
 							:clickable="false"
 							:plantId="plantId"></PlantImage>
+			<AR v-if="AR"></AR>
 			<div class="plant-data">
 				<div class="plant-values">
 					<div class="plant-rating">
@@ -139,11 +140,13 @@ import PlantImage from '@/components/PlantImage';
 import ProductCarousel from '@/components/ProductCarousel';
 import PlantService from "@/services/PlantService";
 import ScoresService from "@/services/ScoresService";
+import AR from "@/components/AR";
 
 export default {
 	components: {
 		ProductCarousel,
-		PlantImage
+		PlantImage,
+		AR,
 	},
 	data() {
 		return {
