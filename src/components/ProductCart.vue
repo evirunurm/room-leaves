@@ -1,6 +1,7 @@
 <template>
 	<article class="product-cart">
-		<PlantImage :canBeFavorite="false" class="plant-image" :plant-id="item.id" :clickable="true"
+		<PlantImage :plant-name="item.name" :canBeFavorite="false" class="plant-image" :plant-id="item.id"
+						:clickable="true"
 						:stock="item.stock > 0"></PlantImage>
 		<div class="plant-data">
 			<div class="plant-data-section">

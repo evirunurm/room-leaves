@@ -34,6 +34,7 @@ export default {
 		clickable: Boolean,
 		initialFavoriteState: Boolean,
 		canBeFavorite: Boolean,
+		plantName: String,
 	},
 	data() {
 		return {
@@ -45,7 +46,7 @@ export default {
 		loadImg() {
 			let img;
 			try {
-				img = require("../../public/plants/plant_" + this.plantId + ".png");
+				img = require("../../public/plants/plant_" + this.plantName.toLowerCase().split(" ").join("") + ".png");
 				this.plantImage = img;
 			} catch (err) {
 				console.log("Image not found for plant with id: " + this.plantId);

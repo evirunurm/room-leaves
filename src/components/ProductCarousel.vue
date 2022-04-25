@@ -9,7 +9,7 @@
 			<section class="carousel-wrapper">
 				<p class="no-plants-warning" v-if="plants.length === 0">No plants here...</p>
 				<div class="carousel-img-container" id="" v-for="plant in plants">
-					<PlantImage :clickable="true" :plant-id="plant.id" :stock="plant.stock > 0"/>
+					<PlantImage :plant-name="plant.name" :clickable="true" :plant-id="plant.id" :stock="plant.stock > 0"/>
 				</div>
 			</section>
 		</div>

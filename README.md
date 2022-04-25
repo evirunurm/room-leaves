@@ -54,6 +54,7 @@
         - Search bar
     - ~~Add where push notification would go~~
     - Better toast notification design
+    - Change plant file names from id to name.
 
 
 - Search bar functionality

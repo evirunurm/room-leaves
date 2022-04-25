@@ -1,6 +1,7 @@
 <template>
 	<article class="product-cart">
-		<PlantImage class="plant-image" :plant-id="item.id" :clickable="true" :stock="item.stock > 0"></PlantImage>
+		<PlantImage :plant-name="item.name" class="plant-image" :plant-id="item.id" :clickable="true"
+						:stock="item.stock > 0"></PlantImage>
 		<div class="plant-data">
 			<div class="plant-data-section">
 				<p class="plant-name">{{ item.name }}</p>

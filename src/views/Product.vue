@@ -2,7 +2,8 @@
 	<main class="product">
 		<h1 class="serif">{{ plant.name }}</h1>
 		<section class="plant-main">
-			<PlantImage :can-be-favorite="true" class="plant-image" :stock="true" :clickable="false"
+			<PlantImage :plant-name="plant.name" v-if="!AR" :can-be-favorite="true" class="plant-image" :stock="true"
+							:clickable="false"
 							:plantId="plantId"></PlantImage>
 			<div class="plant-data">
 				<div class="plant-values">
@@ -80,7 +81,7 @@
 					<router-link class="router-cart" to="/cart">
 						<button @click="addToCart" class="green cart-button">Add to Cart</button>
 					</router-link>
-					<button class="white--white ar-button">Visualize in AR</button>
+					<button @click="AR=true" class="white--white ar-button">Visualize in AR</button>
 				</div>
 			</div>
 		</section>
@@ -139,11 +140,10 @@ import ProductCarousel from '@/components/ProductCarousel';
 import PlantService from "@/services/PlantService";
 import ScoresService from "@/services/ScoresService";
 
-
 export default {
 	components: {
 		ProductCarousel,
-		PlantImage,
+		PlantImage
 	},
 	data() {
 		return {
@@ -159,7 +159,8 @@ export default {
 			avgScoreHalf: false,
 			scored: false,
 			usersScoreId: null,
-			usersScoreValue: null
+			usersScoreValue: null,
+			AR: false
 		}
 	},
 	methods: {

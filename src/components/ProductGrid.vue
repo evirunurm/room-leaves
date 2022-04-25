@@ -1,6 +1,7 @@
 <template>
 	<div class="product-grid">
-		<PlantImage :can-be-favorite="true" :initialFavoriteState="plant.isFavorite" class="product-image"
+		<PlantImage :plant-name="plant.name" :can-be-favorite="true" :initialFavoriteState="plant.isFavorite"
+						class="product-image"
 						:clickable="true" :plantId="plant.id"
 						:stock="plant.stock > 0"></PlantImage>
 		<div class="product-data">
