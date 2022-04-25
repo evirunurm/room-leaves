@@ -66,6 +66,7 @@
     - ~~Change profile~~
     - ~~Add to cart~~
     - ~~Order~~
+    - When trying to score a plant without being logged in
 
 
 - Newspaper form
