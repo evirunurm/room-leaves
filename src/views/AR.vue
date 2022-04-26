@@ -20,24 +20,24 @@ export default {
 		resideVideo() {
 			const container = document.getElementById("ar-container");
 			const scene = document.getElementById("ar-scene");
-			container.style.width = Math.max(window.innerWidth, document.documentElement.clientWidth) + "px";
+			/*container.style.width = Math.max(window.innerWidth, document.documentElement.clientWidth) + "px";
 			container.style.height = Math.max(window.innerHeight, document.documentElement.clientHeight) + "px";
 			scene.style.width = Math.max(window.innerWidth, document.documentElement.clientWidth) + "px";
 			scene.style.height = Math.max(window.innerHeight, document.documentElement.clientHeight) + "px";
 			container.children[1].style.height = Math.max(window.innerHeight, document.documentElement.clientHeight) + "px";
 			container.children[1].style.width = Math.max(window.innerWidth, document.documentElement.clientWidth) + "px";
-			container.children[1].style.left = "0px";
+			container.children[1].style.left = "0px";*/
 		}
 	},
 	mounted() {
-		setTimeout(() => {
+		/*setTimeout(() => {
 			this.resideVideo();
 		}, 2000);
 		window.addEventListener("resize", () => {
 			setTimeout(() => {
 				this.resideVideo();
 			}, 2);
-		});
+		});*/
 	}
 }
 </script>
@@ -47,15 +47,15 @@ export default {
 .container {
 	overflow: hidden;
 	/*	display: flex;*/
-	width: 100px;
-	height: 100px;
+	width: 200px;
+	height: 200px;
 }
 
 a-scene {
-	height: 100px;
-	max-width: 100vw;
+	height: 200px;
+	max-width: 200vw;
 	overflow: hidden;
-	width: 100px;
+	width: 200px;
 }
 
 .a-canvas {
