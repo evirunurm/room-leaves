@@ -3,7 +3,7 @@
 		<PushNotification v-if="isNotificationShown" :message="notificationMessage"
 								:color="notificationColor"></PushNotification>
 	</Transition>
-	<header>
+	<header v-if="!['AR'].includes($route.name)">
 		<div class="logo">
 			<router-link to="/"><img src="./assets/logo.png" alt="Room Leaves logotype" height="48"></router-link>
 		</div>
@@ -45,7 +45,7 @@
 		</div>
 	</header>
 	<router-view @notification="showNotification"/>
-	<footer>
+	<footer v-if="!['AR'].includes($route.name)">
 		<form @submit.prevent="" class="newsletter" action="/" method="POST">
 			<p>Be the first one to receive all the exclusive discounts</p>
 			<div class="newsletter-title">

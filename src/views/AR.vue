@@ -1,7 +1,8 @@
 <template>
-	<div class="container">
-		<a-scene embedded
-					mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/examples/image-tracking/assets/card-example/card.mind;"
+	<div class="container" id="ar-container">
+		<a-scene id="ar-scene"
+					embedded
+					mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/examples/image-tracking/assets/card-example/card.mind; uiScanning: no"
 					vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
 			<a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 			<a-entity mindar-image-target="targetIndex: 0">
@@ -17,36 +18,46 @@ export default {
 	name: "AR",
 	methods: {
 		resideVideo() {
-			console.log(AFRAME)
-			let x = document.getElementById("arjs-video");
-
-			x.style.width = "500px";
-			console.log(x)
+			const container = document.getElementById("ar-container");
+			const scene = document.getElementById("ar-scene");
+			container.style.width = window.innerWidth + "px";
+			container.style.height = window.innerHeight + "px";
+			scene.style.width = window.innerWidth + "px";
+			scene.style.height = window.innerHeight + "px";
+			container.children[1].style.height = window.innerHeight + "px";
+			container.children[1].style.width = window.innerWidth + "px";
 		}
 	},
 	mounted() {
-
+		setTimeout(() => {
+			this.resideVideo();
+		}, 2000);
+		/*	window.addEventListener("resize", () => {
+				setTimeout(() => {
+					this.resideVideo();
+				}, 1000);
+			});*/
 	}
 }
 </script>
 
 <style scoped>
-body {
-	overflow: hidden;
-}
 
 .container {
 	overflow: hidden;
-	display: flex;
-	width: 100%;
+	/*	display: flex;*/
+	width: 100px;
+	height: 100px;
 }
 
 a-scene {
-	/*	!*	height: 100%;*!
-		width: 100vw !important;
-		max-width: 100vw !important;*/
-	height: 500px;
-	width: 100%;
+	height: 100px;
+	max-width: 100vw;
+	overflow: hidden;
+	width: 100px;
+}
+
+.a-canvas {
 
 }
 </style>
