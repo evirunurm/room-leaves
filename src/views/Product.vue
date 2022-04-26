@@ -5,7 +5,6 @@
 			<PlantImage :plant-name="plant.name" v-if="!AR" :can-be-favorite="true" class="plant-image" :stock="true"
 							:clickable="false"
 							:plantId="plantId"></PlantImage>
-			<AR v-if="AR"></AR>
 			<div class="plant-data">
 				<div class="plant-values">
 					<div class="plant-rating">
@@ -82,7 +81,9 @@
 					<router-link class="router-cart" to="/cart">
 						<button @click="addToCart" class="green cart-button">Add to Cart</button>
 					</router-link>
-					<button @click="AR=true" class="white--white ar-button">Visualize in AR</button>
+					<router-link :to="'/products/' + plantId + '/AR'">
+						<button class="white--white ar-button">Visualize in AR</button>
+					</router-link>
 				</div>
 			</div>
 		</section>
@@ -140,13 +141,12 @@ import PlantImage from '@/components/PlantImage';
 import ProductCarousel from '@/components/ProductCarousel';
 import PlantService from "@/services/PlantService";
 import ScoresService from "@/services/ScoresService";
-import AR from "@/components/AR";
+import AR from "@/views/AR";
 
 export default {
 	components: {
 		ProductCarousel,
 		PlantImage,
-		AR,
 	},
 	data() {
 		return {
@@ -163,7 +163,6 @@ export default {
 			scored: false,
 			usersScoreId: null,
 			usersScoreValue: null,
-			AR: false
 		}
 	},
 	methods: {

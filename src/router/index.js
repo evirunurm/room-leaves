@@ -73,6 +73,11 @@ const routes = [
 		component: () => import( '../views/Checkout.vue')
 	},
 	{
+		path: '/products/:id/AR',
+		name: 'AR',
+		component: () => import( '../views/AR.vue')
+	},
+	{
 		/* NOT FOUND. This object has to be the last one. */
 		path: '/:pathMatch(.*)*',
 		name: "NotFound",
