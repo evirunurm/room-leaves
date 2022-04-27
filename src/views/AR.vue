@@ -1,15 +1,25 @@
 <template>
-	<div class="container" id="ar-container">
-		<a-scene id="ar-scene"
-					embedded
-					mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/examples/image-tracking/assets/card-example/card.mind; uiScanning: no"
-					vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-			<a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-			<a-entity mindar-image-target="targetIndex: 0">
-				<a-plane color="blue" opaciy="0.5" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
-			</a-entity>
-		</a-scene>
-	</div>
+	<a-scene
+		id="scene"
+		mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/evirunurm/mind@main/targets.mind"
+		color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
+		device-orientation-permission-ui="enabled: false">
+		<a-assets>
+			<img id="card"
+				  src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/examples/image-tracking/assets/card-example/card.png"/>
+			<a-asset-item id="avatarModel"
+							  src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
+		</a-assets>
+
+		<a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+		<a-entity mindar-image-target="targetIndex: 0">
+			<a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+			<a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel"
+							  animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+			></a-gltf-model>
+		</a-entity>
+	</a-scene>
 </template>
 
 <script>
@@ -17,29 +27,15 @@
 export default {
 	name: "AR",
 	methods: {
-		resideVideo() {
-			const container = document.getElementById("ar-container");
-			const scene = document.getElementById("ar-scene");
-			// container.style.width = Math.max(window.innerWidth, document.documentElement.clientWidth) + "px";
-			// container.style.height = Math.max(window.innerHeight, document.documentElement.clientHeight) + "px";
-			// scene.style.width = Math.max(window.innerWidth, document.documentElement.clientWidth) + "px";
-			// scene.style.height = Math.max(window.innerHeight, document.documentElement.clientHeight) + "px";
-			// container.children[1].style.height = Math.max(window.innerHeight, document.documentElement.clientHeight) + "px";
-			// container.children[1].style.width = Math.max(window.innerWidth, document.documentElement.clientWidth) + "px";
-			container.children[1].style.left = "0px";
-			container.children[1].style.top = "0px";
+		insert() {
+			/*	let x = document.getElementById("scene");
+				document.getElementById("app").removeChild(document.getElementById("scene"));
+				/!*document.body.appendChild(x);*!/*/
 		}
 	},
-	mounted() {
-		setTimeout(() => {
-			this.resideVideo();
-		}, 2000);
-		window.addEventListener("resize", () => {
-			setTimeout(() => {
-				this.resideVideo();
-			}, 2);
-		});
-	}
+	/*mounted() {
+		this.insert();
+	}*/
 }
 </script>
 
@@ -47,7 +43,7 @@ export default {
 
 .container {
 	overflow: hidden;
-	/*	display: flex;*/
+	display: flex;
 	height: 100%;
 }
 
