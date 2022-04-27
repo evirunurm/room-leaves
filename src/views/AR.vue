@@ -7,7 +7,7 @@
 export default {
 	name: "AR",
 	methods: {
-		openAR() {
+		createAR() {
 			let sceneEl = document.createElement('a-scene');
 			sceneEl.setAttribute("mindar-image", "imageTargetSrc: https://cdn.jsdelivr.net/gh/evirunurm/mind@main/targets.mind");
 			sceneEl.setAttribute('color-space', "sRGB");
@@ -59,12 +59,22 @@ export default {
 			entity.flushToDOM(true);
 			sceneEl.flushToDOM(true);
 			document.body.appendChild(sceneEl);
-			console.log(sceneEl)
 
+		},
+		destroyAR() {
+			document.querySelector("a-scene").remove();
+			document.querySelector("video").remove();
+			document.querySelectorAll(".mindar-ui-overlay").forEach(el => {
+				el.remove();
+			});
+			/*mindar-ui-overlay*/
 		}
 	},
 	beforeMount() {
-		this.openAR();
+		this.createAR();
+	},
+	beforeUnmount() {
+		this.destroyAR();
 	}
 }
 </script>
