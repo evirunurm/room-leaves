@@ -1,8 +1,8 @@
 <template>
-	<main v-if="!AROpen" class="product">
+	<main class="product">
 		<h1 class="serif">{{ plant.name }}</h1>
 		<section class="plant-main">
-			<PlantImage :plant-name="plant.name" v-if="!AR" :can-be-favorite="true" class="plant-image" :stock="true"
+			<PlantImage :plant-name="plant.name" :can-be-favorite="true" class="plant-image" :stock="true"
 							:clickable="false"
 							:plantId="plantId"></PlantImage>
 			<div class="plant-data">
@@ -162,7 +162,6 @@ export default {
 			scored: false,
 			usersScoreId: null,
 			usersScoreValue: null,
-			AROpen: false
 		}
 	},
 	methods: {
@@ -256,7 +255,6 @@ export default {
 		this.checkIfScored();
 		this.setAvgScore();
 		this.setLastReview();
-
 	}
 }
 </script>

@@ -6,6 +6,11 @@
 
 export default {
 	name: "AR",
+	data() {
+		return {
+			modelURI: "./models/plant_1.obj",
+		}
+	},
 	methods: {
 		createAR() {
 			let sceneEl = document.createElement('a-scene');
@@ -23,6 +28,7 @@ export default {
 			let assetItem = document.createElement('a-asset-item');
 			assetItem.setAttribute("id", "avatarModel");
 			assetItem.setAttribute("src", "https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/examples/image-tracking/assets/card-example/softmind/scene.gltf");
+			/*assetItem.setAttribute("src", this.modelURI);*/
 
 			let camera = document.createElement('a-camera');
 			camera.setAttribute("position", "0 0 0");
@@ -40,8 +46,8 @@ export default {
 
 			let model = document.createElement('a-gltf-model');
 			model.setAttribute("rotation", "0 0 0");
-			model.setAttribute("position", "0 0 0.1");
-			model.setAttribute("scale", "0.005 0.005 0.005");
+			model.setAttribute("position", "0 0 0");
+			model.setAttribute("scale", "1 1 1");
 			model.setAttribute("src", "#avatarModel");
 			model.setAttribute("animation", "property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate");
 
@@ -55,7 +61,6 @@ export default {
 			entity.appendChild(model);
 			sceneEl.appendChild(entity);
 
-
 			entity.flushToDOM(true);
 			sceneEl.flushToDOM(true);
 			document.body.appendChild(sceneEl);
@@ -67,7 +72,6 @@ export default {
 			document.querySelectorAll(".mindar-ui-overlay").forEach(el => {
 				el.remove();
 			});
-			/*mindar-ui-overlay*/
 		}
 	},
 	beforeMount() {

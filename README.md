@@ -59,6 +59,10 @@
 
 - Search bar functionality
 - AR in AFrame
+    - Change loading screen
+    - Change scanning thing
+    - Create a new, detailed, card
+    - 3D models: TEST
 - Payment system
 
 
