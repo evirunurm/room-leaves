@@ -1,5 +1,5 @@
 <template>
-	<main class="product">
+	<main v-if="!AROpen" class="product">
 		<h1 class="serif">{{ plant.name }}</h1>
 		<section class="plant-main">
 			<PlantImage :plant-name="plant.name" v-if="!AR" :can-be-favorite="true" class="plant-image" :stock="true"
@@ -81,7 +81,7 @@
 					<router-link class="router-cart" to="/cart">
 						<button @click="addToCart" class="green cart-button">Add to Cart</button>
 					</router-link>
-					<router-link :to="'/products/' + plantId + '/AR'">
+					<router-link class="router-cart" :to="'/products/' + plantId + '/AR'">
 						<button class="white--white ar-button">Visualize in AR</button>
 					</router-link>
 				</div>
@@ -141,7 +141,6 @@ import PlantImage from '@/components/PlantImage';
 import ProductCarousel from '@/components/ProductCarousel';
 import PlantService from "@/services/PlantService";
 import ScoresService from "@/services/ScoresService";
-import AR from "@/views/AR";
 
 export default {
 	components: {
@@ -163,6 +162,7 @@ export default {
 			scored: false,
 			usersScoreId: null,
 			usersScoreValue: null,
+			AROpen: false
 		}
 	},
 	methods: {
@@ -248,7 +248,7 @@ export default {
 					this.usersScoreValue = this.plant.scores[i].value;
 				}
 			}
-		}
+		},
 	},
 	async mounted() {
 		await this.fetchPlantData();
@@ -256,6 +256,7 @@ export default {
 		this.checkIfScored();
 		this.setAvgScore();
 		this.setLastReview();
+
 	}
 }
 </script>

@@ -1,25 +1,5 @@
 <template>
-	<a-scene
-		id="scene"
-		mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/evirunurm/mind@main/targets.mind"
-		color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
-		device-orientation-permission-ui="enabled: false">
-		<a-assets>
-			<img id="card"
-				  src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/examples/image-tracking/assets/card-example/card.png"/>
-			<a-asset-item id="avatarModel"
-							  src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
-		</a-assets>
 
-		<a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
-		<a-entity mindar-image-target="targetIndex: 0">
-			<a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
-			<a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel"
-							  animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
-			></a-gltf-model>
-		</a-entity>
-	</a-scene>
 </template>
 
 <script>
@@ -27,29 +7,68 @@
 export default {
 	name: "AR",
 	methods: {
-		insert() {
-			/*	let x = document.getElementById("scene");
-				document.getElementById("app").removeChild(document.getElementById("scene"));
-				/!*document.body.appendChild(x);*!/*/
+		openAR() {
+			let sceneEl = document.createElement('a-scene');
+			sceneEl.setAttribute("mindar-image", "imageTargetSrc: https://cdn.jsdelivr.net/gh/evirunurm/mind@main/targets.mind");
+			sceneEl.setAttribute('color-space', "sRGB");
+			sceneEl.setAttribute('renderer', "colorManagement: true, physicallyCorrectLights");
+			sceneEl.setAttribute('vr-mode-ui', "enabled: false");
+			sceneEl.setAttribute('device-orientation-permission-ui', "enabled: false");
+
+			let assets = document.createElement('a-assets');
+			let img = document.createElement('img');
+			img.setAttribute("id", "card");
+			img.setAttribute("src", "https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/examples/image-tracking/assets/card-example/card.png");
+			img.setAttribute("id", "card");
+			let assetItem = document.createElement('a-asset-item');
+			assetItem.setAttribute("id", "avatarModel");
+			assetItem.setAttribute("src", "https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/examples/image-tracking/assets/card-example/softmind/scene.gltf");
+
+			let camera = document.createElement('a-camera');
+			camera.setAttribute("position", "0 0 0");
+			camera.setAttribute("look-controls", "enabled: false");
+
+			let entity = document.createElement('a-entity');
+			entity.setAttribute("mindar-image-target", "targetIndex: 0");
+
+			let plane = document.createElement('a-plane');
+			plane.setAttribute("src", "#card");
+			plane.setAttribute("position", "0 0 0");
+			plane.setAttribute("height", "0.552");
+			plane.setAttribute("width", "1");
+			plane.setAttribute("rotation", "0 0 0");
+
+			let model = document.createElement('a-gltf-model');
+			model.setAttribute("rotation", "0 0 0");
+			model.setAttribute("position", "0 0 0.1");
+			model.setAttribute("scale", "0.005 0.005 0.005");
+			model.setAttribute("src", "#avatarModel");
+			model.setAttribute("animation", "property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate");
+
+			assets.appendChild(img);
+			assets.appendChild(assetItem);
+			sceneEl.appendChild(assets);
+
+			sceneEl.appendChild(camera);
+
+			entity.appendChild(plane);
+			entity.appendChild(model);
+			sceneEl.appendChild(entity);
+
+
+			entity.flushToDOM(true);
+			sceneEl.flushToDOM(true);
+			document.body.appendChild(sceneEl);
+			console.log(sceneEl)
+
 		}
 	},
-	/*mounted() {
-		this.insert();
-	}*/
+	beforeMount() {
+		this.openAR();
+	}
 }
 </script>
 
 <style scoped>
 
-.container {
-	overflow: hidden;
-	display: flex;
-	height: 100%;
-}
-
-a-scene {
-	height: 100%;
-	overflow: hidden;
-
-}
 </style>
