@@ -147,6 +147,7 @@ export default {
 		ProductCarousel,
 		PlantImage,
 	},
+	emits: ["notification"],
 	data() {
 		return {
 			plantId: parseInt(this.$route.params.id),
@@ -174,6 +175,7 @@ export default {
 			this.sameCategoryPlants = plants.data.filter(plant => {
 				return plant.categoryId === this.plant.categoryId && plant.id !== this.plant.id
 			});
+
 		},
 		addToCart() {
 			if (this.plant.stock > 0) {
@@ -197,7 +199,11 @@ export default {
 			for (let i = 0; i < this.plant.scores.length; i++) {
 				sum += this.plant.scores[i].value;
 			}
-			avg = sum / this.plant.scores.length;
+			if (sum > 0) {
+				avg = sum / this.plant.scores.length;
+			} else {
+				avg = 0;
+			}
 			this.avgScore = Math.floor(avg);
 			this.avgScoreHalf = (avg - Math.floor(avg)) > 0.25;
 		},
@@ -225,11 +231,15 @@ export default {
 						clientId: localStorage.getItem("userId")
 					});
 				} else {
-					let res = await ScoresService.create({
-						value: score,
-						plantId: this.plantId,
-						clientId: localStorage.getItem("userId")
-					});
+					if (localStorage.getItem("userId") !== null) {
+						let res = await ScoresService.create({
+							value: score,
+							plantId: this.plantId,
+							clientId: localStorage.getItem("userId")
+						});
+						return;
+					}
+					this.sendNotification("You must be logged in in order to score a plant.");
 				}
 				await this.fetchPlantData();
 				this.setAvgScore();
@@ -241,13 +251,16 @@ export default {
 		},
 		checkIfScored() {
 			for (let i = 0; i < this.plant.scores.length; i++) {
-				if (this.plant.scores[i].clientId == localStorage.getItem("userId")) {
+				if (this.plant.scores[i].clientId === localStorage.getItem("userId")) {
 					this.scored = true;
 					this.usersScoreId = this.plant.scores[i].id;
 					this.usersScoreValue = this.plant.scores[i].value;
 				}
 			}
 		},
+		sendNotification(message) {
+			this.$emit("notification", message)
+		}
 	},
 	async mounted() {
 		await this.fetchPlantData();
