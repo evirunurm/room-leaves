@@ -1,6 +1,8 @@
 # Room Leaves
 
-## [Live Preview]("https://roomleaves.netlify.app/")
+## Live Preview
+
+[Click here]("https://roomleaves.netlify.app/")
 
 ## Design Stage
 
