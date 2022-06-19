@@ -2,8 +2,7 @@
 
 ## Live Preview
 
-Page might not **load correctly** the first time you enter because of back-end free hosting limitations. Please, **
-reload** the page after entering.
+Page might not **load correctly** the first time you enter because of back-end free hosting limitations. Please, **reload** the page after entering.
 
 <a href="https://roomleaves.netlify.app/">Click here!</a>
 
