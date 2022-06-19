@@ -2,7 +2,7 @@
 
 ## Live Preview
 
-[Click here]("https://roomleaves.netlify.app/")
+<a href="https://roomleaves.netlify.app/">Click here</a>
 
 ## Design Stage
 
@@ -24,7 +24,7 @@
     - Hosted on **Netlify**
 
 
-- Back-End ([GitHub repo]("https://github.com/evirunurm/room-leaves-api"))
+- Back-End (<a href="https://github.com/evirunurm/room-leaves-api">GitHub repo</a>)
     - Javascript, **NodeJS**
     - **Express** 4 + **JsonWebToken** (RESTful API)
     - **MySQL** 2 + **Sequelize** ORM
