@@ -21,9 +21,11 @@
 			<div class="header-icons">
 				<form @submit.prevent="handleSearchForm" class="header-search-form" id="searchform" method="GET"
 						action="/products">
-					<button type="submit" @click="isSearchbarOpen = true; searchbarOpened()"><img height="20"
-																															src="./assets/search-icon.png"
-																															alt="Search Icon"></button>
+					<button class="submit-search-button" type="submit" @click="isSearchbarOpen = true; searchbarOpened()">
+						<img height="20"
+							  src="./assets/search-icon.png"
+							  alt="Search Icon">
+					</button>
 					<Transition name="widthAppearance">
 						<div v-show="isSearchbarOpen" id="searchbar">
 							<input name="query" id="searchinput" type="text" placeholder="Search..." maxlength="150">
@@ -465,19 +467,19 @@ footer > section.newsletter input:focus {
 		margin-bottom: 2rem;
 	}
 
-	/*
 	#searchbar {
-		position: absolute;
-		bottom: -1rem;
-		right: 50%;
-		width: calc(100% - var(--general-margin) * 2);
-		transform: translateX(50%);
+		width: 100%;
 	}
-	*/
+
 	.header-search-form {
+		width: calc(100% - (var(--general-margin) * 2));
 		position: absolute;
-		bottom: 0;
-		left: 0;
+		bottom: -1.25rem;
+		left: var(--general-margin);
+	}
+
+	.submit-search-button {
+		height: 33px;
 	}
 }
 

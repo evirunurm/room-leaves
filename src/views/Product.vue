@@ -81,9 +81,12 @@
 					<router-link class="router-cart" to="/cart">
 						<button @click="addToCart" class="green cart-button">Add to Cart</button>
 					</router-link>
-					<router-link class="router-cart" :to="'/products/' + plantId + '/AR'">
-						<button class="white--white ar-button">Visualize in AR</button>
-					</router-link>
+					<!--					<router-link class="router-cart" :to="'/products/' + plantId + '/AR'">-->
+					<button @click="sendNotification('Sorry, this feature is not yet implemented.')"
+							  class="white--white ar-button">
+						Visualize in AR
+					</button>
+					<!--					</router-link>-->
 				</div>
 			</div>
 		</section>

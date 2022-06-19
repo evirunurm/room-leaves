@@ -31,11 +31,10 @@
 					</article>
 				</section>
 				<section class="cart-section checkout-section">
-					<router-link to="/login">
-						<button class="white" v-if="!loggedIn">Log in</button>
+					<router-link class="button-width" v-if="!loggedIn" to="/login">
+						<button class="white">Log in to proceed</button>
 					</router-link>
-					<p v-if="!loggedIn" class="checkout-divisor">or</p>
-					<button @click="goToCheckout" class="green">Continue to checkout</button>
+					<button v-else @click="goToCheckout" class="green button-width">Continue to checkout</button>
 				</section>
 			</div>
 		</div>
@@ -204,6 +203,11 @@ h2 {
 	gap: 3rem;
 	margin-bottom: 2rem;
 	margin-top: 10px; /* ALIGN WITH "My Cart title" */
+}
+
+.button-width {
+	width: 100%;
+	max-width: 400px;
 }
 
 @media (max-width: 1000px) {
